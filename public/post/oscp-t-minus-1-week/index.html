@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>OSCP: T-minus 1 week // Securing The Net</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.58.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="AJ McQuay" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://securingthe.net/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="OSCP: T-minus 1 week"/>
+<meta name="twitter:description" content="I get access to the PWK course material in a week, so I figured I&rsquo;d write up a quick post about how I&rsquo;ve been preparing.
+After I registered for the course I read through the syllabus and made note of the areas in which I was least confident. The main topics that jumped out at me were buffer overflows and web application attacks. I did some searching and found some great resources."/>
+
+    <meta property="og:title" content="OSCP: T-minus 1 week" />
+<meta property="og:description" content="I get access to the PWK course material in a week, so I figured I&rsquo;d write up a quick post about how I&rsquo;ve been preparing.
+After I registered for the course I read through the syllabus and made note of the areas in which I was least confident. The main topics that jumped out at me were buffer overflows and web application attacks. I did some searching and found some great resources." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://securingthe.net/post/oscp-t-minus-1-week/" />
+<meta property="article:published_time" content="2019-03-08T22:38:11+00:00" />
+<meta property="article:modified_time" content="2019-03-08T22:38:11+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://securingthe.net"><img class="app-header-avatar" src="/avatar.jpg" alt="AJ McQuay" /></a>
+      <h1>Securing The Net</h1>
+      <p>Tech ramblings from the desert</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://twitter.com/x41x4a" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">OSCP: T-minus 1 week</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          Mar 8, 2019
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          2 min read
+        </div><div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+          <a class="tag" href="https://securingthe.net/tags/oscp/">OSCP</a></div></div>
+    </header>
+    <div class="post-content">
+      <p>I get access to the PWK course material in a week, so I figured I&rsquo;d write up a quick post about how I&rsquo;ve been preparing.</p>
+
+<p>After I registered for the course I read through <a href="https://www.offensive-security.com/documentation/penetration-testing-with-kali.pdf">the syllabus</a> and made note of the areas in which I was least confident.  The main topics that jumped out at me were buffer overflows and web application attacks. I did some searching and found some great resources.</p>
+
+<p><a href="https://www.abatchy.com/2017/03/how-to-prepare-for-pwkoscp-noob">This post on abatchy&rsquo;s blog</a> has been a huge help, and it led me to the <a href="https://www.corelan.be/index.php/2009/07/19/exploit-writing-tutorial-part-1-stack-based-overflows/">first post in the Corelan series</a> on buffer overflows. Combined with the <a href="https://github.com/justinsteven/dostackbufferoverflowgood">dostackbufferoverflowgood lesson on Github</a> I feel like I at least have enough of a grasp on things to work through the PWK BO material.</p>
+
+<p>As for web application attacks, I plan to follow abatchy&rsquo;s advice and see how far I can get with <a href="http://overthewire.org/wargames/natas/">Overthewire: Natas</a> over the next few days.</p>
+
+<p>Outside of preparing for the course content, I still need to decide on how I&rsquo;ll be handling my notes throughout the class/lab/exam.  I will probably run the PWK Kali VM on my Windows 10 machine.  It&rsquo;s a 17&rdquo; laptop with a beefier processor and more RAM than my ThinkPad (running Ubuntu), so I may go with OneNote over CherryTree within the Kali VM.</p>
+
+<p><a href="https://github.com/patrikx3/onenote">This Electron app</a> makes it pretty easy to use OneNote on Linux. That would give me a backup option if I run into clipboard issues between the Windows host and the PWK Kali image, or if the OneNote web app has problems in Kali (which I&rsquo;ve run into before).</p>
+
+<p>I&rsquo;m looking forward to getting started and plan to post somewhat regular updates here to track my progress.</p>
+
+<hr />
+
+<p>_Photo by <a href="https://unsplash.com/photos/FXFz-sW0uwo?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Markus Spiske</a> on <a href="https://unsplash.com/search/photos/hacker?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a>_</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>

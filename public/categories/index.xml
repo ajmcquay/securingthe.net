@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on Securing The Net</title>
+    <link>https://securingthe.net/categories/</link>
+    <description>Recent content in Categories on Securing The Net</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 24 Jun 2019 02:54:19 +0000</lastBuildDate>
+    
+	<atom:link href="https://securingthe.net/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>OSCP</title>
+      <link>https://securingthe.net/categories/oscp/</link>
+      <pubDate>Mon, 24 Jun 2019 02:54:19 +0000</pubDate>
+      
+      <guid>https://securingthe.net/categories/oscp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>News</title>
+      <link>https://securingthe.net/categories/news/</link>
+      <pubDate>Mon, 25 Mar 2019 02:12:43 +0000</pubDate>
+      
+      <guid>https://securingthe.net/categories/news/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Opinion</title>
+      <link>https://securingthe.net/categories/opinion/</link>
+      <pubDate>Wed, 20 Mar 2019 20:16:03 +0000</pubDate>
+      
+      <guid>https://securingthe.net/categories/opinion/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>HackTheBox</title>
+      <link>https://securingthe.net/categories/hackthebox/</link>
+      <pubDate>Sat, 05 May 2018 02:47:50 +0000</pubDate>
+      
+      <guid>https://securingthe.net/categories/hackthebox/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Linux</title>
+      <link>https://securingthe.net/categories/linux/</link>
+      <pubDate>Sat, 05 May 2018 02:47:50 +0000</pubDate>
+      
+      <guid>https://securingthe.net/categories/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ansible</title>
+      <link>https://securingthe.net/categories/ansible/</link>
+      <pubDate>Fri, 09 Mar 2018 18:04:36 +0000</pubDate>
+      
+      <guid>https://securingthe.net/categories/ansible/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Automation</title>
+      <link>https://securingthe.net/categories/automation/</link>
+      <pubDate>Fri, 09 Mar 2018 18:04:36 +0000</pubDate>
+      
+      <guid>https://securingthe.net/categories/automation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tools</title>
+      <link>https://securingthe.net/categories/tools/</link>
+      <pubDate>Fri, 09 Mar 2018 18:04:36 +0000</pubDate>
+      
+      <guid>https://securingthe.net/categories/tools/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

