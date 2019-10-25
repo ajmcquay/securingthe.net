@@ -1,180 +1,494 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
-  <url>
-    <loc>https://securingthe.net/categories/</loc>
-    <lastmod>2019-06-24T02:54:19+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/categories/</loc>
+      
+      <lastmod>2019-06-24T02:54:19+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/post/oscp/</loc>
-    <lastmod>2019-06-24T02:54:19+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/post/oscp/</loc>
+      
+      <lastmod>2019-06-24T02:54:19+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/tags/oscp/</loc>
-    <lastmod>2019-06-24T02:54:19+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/categories/oscp/</loc>
+      
+      <lastmod>2019-06-24T02:54:19+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/categories/oscp/</loc>
-    <lastmod>2019-06-24T02:54:19+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/tags/oscp/</loc>
+      
+      <lastmod>2019-06-24T02:54:19+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/post/</loc>
-    <lastmod>2019-06-24T02:54:19+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/post/</loc>
+      
+      <lastmod>2019-06-24T02:54:19+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/</loc>
-    <lastmod>2019-06-24T02:54:19+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/</loc>
+      
+      <lastmod>2019-06-24T02:54:19+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/tags/</loc>
-    <lastmod>2019-06-24T02:54:19+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/tags/</loc>
+      
+      <lastmod>2019-06-24T02:54:19+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/post/pwk-weeks-9-11/</loc>
-    <lastmod>2019-06-07T20:52:17+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/post/pwk-weeks-9-11/</loc>
+      
+      <lastmod>2019-06-07T20:52:17+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/post/pwk-weeks-7-8/</loc>
-    <lastmod>2019-05-11T20:09:20+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/post/pwk-weeks-7-8/</loc>
+      
+      <lastmod>2019-05-11T20:09:20+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/post/pwk-weeks-5-6/</loc>
-    <lastmod>2019-04-28T04:19:36+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/post/pwk-weeks-5-6/</loc>
+      
+      <lastmod>2019-04-28T04:19:36+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/post/pwk-week-4/</loc>
-    <lastmod>2019-04-17T19:31:39+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/post/pwk-week-4/</loc>
+      
+      <lastmod>2019-04-17T19:31:39+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/post/pwk-week-3/</loc>
-    <lastmod>2019-04-09T18:28:17+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/post/pwk-week-3/</loc>
+      
+      <lastmod>2019-04-09T18:28:17+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/post/pwk-week-2/</loc>
-    <lastmod>2019-04-02T02:21:42+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/post/pwk-week-2/</loc>
+      
+      <lastmod>2019-04-02T02:21:42+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/categories/news/</loc>
-    <lastmod>2019-03-25T02:12:43+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/categories/news/</loc>
+      
+      <lastmod>2019-03-25T02:12:43+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/tags/news/</loc>
-    <lastmod>2019-03-25T02:12:43+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/tags/news/</loc>
+      
+      <lastmod>2019-03-25T02:12:43+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/post/pwk-week-1/</loc>
-    <lastmod>2019-03-25T02:12:43+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/post/pwk-week-1/</loc>
+      
+      <lastmod>2019-03-25T02:12:43+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/post/common-question-what-certs-should-i-get/</loc>
-    <lastmod>2019-03-20T20:16:03+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/post/common-question-what-certs-should-i-get/</loc>
+      
+      <lastmod>2019-03-20T20:16:03+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/tags/opinion/</loc>
-    <lastmod>2019-03-20T20:16:03+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/tags/opinion/</loc>
+      
+      <lastmod>2019-03-20T20:16:03+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/categories/opinion/</loc>
-    <lastmod>2019-03-20T20:16:03+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/categories/opinion/</loc>
+      
+      <lastmod>2019-03-20T20:16:03+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/post/oscp-t-minus-1-week/</loc>
-    <lastmod>2019-03-08T22:38:11+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/post/oscp-t-minus-1-week/</loc>
+      
+      <lastmod>2019-03-08T22:38:11+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/about/</loc>
-    <lastmod>2019-03-06T15:47:41+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/about/</loc>
+      
+      <lastmod>2019-03-06T15:47:41+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/post/starting-my-oscp-journey/</loc>
-    <lastmod>2019-02-25T05:15:10+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/post/starting-my-oscp-journey/</loc>
+      
+      <lastmod>2019-02-25T05:15:10+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/tags/hackthebox/</loc>
-    <lastmod>2018-05-05T02:47:50+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/categories/hackthebox/</loc>
+      
+      <lastmod>2018-05-05T02:47:50+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/categories/hackthebox/</loc>
-    <lastmod>2018-05-05T02:47:50+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/tags/hackthebox/</loc>
+      
+      <lastmod>2018-05-05T02:47:50+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/post/hackthebox-bashed/</loc>
-    <lastmod>2018-05-05T02:47:50+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/post/hackthebox-bashed/</loc>
+      
+      <lastmod>2018-05-05T02:47:50+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/categories/linux/</loc>
-    <lastmod>2018-05-05T02:47:50+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/categories/linux/</loc>
+      
+      <lastmod>2018-05-05T02:47:50+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/tags/linux/</loc>
-    <lastmod>2018-05-05T02:47:50+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/tags/linux/</loc>
+      
+      <lastmod>2018-05-05T02:47:50+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/post/infosec-is-bigger-than-pentesting/</loc>
-    <lastmod>2018-03-30T12:36:10+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/post/infosec-is-bigger-than-pentesting/</loc>
+      
+      <lastmod>2018-03-30T12:36:10+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/tags/ansible/</loc>
-    <lastmod>2018-03-09T18:04:36+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/tags/ansible/</loc>
+      
+      <lastmod>2018-03-09T18:04:36+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/categories/ansible/</loc>
-    <lastmod>2018-03-09T18:04:36+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/categories/ansible/</loc>
+      
+      <lastmod>2018-03-09T18:04:36+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/categories/automation/</loc>
-    <lastmod>2018-03-09T18:04:36+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/categories/automation/</loc>
+      
+      <lastmod>2018-03-09T18:04:36+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/tags/automation/</loc>
-    <lastmod>2018-03-09T18:04:36+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/tags/automation/</loc>
+      
+      <lastmod>2018-03-09T18:04:36+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/post/deploying-security-controls-with-ansible/</loc>
-    <lastmod>2018-03-09T18:04:36+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/post/deploying-security-controls-with-ansible/</loc>
+      
+      <lastmod>2018-03-09T18:04:36+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/tags/tools/</loc>
-    <lastmod>2018-03-09T18:04:36+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/tags/tools/</loc>
+      
+      <lastmod>2018-03-09T18:04:36+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
-  <url>
-    <loc>https://securingthe.net/categories/tools/</loc>
-    <lastmod>2018-03-09T18:04:36+00:00</lastmod>
-  </url>
+    <url>
+      <loc>https://securingthe.net/categories/tools/</loc>
+      
+      <lastmod>2018-03-09T18:04:36+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
   
 </urlset>

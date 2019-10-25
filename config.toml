@@ -1,45 +1,188 @@
-#[Menus]
-#  main = [
-#      {Name = "Twitter", URL = "https://twitter.com/x41x4a/"},
-#      {Name = "About", URL = "/about/"}
-#  ]
-
 baseURL = "https://securingthe.net"
+languageCode = "en"
+defaultContentLanguage = "en"
 title = "Securing The Net"
-#themesDir = "../.."
-theme = "m10c"
+theme = "KeepIt"
+
 paginate = 10
+enableEmoji = true
+enableRobotsTXT = true
+googleAnalytics = ""
+disqusShortname = "yourdiscussshortname"
+
+[sitemap]
+  changefreq = "monthly"
+  filename = "sitemap.xml"
+  priority = 0.5
+
+[blackfriday]
+  hrefTargetBlank = true
+  nofollowLinks = true
+  noreferrerLinks = true
+
+[Permalinks]
+ posts = "/:year/:filename/"
+
+[menu]
+  [[menu.main]]
+    name = "Blog"
+    url = "/post/"
+    weight = 1
+
+  [[menu.main]]
+    name = "Categories"
+    url = "/categories/"
+    weight = 3
+
+  [[menu.main]]
+    name = "About"
+    url = "/about"
+    weight = 4
 
 [params]
-  author = "AJ McQuay"
-  description = "Tech ramblings from the desert"
-  #[[params.social]]
-  #  name = "github"
-  #  url = "https://github.com/gohugoio"
-  [[params.social]]
-    name = "twitter"
-    url = "https://twitter.com/x41x4a"
+    since = 2018
+    author = "AJ McQuay"               # Author's name
+    subtitle = "Securing The Net"       # Subtitle
+    cdn_url = ""           # Base CDN URL
+    #home_mode = "other" # post or other
 
-  # Brown theme
-  #[params.style]
-  #  darkestColor = "#463625"
-  #  darkColor = "#2a3738"
-  #  primaryColor = "#eeee6a"
-  #  lightColor = "#96a879"
-  #  lightestColor = "#ffffff"
+    google_verification = ""
+    bing_verification = ""
+    yandex_verification = ""
+    pinterest_verification = ""
+    baidu_verification = ""
 
-  # Green theme
-  #[params.style]
-  #  darkestColor = "#315659"
-  #  darkColor = "#253031"
-  #  primaryColor = "#dad865"
-  #  lightColor = "#96a879"
-  #  lightestColor = "#fff"
+    avatar = "avatar.jpg" #comment it to use gravatar
+    socialShare = true
 
-  # Red and black theme
-  [params.style]
-    darkestColor = "#d35050"
-    darkColor = "#212121"
-    primaryColor = "#ffffff"
-    lightColor = "#a2a2a2"
-    lightestColor = "#d3d3d3"
+    description = "Tech ramblings from the desert" # site description
+    keywords = "" # site keywords
+
+    license= 'Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>'
+
+[params.gravatar]
+    #email = "example@gmail.com"   #uncomment and insert your email address to use gravatar
+
+
+[params.social]
+    GitHub = "ajmcquay"
+    Linkedin = "ajmcquay"
+    Twitter = "x41x4a"
+    #Instagram = "xxxx"
+    #Email   = "xxxx"
+    #Facebook = "xxxx"
+    #Telegram = "xxxx"
+    #Medium = "xxxx"
+    #Gitlab = "xxxx"
+    #Youtubelegacy = "xxxx"
+    #Youtubecustom = "xxxx"
+    #Youtubechannel = "xxxx"
+    #Tumblr ="xxxx"
+    #Quora = "xxxx"
+    Keybase = "amcquay"
+    #Pinterest = "xxxx"
+    #Reddit = "afterosmosis"
+    #Codepen = "xxxx"
+    #Bitbucket = "xxxx"
+    #Stackoverflow = "xxxxx"
+    #Weibo = "xxxx"
+    #Odnoklassniki = "xxxx"
+    #VKontakte = "xxxx"
+    #Flickr = "xxxx"
+    #Xing = "xxxx"
+    #Snapchat = "xxxx"
+    #Soundcloud = "xxxx"
+    #Spotify = "xxxx"
+    Bandcamp = "afterosmosis"
+    #Paypal = "xxxx"
+    #Fivehundredpx = "xxxx"
+    #Mix = "xxxx"
+    #Goodreads = "xxxx"
+    #Lastfm = "xxxx"
+    #Foursquare = "xxxx"
+    #Hackernews = "xxxx"
+    #Kickstarter = "xxxx"
+    #Patreon = "xxxx"
+    #Steam = "xxxx"
+    #Twitch = "xxxx"
+    #Strava = "xxxx"
+    #Skype = "xxxx"
+    #Whatsapp = "xxxx"
+    #Zhihu = "xxxx"
+    #Douban = "xxxx"
+    #Angellist = "xxxx"
+    #Slidershare = "xxxx"
+    #Jsfiddle = "xxxx"
+    #Deviantart = "xxxx"
+    #Behance = "xxxx"
+    #Dribble = "xxxx"
+    #Wordpress = "xxxx"
+    #Vine = "xxxx"
+    #Googlescholar = "xxxx"
+    #Researchgate = "xxxx"
+    #Mastodon = "afterosmosis"
+    #Thingiverse = "xxxx"
+
+[params.share]
+Twitter = true
+#Facebook = true
+Reddit = true
+Linkedin = true
+#Pinterest = true
+#HackerNews = true
+#Mix = true
+#Tumblr = true
+#VKontakte = true
+#Douban = true
+#Weibo = true
+
+# Used only for Seo schema
+copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License."
+
+[author]
+  name = "AJ McQuay"
+
+  [params.publisher]
+    name = "AJ McQuay"
+
+    [params.publisher.logo]
+      url = "logo.png"
+      width = 127
+      height = 40
+
+  [params.logo]
+    #url = "logo.png"
+    url = "avatar.jpg"
+    width = 127
+    height = 40
+
+  [params.image]
+    url = "cover.png"
+    width = 800
+    height = 600
+
+[params.gitalk]
+owner = ""       # Your GitHub ID
+repo = ""        # The repo to store comments
+clientId = ""    # Your client ID
+clientSecret = "" # Your client secret
+
+[params.valine]
+  enable = false
+  appId = 'your appId'
+  appKey = 'your appKey'
+  notify = false  # mail notifier , https://github.com/xCss/Valine/wiki
+  verify = false # Verification code
+  avatar = 'mm'
+  placeholder = 'your comments ...'
+  visitor = true
+
+[params.utterances]       # https://utteranc.es/
+    owner = ""              # Your GitHub ID
+    repo = ""               # The repo to store comments
+
+[params.gitment]          # Gitment is a comment system based on GitHub issues. see https://github.com/imsun/gitment
+    owner = ""              # Your GitHub ID
+    repo = ""               # The repo to store comments
+    clientId = ""           # Your client ID
+    clientSecret = ""       # Your client secret
