@@ -153,11 +153,11 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
   [params.logo]
     #url = "logo.png"
     url = "avatar.jpg"
-    width = 127
-    height = 40
+    width = 300
+    height = 110
 
   [params.image]
-    url = "cover.png"
+    url = "green.png"
     width = 800
     height = 600
 
