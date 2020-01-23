@@ -7,8 +7,8 @@ theme = "KeepIt"
 paginate = 10
 enableEmoji = true
 enableRobotsTXT = true
-googleAnalytics = ""
-disqusShortname = "yourdiscussshortname"
+googleAnalytics = "UA-41546806-5"
+disqusShortname = "ajmcquay"
 
 [sitemap]
   changefreq = "monthly"
@@ -42,9 +42,9 @@ disqusShortname = "yourdiscussshortname"
 [params]
     since = 2018
     author = "AJ McQuay"               # Author's name
-    subtitle = "Securing The Net"       # Subtitle
+    subtitle = "Tech ramblings from the desert"       # Subtitle
     cdn_url = ""           # Base CDN URL
-    #home_mode = "other" # post or other
+    #home_mode = "post" # post or other
 
     google_verification = ""
     bing_verification = ""
