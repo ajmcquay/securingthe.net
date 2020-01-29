@@ -1,0 +1,88 @@
+==================================================================
+https://keybase.io/amcquay
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://securingthe.net
+  * I am amcquay (https://keybase.io/amcquay) on keybase.
+  * I have a public key with fingerprint 942A 39F0 E710 8149 1616  6987 F6BA 9A10 A385 8C6F
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "01204bb2490ca2a7bdd70176e1b5a7687a8d2028c2a6b0898cdba1a144c4dbbd01910a",
+      "fingerprint": "942a39f0e710814916166987f6ba9a10a3858c6f",
+      "host": "keybase.io",
+      "key_id": "f6ba9a10a3858c6f",
+      "kid": "0101b6965648bfb3b9288ff47315434c75395a89be4c300f9dbf8478e55ef1b865650a",
+      "uid": "851ced0326dc3f4a87ea8c7584491519",
+      "username": "amcquay"
+    },
+    "merkle_root": {
+      "ctime": 1580277104,
+      "hash_meta": "80f875ab6219cc6a3c6c246e1319a5022e6e88a35cfb59cd750a8e708b9579af",
+      "seqno": 14402879
+    },
+    "revoke": {
+      "sig_ids": [
+        "22111b7337a66ee022208fcd83fefcfe3d9a9a80c8ce8edd1805fbc1c479040f0f"
+      ]
+    },
+    "service": {
+      "hostname": "securingthe.net",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1580277130,
+  "expire_in": 157680000,
+  "prev": "159a3e96fa278cf356b2ac3e36098e4362ca2ab335c90ec465335b8b3c4ca7f8",
+  "seqno": 74,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.1.3
+Comment: https://keybase.io/crypto
+
+yMQJAnicbVN7UFVFHAaVUMJHkZKjzNhJHQKE3fPcg5OYheIMRqaD5uu6u2cP93bh
+Ps49gKTENIamMYiIlaSUEtYMKmaZgYmmJDrlY8RHlgbVCISJjeNEPmsPo9NM0/ln
+zzn7fd/v+32/3ZahA8Oiwv9sqh5RW1rmD//2cFF+2BIYt3a5QPxGkZC6XPCy/oXl
+Gixku7weQ0gVABSBTIgo64BiEWvEMDQANZVBomBNRRpGhghEREWsEoB0RA2CIYay
+TGWDEANAHQIsJAmmx5fDrIDl8dlcVpdFLOkmYBoECMo6VKGq6kgzVYJ1zBkSUhBV
+TU50+0MOg5sjOMSSPX7+j3+4+u39D/6hbwCJqquKKiNiEonoIkKmKWsSVGRJppoi
+6QpGOmEylQAwdYOYSNYQUxRmQoI4Uen3nd8vhxRImQEkUTWoZMoYaQwjLoJk7l2B
+ugMMMcuH8xhH4zwazMdFQnGSkMcsby5zWX6/7WRLbY+DgAoCosZ7l3l/OOR25TEb
+O2WAiTQFE1WEOqUqlqhKRZmHLUEdK0AUmcoQwpJCTaLo1NC4R8Q0gIiuaDp22g+x
+oM/PK8gyn4qmcwsWK/B7mVM95MnhsYWE1IWCKEIIiSZJGlZVxri0CJBJDSSZzKQm
+kwydB4sARZQhZhgQAcUkFFJZ04EMTGAKi4udalaBh/aLO3N60H+I0Xw+6BzbzZJ9
+zOauApbf9lN/Lt9023YglOpkYxcFHHQhI64HOi7i8RmcyBkFzAp5/D7eCUf+JzYJ
+JAlsWcBjMZfHQSj8IAL+OHVYAZeEio4lpqsmFjVETUlRiYipxCQV6IjJkio6h5lI
+PEgdMCqrCn8liEhUplgz0b85anxCNs5xmvLk+LCdbzGh+PDXiwaFhUeFPRIxwLlB
+YVFDRjy8V+f3D7+vJpyvfCfjRO2gOdHVM4XBvWtjssd9F/3LZzUbSOQfV7va0TND
+6mftqLU6N5pF5XNOl2+/PybYFVFh9MVv7w5e23tVKZ1/emdNTFnjvanWvs7NdzYv
+eslYVDO/qTLtgInqXjzTs7rqYPaWedemjGm7WjU3bcITZ/WuVy6/dWt1X+mal3/f
+MDkR7ixLzL21+Ztr2j1v5ogvXLviC2dXtHWVXB82a+FXj8LRn6TdnpGUm7rg8+ao
+LdURkS0r8ia9FlM4flXCuX11vlEnUt7Ve7svZGxVMua/0JoiTxn7d3mxXJiePqWy
+59J6K+XVKw3P90RmVF3oWFPtfq7p5rEP34gzmnZn7Vr5XmJHb+u4zkDH0R2VpGli
+zOuZe1niPnYjFHY79uSR9394LOKj9GnPrqpb2p2ccGmU70RWQ/vsrfXNS3xDGw5V
+vHmkvqK2df29ZZczTyVPbIlPfrt+7wdHp47JXv7b3dgbTy3ecakks92/7oDdkTY6
+Nrv81N2Unw+698wsXDF32/CBSvtfbUXTFtTVPS3f2Hg85eLjAy+2Ljsc/lP3931b
+R26bPqnn13Vfnrp/Jcs3fmWK+8mTgj155IAJu0Nn466fjM4MTk9unNy5Z8KwcW03
+twyeBRvvdDc3pscFesceW1DaXNIwvm9GUP00+sy8ATEdscfnujadi69J2r+wbFPJ
+mriEH4Mth7xl3qXbqs5WZu6M/DhsWtY/ITsE3A==
+=q3JG
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/amcquay
+
+==================================================================
