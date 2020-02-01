@@ -166,58 +166,39 @@ Here&rsquo;s what my daily time commitment looked like in week 4:
           
           
 
-          
-
-<p>It&rsquo;s already been a month since I started the PWK course, and this past week was my first week fully dedicated to lab machines.  Some have been easy, some difficult, but all have taught me at least one takeaway lesson.</p>
-
+          <p>It&rsquo;s already been a month since I started the PWK course, and this past week was my first week fully dedicated to lab machines.  Some have been easy, some difficult, but all have taught me at least one takeaway lesson.</p>
 <p>Here&rsquo;s what my daily time commitment looked like in week 4:</p>
-
 <figure>
     <img src="/content/images/2019/04/Screen-Shot-2019-04-17-at-1.06.59-PM.png"/> 
 </figure>
 
-
 <h2 id="day-22">Day 22</h2>
-
 <ul>
 <li>It seems I chose (at random) a machine in the top half of the difficulty spectrum for my first target, yay.  We&rsquo;ll call it box 01.  I spent 3 hours here on reconnaissance, enumeration, and some failed exploit attempts.</li>
 </ul>
-
 <h2 id="day-23">Day 23</h2>
-
 <ul>
 <li>I finished exploitation of box 01.  I had found a way to add a user to the system and add that user to the local admin group, then spun my wheels trying to upgrade to a system shell.  I finally asked for some guidance from fellow students and they kindly pointed out that I was done and was just overthinking it.</li>
 </ul>
-
 <h2 id="day-24">Day 24</h2>
-
 <ul>
 <li>I decided to spend time enumerating DNS for the entire public lab network so I had the hostname documented for every machine.  I exploited box 02, but went to bed before starting any post-exploitation.</li>
 </ul>
-
 <h2 id="day-25">Day 25</h2>
-
 <ul>
 <li>I did some post-exploitation snooping on boxes 01 and 02.  Got a low privilege shell on box 03 and started looking for privilege escalation opportunities.</li>
 </ul>
-
 <h2 id="day-26">Day 26</h2>
-
 <ul>
 <li>Finished up exploitation of box 03.  This one taught me a LOT about Windows privesc.  Also owned box 04.</li>
 </ul>
-
 <h2 id="day-28">Day 28</h2>
-
 <ul>
 <li>After taking Friday night off, on Saturday I completed box 05 and unlocked access to the IT network.</li>
 </ul>
-
 <p>I averaged just over 3 hours per target in my first week, though it seems many of the hosts I went after are in the middle to lower difficulty range.  I plan to spend at least one more week going through machines and picking up tricks and techniques before attempting any of the &ldquo;big 4&rdquo;.  I&rsquo;m feeling more confident though, and my goal of compromising 30 hosts before my lab time expires seems well within range.</p>
-
-<p>I also have my exam scheduled for <sup>5</sup>&frasl;<sub>21</sub>, but I may book at least a 15-day extension and push the exam off a couple of weeks if I stall in the labs.  My total time commitment so far is up to 55.5 hours.</p>
-
-<p>_Photo by <a href="https://unsplash.com/photos/6WPcf5D1XdA?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" rel="nofollow noreferrer" target="_blank">Jared Brashier</a> on <a href="https://unsplash.com/search/photos/computer?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" rel="nofollow noreferrer" target="_blank">Unsplash</a>_</p>
+<p>I also have my exam scheduled for 5/21, but I may book at least a 15-day extension and push the exam off a couple of weeks if I stall in the labs.  My total time commitment so far is up to 55.5 hours.</p>
+<p><em>Photo by <a href="https://unsplash.com/photos/6WPcf5D1XdA?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Jared Brashier</a> on <a href="https://unsplash.com/search/photos/computer?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></em></p>
 
     </div>
 
@@ -312,30 +293,22 @@ Here&rsquo;s what my daily time commitment looked like in week 4:
     <div class="post-comment">
           
           <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "ajmcquay" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
+  <script type="text/javascript">
+      (function() {
+          
+          
+          if (window.location.hostname == "localhost")
+              return;
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          var disqus_shortname = 'ajmcquay';
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
  
-
 
           
     </div>
@@ -346,13 +319,13 @@ Here&rsquo;s what my daily time commitment looked like in week 4:
     <div class="copyright">
         &copy;
         
-        <span itemprop="copyrightYear">2018 - 2019</span>
+        <span itemprop="copyrightYear">2018 - 2020</span>
         
          
-            <span class="author" itemprop="copyrightHolder"><a href="https://securingthe.net">AJ McQuay</a></span>
+            <span class="author" itemprop="copyrightHolder"><a href="https://securingthe.net">AJ McQuay</a> | </span>
          
 
-		  
+		 
     </div>
 </footer>
 
@@ -368,7 +341,7 @@ Here&rsquo;s what my daily time commitment looked like in week 4:
 
 
     
-     <link href="//lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">  
+    <link crossorigin="anonymous" integrity="sha384-yziQACfvCVwLqVFLqkWBYRO3XeA4EqzfXKGwaWnenYn5XzqfJFlFdKEmvutIQdKb" href="https://lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">
       
      <script src="/js/vendor_gallery.min.js" async="" ></script>
     

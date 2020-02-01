@@ -165,79 +165,54 @@
           
           
 
-          
-
-<p>It&rsquo;s hard to believe I&rsquo;m already starting my ninth week of the PWK course, it&rsquo;s gone by extremely quickly. I took a few days off at the end of week 7 for some time away in Arizona with my wife, but I&rsquo;ve been back at it for a few days now. Here&rsquo;s an update on my progress.</p>
-
+          <p>It&rsquo;s hard to believe I&rsquo;m already starting my ninth week of the PWK course, it&rsquo;s gone by extremely quickly. I took a few days off at the end of week 7 for some time away in Arizona with my wife, but I&rsquo;ve been back at it for a few days now. Here&rsquo;s an update on my progress.</p>
 <figure>
     <img src="/content/images/2019/05/week7.png"/> 
 </figure>
 
-
 <h3 id="day-44">Day 44</h3>
-
 <ul>
 <li>Rooted box #16. Recon, enumeration, and attempted (read: failed) exploitation of #17. It turns out I was using the wrong hammer.</li>
 </ul>
-
 <h3 id="day-45">Day 45</h3>
-
 <ul>
 <li>Completed #17. I had been trying to use an exploit that the machine has apparently been patched against, but something related still worked. I did wind up using Metasploit on this one. Also did recon/enumeration of #18 and got admin credentials for a web app.</li>
 </ul>
-
 <h3 id="day-46">Day 46</h3>
-
 <ul>
 <li>Completed #18. This machine reinforced that I need more web application experience. I got lucky choosing the final exploit but need to find out how to fingerprint a client browser via XSS. Started scans/recon of #19.</li>
 </ul>
-
 <h3 id="day-47">Day 47</h3>
-
 <ul>
 <li>Completed #19. Here I learned some new PHP syntax and feel more confident after quickly noticing how I needed to chain two vulnerabilities together. I decided to go after another &ldquo;big 4&rdquo; host for my 20th target and performed initial scans against Sufferance.</li>
 </ul>
-
 <p>I was traveling with my wife on days 48 through 50, we had some time away from the kids and I was able to get rested and came back refreshed. It was a well-timed break. It was a little tough getting motivated right away, but I wanted to finish what I started with Sufferance. Here&rsquo;s a look at my eighth week.</p>
-
 <figure>
     <img src="/content/images/2019/05/week8.png"/> 
 </figure>
 
-
 <h3 id="day-51">Day 51</h3>
-
 <ul>
 <li>I revisted recon and enumeration against #20, Sufferance. My VPN was being problematic, but I was at least able to identify how I expected to gain my initial foothold.</li>
 </ul>
-
 <h3 id="day-52">Day 52</h3>
-
 <ul>
 <li>Completed Sufferance. I actually worked through this one pretty quickly. I got the low privilege shell without too much trouble and found the correct path for privilege escalation, but burned at least an hour for not knowing the right options for compiling a binary.</li>
 </ul>
-
 <h3 id="day-53">Day 53</h3>
-
 <ul>
 <li>Started and completed host #21.</li>
 </ul>
-
 <h3 id="day-54">Day 54</h3>
-
 <ul>
 <li>Completed initial recon and identified exploitation path for #22. This box was heavily dependent on another lab machine, and was probably the most fun I&rsquo;ve had in the lab so far. Thankfully I had already rooted the dependent host, but I did have to get back into it and do a lot more post-exploitation work.</li>
 </ul>
-
 <h3 id="day-55">Day 55</h3>
-
 <ul>
 <li>Completed #22. Learned quite a bit about client-side exploits with this one. Started recon/enumeration of #23.</li>
 </ul>
-
 <p>These two weeks were pretty light on lab time since I was out of town, but I feel like I learned quite a bit in a short amount of time and completed some of the more challenging lab machines. I am closing in on my goal of 30 completed machines, and hope to get there in the next few days. I&rsquo;m now over 100 hours into the lab with a total of 105.5 invested so far.</p>
-
-<p>_Photo by <a href="https://unsplash.com/photos/kjA82leKmJc?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" rel="nofollow noreferrer" target="_blank">Christoph von Gellhorn</a> on <a href="https://unsplash.com/search/photos/arizona?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" rel="nofollow noreferrer" target="_blank">Unsplash</a>_</p>
+<p><em>Photo by <a href="https://unsplash.com/photos/kjA82leKmJc?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Christoph von Gellhorn</a> on <a href="https://unsplash.com/search/photos/arizona?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></em></p>
 
     </div>
 
@@ -332,30 +307,22 @@
     <div class="post-comment">
           
           <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "ajmcquay" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
+  <script type="text/javascript">
+      (function() {
+          
+          
+          if (window.location.hostname == "localhost")
+              return;
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          var disqus_shortname = 'ajmcquay';
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
  
-
 
           
     </div>
@@ -366,13 +333,13 @@
     <div class="copyright">
         &copy;
         
-        <span itemprop="copyrightYear">2018 - 2019</span>
+        <span itemprop="copyrightYear">2018 - 2020</span>
         
          
-            <span class="author" itemprop="copyrightHolder"><a href="https://securingthe.net">AJ McQuay</a></span>
+            <span class="author" itemprop="copyrightHolder"><a href="https://securingthe.net">AJ McQuay</a> | </span>
          
 
-		  
+		 
     </div>
 </footer>
 
@@ -388,7 +355,7 @@
 
 
     
-     <link href="//lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">  
+    <link crossorigin="anonymous" integrity="sha384-yziQACfvCVwLqVFLqkWBYRO3XeA4EqzfXKGwaWnenYn5XzqfJFlFdKEmvutIQdKb" href="https://lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">
       
      <script src="/js/vendor_gallery.min.js" async="" ></script>
     

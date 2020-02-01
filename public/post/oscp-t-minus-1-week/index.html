@@ -164,22 +164,14 @@ After I registered for the course I read through the syllabus and made note of t
           
 
           <p>I get access to the PWK course material in a week, so I figured I&rsquo;d write up a quick post about how I&rsquo;ve been preparing.</p>
-
-<p>After I registered for the course I read through <a href="https://www.offensive-security.com/documentation/penetration-testing-with-kali.pdf" rel="nofollow noreferrer" target="_blank">the syllabus</a> and made note of the areas in which I was least confident.  The main topics that jumped out at me were buffer overflows and web application attacks. I did some searching and found some great resources.</p>
-
-<p><a href="https://www.abatchy.com/2017/03/how-to-prepare-for-pwkoscp-noob" rel="nofollow noreferrer" target="_blank">This post on abatchy&rsquo;s blog</a> has been a huge help, and it led me to the <a href="https://www.corelan.be/index.php/2009/07/19/exploit-writing-tutorial-part-1-stack-based-overflows/" rel="nofollow noreferrer" target="_blank">first post in the Corelan series</a> on buffer overflows. Combined with the <a href="https://github.com/justinsteven/dostackbufferoverflowgood" rel="nofollow noreferrer" target="_blank">dostackbufferoverflowgood lesson on Github</a> I feel like I at least have enough of a grasp on things to work through the PWK BO material.</p>
-
-<p>As for web application attacks, I plan to follow abatchy&rsquo;s advice and see how far I can get with <a href="http://overthewire.org/wargames/natas/" rel="nofollow noreferrer" target="_blank">Overthewire: Natas</a> over the next few days.</p>
-
+<p>After I registered for the course I read through <a href="https://www.offensive-security.com/documentation/penetration-testing-with-kali.pdf">the syllabus</a> and made note of the areas in which I was least confident.  The main topics that jumped out at me were buffer overflows and web application attacks. I did some searching and found some great resources.</p>
+<p><a href="https://www.abatchy.com/2017/03/how-to-prepare-for-pwkoscp-noob">This post on abatchy&rsquo;s blog</a> has been a huge help, and it led me to the <a href="https://www.corelan.be/index.php/2009/07/19/exploit-writing-tutorial-part-1-stack-based-overflows/">first post in the Corelan series</a> on buffer overflows. Combined with the <a href="https://github.com/justinsteven/dostackbufferoverflowgood">dostackbufferoverflowgood lesson on Github</a> I feel like I at least have enough of a grasp on things to work through the PWK BO material.</p>
+<p>As for web application attacks, I plan to follow abatchy&rsquo;s advice and see how far I can get with <a href="http://overthewire.org/wargames/natas/">Overthewire: Natas</a> over the next few days.</p>
 <p>Outside of preparing for the course content, I still need to decide on how I&rsquo;ll be handling my notes throughout the class/lab/exam.  I will probably run the PWK Kali VM on my Windows 10 machine.  It&rsquo;s a 17&rdquo; laptop with a beefier processor and more RAM than my ThinkPad (running Ubuntu), so I may go with OneNote over CherryTree within the Kali VM.</p>
-
-<p><a href="https://github.com/patrikx3/onenote" rel="nofollow noreferrer" target="_blank">This Electron app</a> makes it pretty easy to use OneNote on Linux. That would give me a backup option if I run into clipboard issues between the Windows host and the PWK Kali image, or if the OneNote web app has problems in Kali (which I&rsquo;ve run into before).</p>
-
+<p><a href="https://github.com/patrikx3/onenote">This Electron app</a> makes it pretty easy to use OneNote on Linux. That would give me a backup option if I run into clipboard issues between the Windows host and the PWK Kali image, or if the OneNote web app has problems in Kali (which I&rsquo;ve run into before).</p>
 <p>I&rsquo;m looking forward to getting started and plan to post somewhat regular updates here to track my progress.</p>
-
-<hr />
-
-<p>_Photo by <a href="https://unsplash.com/photos/FXFz-sW0uwo?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" rel="nofollow noreferrer" target="_blank">Markus Spiske</a> on <a href="https://unsplash.com/search/photos/hacker?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText" rel="nofollow noreferrer" target="_blank">Unsplash</a>_</p>
+<hr>
+<p><em>Photo by <a href="https://unsplash.com/photos/FXFz-sW0uwo?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Markus Spiske</a> on <a href="https://unsplash.com/search/photos/hacker?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></em></p>
 
     </div>
 
@@ -274,30 +266,22 @@ After I registered for the course I read through the syllabus and made note of t
     <div class="post-comment">
           
           <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "ajmcquay" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
+  <script type="text/javascript">
+      (function() {
+          
+          
+          if (window.location.hostname == "localhost")
+              return;
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          var disqus_shortname = 'ajmcquay';
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
  
-
 
           
     </div>
@@ -308,13 +292,13 @@ After I registered for the course I read through the syllabus and made note of t
     <div class="copyright">
         &copy;
         
-        <span itemprop="copyrightYear">2018 - 2019</span>
+        <span itemprop="copyrightYear">2018 - 2020</span>
         
          
-            <span class="author" itemprop="copyrightHolder"><a href="https://securingthe.net">AJ McQuay</a></span>
+            <span class="author" itemprop="copyrightHolder"><a href="https://securingthe.net">AJ McQuay</a> | </span>
          
 
-		  
+		 
     </div>
 </footer>
 

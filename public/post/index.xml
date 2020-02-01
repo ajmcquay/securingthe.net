@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Securing The Net</title>
@@ -81,7 +81,7 @@ Keeping with tradition, here&amp;rsquo;s my daily time breakdown:
       <description>I&amp;rsquo;m starting my third week in Offensive Security&amp;rsquo;s Penetration Testing with Kali Linux (PWK) course, which means it&amp;rsquo;s time for a quick look at how my second week went.
 I&amp;rsquo;m still working through the exercises and should wrap up chapter 13 tonight. Here&amp;rsquo;s a pretty chart thing:
   And here&amp;rsquo;s a look at what I accomplished each of those days:
-Day 8  Chapter 8 exercises. Reminder: The &amp;ldquo;\&amp;rdquo; character is important when working with hex characters.</description>
+Day 8  Chapter 8 exercises. Reminder: The &amp;ldquo;&amp;quot; character is important when working with hex characters.</description>
     </item>
     
     <item>
