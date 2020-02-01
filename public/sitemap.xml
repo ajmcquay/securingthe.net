@@ -184,7 +184,7 @@
     </url>
   
     <url>
-      <loc>https://securingthe.net/categories/news/</loc>
+      <loc>https://securingthe.net/tags/news/</loc>
       
       <lastmod>2019-03-25T02:12:43+00:00</lastmod>
       
@@ -198,7 +198,7 @@
     </url>
   
     <url>
-      <loc>https://securingthe.net/tags/news/</loc>
+      <loc>https://securingthe.net/categories/news/</loc>
       
       <lastmod>2019-03-25T02:12:43+00:00</lastmod>
       
@@ -324,7 +324,7 @@
     </url>
   
     <url>
-      <loc>https://securingthe.net/tags/hackthebox/</loc>
+      <loc>https://securingthe.net/categories/hackthebox/</loc>
       
       <lastmod>2018-05-05T02:47:50+00:00</lastmod>
       
@@ -338,7 +338,7 @@
     </url>
   
     <url>
-      <loc>https://securingthe.net/categories/hackthebox/</loc>
+      <loc>https://securingthe.net/tags/hackthebox/</loc>
       
       <lastmod>2018-05-05T02:47:50+00:00</lastmod>
       
