@@ -115,6 +115,16 @@ After I registered for the course I read through the syllabus and made note of t
     </item>
     
     <item>
+      <title>About</title>
+      <link>https://securingthe.net/post/about/</link>
+      <pubDate>Wed, 06 Mar 2019 15:47:41 +0000</pubDate>
+      
+      <guid>https://securingthe.net/post/about/</guid>
+      <description>I am an infosec professional with a background in networking (routing &amp;amp; switching, DSL/WAN) and Linux administration. I spent the last few years running a PCI-DSS compliance program and starting a blue team practice for my previous employer. Now I&amp;rsquo;m involved in risk management and information assurance, but hope to get back into the technical bits of information security again in the next few years.
+I&amp;rsquo;m interested in topics like network forensics, threat hunting, penetration testing, and malware analysis/reverse engineering.</description>
+    </item>
+    
+    <item>
       <title>Starting my OSCP journey</title>
       <link>https://securingthe.net/post/starting-my-oscp-journey/</link>
       <pubDate>Mon, 25 Feb 2019 05:15:10 +0000</pubDate>
