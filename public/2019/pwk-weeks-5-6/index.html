@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="https://securingthe.net/2019/pwk-week-4/" />
+  <link rel="next" href="https://securingthe.net/2019/pwk-weeks-7-8/" />
+  <link rel="canonical" href="https://securingthe.net/2019/pwk-weeks-5-6/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           PWK: Weeks 5 &amp; 6 | Securing The Net
+       
+  </title>
+  <meta name="title" content="PWK: Weeks 5 &amp; 6 | Securing The Net">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="PWK: Weeks 5 &amp; 6"/>
+<meta name="twitter:description" content="Last week was pretty busy and I didn&rsquo;t get around to writing my week 5 recap. So, I decided to cover both week 5 and week 6 in one post. In the last two weeks I have completed several more lab machines including one of the &lsquo;big 4&rsquo;, gh0st. Here&rsquo;s the daily breakout for week 5:
+  Day 30  Recon and enumeration against box 06. Tried exploits against a couple of services with no success, but think I have it narrowed down ."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "PWK: Weeks 5 \x26 6",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/securingthe.net\/2019\/pwk-weeks-5-6\/"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https:\/\/securingthe.net\/green.png",
+    "width":  800 ,
+    "height":  600 
+  },
+  "genre": "posts",
+  "keywords": "OSCP",
+  "wordcount":  545 ,
+  "url": "https:\/\/securingthe.net\/2019\/pwk-weeks-5-6\/",
+  "datePublished": "2019-04-28T04:19:36\x2b00:00",
+  "dateModified": "2019-04-28T04:19:36\x2b00:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "AJ McQuay",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/securingthe.net\/avatar.jpg",
+      "width":  300 ,
+      "height":  110 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "AJ McQuay"
+  },
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="https://securingthe.net">Securing The Net</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/posts/about/" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://securingthe.net">Securing The Net</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/posts/about/" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">PWK: Weeks 5 &amp; 6</h1>
+        <div class="post-meta">
+            Written by <a href="https://securingthe.net" rel="author">AJ McQuay</a> with ♥ 
+                <span class="post-time">
+                    on <time datetime=2019-04-28 >28 April 2019</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://securingthe.net/categories/oscp/"> OSCP </a>
+                        
+                </span>
+                <i class="iconfont icon-timer"></i>
+                3 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+            
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <p>Last week was pretty busy and I didn&rsquo;t get around to writing my week 5 recap.  So, I decided to cover both week 5 and week 6 in one post.  In the last two weeks I have completed several more lab machines including one of the &lsquo;big 4&rsquo;, <em>gh0st</em>.  Here&rsquo;s the daily breakout for week 5:</p>
+<figure>
+    <img src="/content/images/2019/04/Week-5.png"/> 
+</figure>
+
+<h3 id="day-30">Day 30</h3>
+<ul>
+<li>Recon and enumeration against box 06.  Tried exploits against a couple of services with no success, but think I have it narrowed down .</li>
+</ul>
+<h3 id="day-31">Day 31</h3>
+<ul>
+<li>Completed box 06 and did some post-exploitation.  Started recon/enumeration of box 07.</li>
+</ul>
+<h3 id="day-32">Day 32</h3>
+<ul>
+<li>Completed exploitation and post-exploitation of box 07.  Started initial recon of box 08.</li>
+</ul>
+<h3 id="day-33">Day 33</h3>
+<ul>
+<li>Owned box 08.  Went back to complete post-exploitation of box 02.</li>
+</ul>
+<h3 id="day-34">Day 34</h3>
+<ul>
+<li>Completed exploitation of box 09, started recon against box 10.</li>
+</ul>
+<h3 id="day-35">Day 35</h3>
+<ul>
+<li>Completed box 10.</li>
+</ul>
+<p>I only devoted 13.5 hours to the lab in week 5, but I was focused more on completing machines than how much time I was spending. I got into a pretty good rhythm of finishing one box shortly before I was ready to turn in for the night and using the last few minutes to fire off initial scans against my next target.  Now let&rsquo;s look at week 6:</p>
+<figure>
+    <img src="/content/images/2019/04/Week-6.png"/> 
+</figure>
+
+<h3 id="day-37">Day 37</h3>
+<ul>
+<li>Recon and numeration against box 11.</li>
+</ul>
+<h3 id="day-38">Day 38</h3>
+<ul>
+<li>Completed exploitation of box 11.  Main lesson here is to stay on task and be thorough, do NOT get distracted and skip over things based on assumptions. Lots of time wasted on box 11 because of this.  Also started and completed box 12.</li>
+</ul>
+<h3 id="day-39">Day 39</h3>
+<ul>
+<li>Completed box 13.  Once again, details matter.  I burned 20-30 minutes because I had created my payload with one LPORT and was running my listener with a different one.  These are silly yet costly mistakes that I can&rsquo;t afford on the exam.</li>
+</ul>
+<h3 id="day-40">Day 40</h3>
+<ul>
+<li>Scans and initial recon against <em>gh0st</em> (box 14 if you&rsquo;re keeping track).</li>
+</ul>
+<h3 id="day-41">Day 41</h3>
+<ul>
+<li>Completed <em>gh0st</em>.  Stayed up way too late, but conquered my first of the &lsquo;big 4&rsquo;. Now I see why everyone says enumeration is key.</li>
+</ul>
+<h3 id="day-42">Day 42</h3>
+<ul>
+<li>Completed box 15. I had initially targeted two other machines, but they both appear to have dependencies on other systems before I can directly compromise them.</li>
+</ul>
+<p>I spent 16.5 hours in the lab in week 6, largely because of <em>gh0st.</em> In hindsight that machine wasn&rsquo;t actually that bad once you have a foothold, but you need to be very thorough and methodical in your enumeration.  Are you detecting a theme in all of the OSCP tales scattered around the Internet?</p>
+<p>My total time commitment is now up to 85.5 hours. After week 6 I also decided to extend my lab time by 30 days (expiring 6/14) and moved my exam date back slightly to Monday 6/10.  I&rsquo;ve upped my goal of compromised lab machines from 30 to 40, and also plan to review the buffer overflow section of the course material in the week leading up to my test.</p>
+<p>Overall I&rsquo;m feeling confident, but just because I&rsquo;m learning so much from each lab machine.  If I were to take the test today I&rsquo;m certain I would fail, but I&rsquo;m hoping another six weeks of lab time will have me ready.</p>
+<p><em>Photo by <a href="https://unsplash.com/photos/w7ZyuGYNpRQ?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Kevin Ku</a> on <a href="https://unsplash.com/search/photos/hacker?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></em></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>AJ McQuay </span>
+                </p>
+            
+           
+            <p class="copyright-item">
+                    <span>Words:</span>
+                   <span>545</span>
+            </p>
+            
+            <p class="copyright-item">
+                
+                <span>Share:</span>
+                <span>
+
+      
+        <a href="//twitter.com/share?url=https%3a%2f%2fsecuringthe.net%2f2019%2fpwk-weeks-5-6%2f&amp;text=PWK%3a%20Weeks%205%20%26%206&amp;via=x41x4a" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+      
+      
+        <a href="//reddit.com/submit?url=https%3a%2f%2fsecuringthe.net%2f2019%2fpwk-weeks-5-6%2f&amp;title=PWK%3a%20Weeks%205%20%26%206" target="_blank" title="Share on Reddit">
+          <i class="iconfont icon-reddit"></i>
+        </a>
+        
+      
+      
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fsecuringthe.net%2f2019%2fpwk-weeks-5-6%2f&amp;title=PWK%3a%20Weeks%205%20%26%206" target="_blank" title="Share on LinkedIn">
+          <i class="iconfont icon-linkedin"></i>
+        </a>
+        
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+</span>
+                
+            </p>
+
+             
+            <p class="copyright-item">
+                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-icon-tag"></i>Tag: 
+            
+            <span class="tag"><a href="https://securingthe.net/tags/oscp/">
+                    #OSCP</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">Back</a></span> · 
+                <span><a href="https://securingthe.net">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://securingthe.net/2019/pwk-week-4/" class="prev" rel="prev" title="PWK: Week 4"><i class="iconfont icon-dajiantou"></i>&nbsp;PWK: Week 4</a>
+         
+        
+        <a href="https://securingthe.net/2019/pwk-weeks-7-8/" class="next" rel="next" title="PWK: Weeks 7 &amp; 8">PWK: Weeks 7 &amp; 8&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+          <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      (function() {
+          
+          
+          if (window.location.hostname == "localhost")
+              return;
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          var disqus_shortname = 'ajmcquay';
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+ 
+
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2018 - 2020</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://securingthe.net">AJ McQuay</a> | </span>
+         
+
+		 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    <link crossorigin="anonymous" integrity="sha384-yziQACfvCVwLqVFLqkWBYRO3XeA4EqzfXKGwaWnenYn5XzqfJFlFdKEmvutIQdKb" href="https://lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">
+      
+     <script src="/js/vendor_gallery.min.js" async="" ></script>
+    
+  
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-41546806-5', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+     </div>
+  </body>
+</html>
