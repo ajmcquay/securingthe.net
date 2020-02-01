@@ -146,9 +146,12 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
     name = "AJ McQuay"
 
     [params.publisher.logo]
-      url = "logo.png"
-      width = 127
-      height = 40
+      #url = "logo.png"
+      #width = 127
+      #height = 40
+      url = "avatar.jpg"
+      width = 800
+      height = 600
 
   [params.logo]
     #url = "logo.png"

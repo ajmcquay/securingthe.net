@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  
+  <link rel="next" href="https://securingthe.net/post/infosec-is-bigger-than-pentesting/" />
+  <link rel="canonical" href="https://securingthe.net/post/deploying-security-controls-with-ansible/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           Deploying Security Controls with Ansible | Securing The Net
+       
+  </title>
+  <meta name="title" content="Deploying Security Controls with Ansible | Securing The Net">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Deploying Security Controls with Ansible"/>
+<meta name="twitter:description" content="I use several tools for various security or compliance controls on production Linux servers. Some of those aren&rsquo;t automatically installed/maintained through our package management utility, and with 100&#43; machines it is far too time-consuming to manually deal with each one. I&rsquo;ve started experimenting with Ansible to simplify this and thought I&rsquo;d share the first role I&rsquo;ve written while I&rsquo;m learning.
+Identify Tools and Required Tasks The first step was to identify what tools I wanted the playbook to manage, and what steps I take to install and configure them."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Deploying Security Controls with Ansible",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/securingthe.net\/post\/deploying-security-controls-with-ansible\/"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https:\/\/securingthe.net\/green.png",
+    "width":  800 ,
+    "height":  600 
+  },
+  "genre": "post",
+  "keywords": "Ansible, Automation, Tools",
+  "wordcount":  1108 ,
+  "url": "https:\/\/securingthe.net\/post\/deploying-security-controls-with-ansible\/",
+  "datePublished": "2018-03-09T18:04:36\x2b00:00",
+  "dateModified": "2018-03-09T18:04:36\x2b00:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "AJ McQuay",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/securingthe.net\/avatar.jpg",
+      "width":  800 ,
+      "height":  600 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "AJ McQuay"
+  },
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="https://securingthe.net">Securing The Net</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://securingthe.net">Securing The Net</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">Deploying Security Controls with Ansible</h1>
+        <div class="post-meta">
+            Written by <a href="https://securingthe.net" rel="author">AJ McQuay</a> with ♥ 
+                <span class="post-time">
+                    on <time datetime=2018-03-09 >9 March 2018</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://securingthe.net/categories/ansible/"> Ansible </a>
+                        <a href="https://securingthe.net/categories/automation/"> Automation </a>
+                        <a href="https://securingthe.net/categories/tools/"> Tools </a>
+                        
+                </span>
+                <i class="iconfont icon-timer"></i>
+                6 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <p>I use several tools for various security or compliance controls on production Linux servers. Some of those aren&rsquo;t automatically installed/maintained through our package management utility, and with 100+ machines it is far too time-consuming to manually deal with each one. I&rsquo;ve started experimenting with Ansible to simplify this and thought I&rsquo;d share the first role I&rsquo;ve written while I&rsquo;m learning.</p>
+<h2 id="identify-tools-and-required-tasks">Identify Tools and Required Tasks</h2>
+<p>The first step was to identify what tools I wanted the playbook to manage, and what steps I take to install and configure them. Two tools I use that aren&rsquo;t managed by Spacewalk are Samhain and M/Monit.</p>
+<h3 id="samhain">Samhain</h3>
+<p>We currently deploy Samhain in a simple standalone fashion that logs locally, then those logs get picked up by our SIEM. I download and compile Samhain from source but don&rsquo;t use a ton of options at compile time as we aren&rsquo;t currently running a Yule server. That means the required tasks are pretty simple:</p>
+<ul>
+<li>Download Samhain</li>
+<li>Extract &amp; verify PGP signature</li>
+<li>Configure, compile, install</li>
+<li>Copy in preferred config</li>
+<li>Initialize or re-initialize file signature database</li>
+<li>Start the daemon</li>
+</ul>
+<p>I opted to split these steps into two tasks named install and update.</p>
+<h3 id="mmonit">M/Monit</h3>
+<p>M/Monit is just a centralized dashboard used to manage multiple instances of the Linux utility monit. Setting this up just requires customizing the monit configuration file with M/Monit server details and any custom services you want to manage. The tasks here include:</p>
+<ul>
+<li>Make sure monit is installed</li>
+<li>Backup current/default monitrc</li>
+<li>Install new monitrc from template</li>
+<li>Start or restart the service</li>
+</ul>
+<h2 id="create-ansible-role-structure">Create Ansible role structure</h2>
+<p>Now it&rsquo;s time to create the folder hierarchy for our Ansible job. When using roles, Ansible expects certain files to exist in specific directories and will automatically pull in your variable files, handlers, templates, etc. If you&rsquo;re unfamiliar, read up on roles here.</p>
+<p>Here&rsquo;s my file/folder structure:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nix" data-lang="nix"><span style="color:#e6db74">ansible/security-tools</span><span style="color:#960050;background-color:#1e0010">/</span>
+<span style="color:#960050;background-color:#1e0010">├</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> ansible<span style="color:#f92672">.</span>cfg
+<span style="color:#960050;background-color:#1e0010">├</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> inventories
+<span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">└</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> production
+<span style="color:#960050;background-color:#1e0010">│</span>       <span style="color:#960050;background-color:#1e0010">└</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> hosts
+<span style="color:#960050;background-color:#1e0010">├</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> main<span style="color:#f92672">.</span>yml
+<span style="color:#960050;background-color:#1e0010">└</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> roles
+    <span style="color:#960050;background-color:#1e0010">├</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> monit
+    <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">├</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> files
+    <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">├</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> handlers
+    <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">└</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> main<span style="color:#f92672">.</span>yml
+    <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">├</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> tasks
+    <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">└</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> main<span style="color:#f92672">.</span>yml
+    <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">├</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> templates
+    <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">└</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> monitrc<span style="color:#f92672">.</span>j2
+    <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">└</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> vars
+    <span style="color:#960050;background-color:#1e0010">│</span>       <span style="color:#960050;background-color:#1e0010">└</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> main<span style="color:#f92672">.</span>yml
+    <span style="color:#960050;background-color:#1e0010">└</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> samhain
+        <span style="color:#960050;background-color:#1e0010">├</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> files
+        <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">└</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> samhainrc
+        <span style="color:#960050;background-color:#1e0010">├</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> handlers
+        <span style="color:#960050;background-color:#1e0010">├</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> tasks
+        <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">├</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> install<span style="color:#f92672">.</span>yml
+        <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">├</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> main<span style="color:#f92672">.</span>yml
+        <span style="color:#960050;background-color:#1e0010">│</span>   <span style="color:#960050;background-color:#1e0010">└</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> update<span style="color:#f92672">.</span>yml
+        <span style="color:#960050;background-color:#1e0010">├</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> templates
+        <span style="color:#960050;background-color:#1e0010">└</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> vars
+            <span style="color:#960050;background-color:#1e0010">└</span><span style="color:#960050;background-color:#1e0010">─</span><span style="color:#960050;background-color:#1e0010">─</span> main<span style="color:#f92672">.</span>yml
+</code></pre></div><p>The primary playbook is executed by running the command ansible-playbook main.yml. Here&rsquo;s what it looks like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+- <span style="color:#66d9ef">hosts</span>: all
+  <span style="color:#66d9ef">become</span>: yes
+  <span style="color:#66d9ef">roles</span>:
+    - {<span style="color:#66d9ef">name: samhain, tags</span>: samhain}
+    - {<span style="color:#66d9ef">name: monit, tags</span>: monit}
+</code></pre></div><p>Pretty simple, right? I added tags so that I can pick and choose which roles I want to run as this project expands. For example I can run just the monit role with the command <code>ansible-playbook main.yml --tags monit</code>.</p>
+<h2 id="roles-in-detail">Roles in Detail</h2>
+<h3 id="monit">Monit</h3>
+<p>Let&rsquo;s take a closer look at each role now, starting with Monit. Here&rsquo;s the roles/monit/tasks/main.yml task file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+ - <span style="color:#66d9ef">stat</span>: path={{ monitrc_path }}
+   <span style="color:#66d9ef">register</span>: rc
+
+ - <span style="color:#66d9ef">name</span>: install monit on CentOS hosts
+   <span style="color:#66d9ef">yum</span>:
+     <span style="color:#66d9ef">name</span>: monit
+     <span style="color:#66d9ef">state</span>: present
+   <span style="color:#66d9ef">when</span>: ansible_distribution == <span style="color:#e6db74">&#34;CentOS&#34;</span> and ansible_distribution_major_version &gt; <span style="color:#e6db74">&#39;5&#39;</span>
+
+ - <span style="color:#66d9ef">name</span>: install monit on Ubuntu hosts
+   <span style="color:#66d9ef">apt</span>:
+     <span style="color:#66d9ef">name</span>: monit
+     <span style="color:#66d9ef">state</span>: present
+   <span style="color:#66d9ef">when</span>: ansible_distribution != <span style="color:#e6db74">&#34;CentOS&#34;</span>
+
+ - <span style="color:#66d9ef">name</span>: backup current monitrc file
+   <span style="color:#66d9ef">command</span>: mv {{ monitrc_path }} /etc/monitrc.bak
+   <span style="color:#66d9ef">when</span>: rc.stat.exists
+
+ - <span style="color:#66d9ef">name</span>: write new monitrc file and restart the service
+   <span style="color:#66d9ef">template</span>:
+     <span style="color:#66d9ef">src</span>: monitrc.j2
+     <span style="color:#66d9ef">dest</span>: <span style="color:#e6db74">&#34;{{ monitrc_path }}&#34;</span>
+     <span style="color:#66d9ef">owner</span>: root
+     <span style="color:#66d9ef">mode</span>: <span style="color:#ae81ff">0600</span>
+   <span style="color:#66d9ef">notify</span>:
+     - stop monit service
+     - start monit service
+</code></pre></div><p>You can see it referencing the variable <code>{{ monitrc_path }}</code>, template file <code>monitrc.j2</code>, and handlers <code>stop monit service</code> and <code>start monit service</code>. Ansible automatically pulls these in from <code>roles/monit/vars/main.yml</code>, <code>roles/monit/templates/</code>, and <code>roles/monit/handlers/main.yml</code>, respectively.</p>
+<p>The vars file contains a single line: <code>monitrc_path: /etc/monitrc</code></p>
+<p>I won&rsquo;t attach the entire monitrc template, but it just substitutes a single variable from the facts Ansible gathers on each host when first running a playbook. Example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nix" data-lang="nix">set httpd port <span style="color:#ae81ff">2812</span> and
+    use address {{ ansible_default_ipv4<span style="color:#f92672">.</span>address }}
+</code></pre></div><p>Finally, <code>roles/monit/handlers/main.yml</code> contains:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+- <span style="color:#66d9ef">name</span>: stop monit service
+  <span style="color:#66d9ef">service</span>:
+    <span style="color:#66d9ef">name</span>: monit
+    <span style="color:#66d9ef">state</span>: stopped
+- <span style="color:#66d9ef">name</span>: start monit service
+  <span style="color:#66d9ef">command</span>: monit -c /etc/monitrc
+</code></pre></div><h3 id="samhain-1">Samhain</h3>
+<p>Now for a quicker look at the Samhain role. Here are the contents of roles/samhain/tasks/main.yml:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+- <span style="color:#66d9ef">include</span>: install.yml
+- <span style="color:#66d9ef">include</span>: update.yml
+</code></pre></div><p>This simply calls the separate install and update tasks. I typically comment one of them out and just run install if it&rsquo;s a new system needing security tools installed the first time, or update if it&rsquo;s an existing system that just needs an update to the samhain config file.</p>
+<p>Install task:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+- <span style="color:#66d9ef">stat</span>: path={{ samhain_database }}
+  <span style="color:#66d9ef">register</span>: sam_db
+- <span style="color:#66d9ef">stat</span>: path={{ samhainrc_path }}
+  <span style="color:#66d9ef">register</span>: sam_path
+- <span style="color:#66d9ef">stat</span>: path={{ samhain_process }}
+  <span style="color:#66d9ef">register</span>: samhain_pid
+- <span style="color:#66d9ef">name</span>: Download Samhain package
+  <span style="color:#66d9ef">get_url</span>:
+    <span style="color:#66d9ef">url</span>: http://www.la-samhna.de/samhain/samhain-current.tar.gz
+    <span style="color:#66d9ef">dest</span>: /opt
+    <span style="color:#66d9ef">checksum</span>: &lt;insert checksum for current version of Samhain&gt;
+- <span style="color:#66d9ef">name</span>: Unpack Samhain tarball
+  <span style="color:#66d9ef">unarchive</span>:
+    <span style="color:#66d9ef">src</span>: /opt/samhain-current.tar.gz
+    <span style="color:#66d9ef">dest</span>: /opt/
+    <span style="color:#66d9ef">remote_src</span>: True
+- <span style="color:#66d9ef">name</span>: Import Samhain development key
+  <span style="color:#66d9ef">command</span>: gpg --keyserver pgp.key-server.io --recv-key 0F571F6C
+- <span style="color:#66d9ef">name</span>: Check key fingerprint
+  <span style="color:#66d9ef">command</span>: gpg --fingerprint 0F571F6C
+- <span style="color:#66d9ef">name</span>: Verify PGP signature
+  <span style="color:#66d9ef">shell</span>: gpg --verify /opt/samhain-{{ samhain_version }}.tar.gz.asc /opt/samhain-{{ samhain_version }}.tar.gz
+  <span style="color:#66d9ef">register</span>: gpg_check
+- <span style="color:#66d9ef">debug</span>: msg={{gpg_check}}
+- <span style="color:#66d9ef">name</span>: Unzip second-stage tar file
+  <span style="color:#66d9ef">unarchive</span>:
+    <span style="color:#66d9ef">src</span>: /opt/samhain-{{ samhain_version }}.tar.gz
+    <span style="color:#66d9ef">dest</span>: /opt
+    <span style="color:#66d9ef">remote_src</span>: True
+- <span style="color:#66d9ef">name</span>: Install Samhain
+  <span style="color:#66d9ef">shell</span>: cd /opt/samhain-{{ samhain_version }} <span style="color:#75715e">&amp;&amp;</span> ./configure <span style="color:#75715e">&amp;&amp;</span> make <span style="color:#75715e">&amp;&amp;</span> make install
+  <span style="color:#66d9ef">args</span>:
+    <span style="color:#66d9ef">creates</span>: /etc/samhainrc
+</code></pre></div><p>Update task:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
+- <span style="color:#66d9ef">stat</span>: path={{ samhain_database }}
+  <span style="color:#66d9ef">register</span>: db
+- <span style="color:#66d9ef">stat</span>: path={{ samhainrc_path }}
+  <span style="color:#66d9ef">register</span>: rc
+- <span style="color:#66d9ef">stat</span>: path={{ samhain_process }}
+  <span style="color:#66d9ef">register</span>: pid
+- <span style="color:#66d9ef">name</span>: Stop samhain process
+  <span style="color:#66d9ef">command</span>: /usr/local/sbin/samhain stop
+  <span style="color:#66d9ef">when</span>: pid.stat.exists
+- <span style="color:#66d9ef">name</span>: Copy samhainrc file to client
+  <span style="color:#66d9ef">copy</span>: src=samhainrc dest=/tmp/samhainrc
+    owner=root group=root mode=<span style="color:#ae81ff">0644</span>
+- <span style="color:#66d9ef">name</span>: Backup current samhainrc
+  <span style="color:#66d9ef">command</span>: mv {{ samhainrc_path }} /etc/samhainrc.bak
+  <span style="color:#66d9ef">when</span>: rc.stat.exists
+- <span style="color:#66d9ef">name</span>: Move samhainrc to /etc
+  <span style="color:#66d9ef">command</span>: mv /tmp/samhainrc {{ samhainrc_path }}
+- <span style="color:#66d9ef">name</span>: Backup existing samhain database
+  <span style="color:#66d9ef">command</span>: mv {{ samhain_database }} /var/lib/samhain/samhain_file.bak
+  <span style="color:#66d9ef">when</span>: db.stat.exists
+- <span style="color:#66d9ef">name</span>: Update samhain database
+  <span style="color:#66d9ef">command</span>: /usr/local/sbin/samhain -t init
+- <span style="color:#66d9ef">name</span>: Start samhain
+  <span style="color:#66d9ef">command</span>: /usr/local/sbin/samhain -D -t check
+</code></pre></div><p>The file referenced in the copy operation is located at roles/samhain/files/samhainrc.</p>
+<p>Vars file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">    <span style="color:#66d9ef">samhain_database</span>: /var/lib/samhain/samhain_file
+    <span style="color:#66d9ef">samhainrc_path</span>: /etc/samhainrc
+    <span style="color:#66d9ef">samhain_process</span>: /var/run/samhain.pid
+    <span style="color:#66d9ef">samhain_version</span>: &lt;insert current Samhain version&gt;
+</code></pre></div><p>Conclusion</p>
+<p>This is all fairly simple but has greatly reduced the amount of time I spend installing and maintaining these tools. I realize the Samhain role doesn&rsquo;t adhere to Ansible&rsquo;s idea of idempotence very well due to the heavy usage of the command module. I&rsquo;m looking for ways to improve it, but it does what I need with some basic error handling for now.</p>
+<p>Hopefully this helps illustrate how Ansible roles work and some of the advantages roles have versus doing everything from one giant playbook. I&rsquo;m relatively new to Ansible so feel free to leave a reply below or reach out on Twitter if you have questions, comments, or even suggestions on how this could be improved.</p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>AJ McQuay </span>
+                </p>
+            
+           
+            <p class="copyright-item">
+                    <span>Words:</span>
+                   <span>1108</span>
+            </p>
+            
+            <p class="copyright-item">
+                
+                <span>Share:</span>
+                <span>
+
+      
+        <a href="//twitter.com/share?url=https%3a%2f%2fsecuringthe.net%2fpost%2fdeploying-security-controls-with-ansible%2f&amp;text=Deploying%20Security%20Controls%20with%20Ansible&amp;via=x41x4a" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+      
+      
+        <a href="//reddit.com/submit?url=https%3a%2f%2fsecuringthe.net%2fpost%2fdeploying-security-controls-with-ansible%2f&amp;title=Deploying%20Security%20Controls%20with%20Ansible" target="_blank" title="Share on Reddit">
+          <i class="iconfont icon-reddit"></i>
+        </a>
+        
+      
+      
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fsecuringthe.net%2fpost%2fdeploying-security-controls-with-ansible%2f&amp;title=Deploying%20Security%20Controls%20with%20Ansible" target="_blank" title="Share on LinkedIn">
+          <i class="iconfont icon-linkedin"></i>
+        </a>
+        
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+</span>
+                
+            </p>
+
+             
+            <p class="copyright-item">
+                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-icon-tag"></i>Tag: 
+            
+            <span class="tag"><a href="https://securingthe.net/tags/ansible/">
+                    #Ansible</a></span>
+            
+            <span class="tag"><a href="https://securingthe.net/tags/automation/">
+                    #Automation</a></span>
+            
+            <span class="tag"><a href="https://securingthe.net/tags/tools/">
+                    #Tools</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">Back</a></span> · 
+                <span><a href="https://securingthe.net">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+         
+        
+        <a href="https://securingthe.net/post/infosec-is-bigger-than-pentesting/" class="next" rel="next" title="InfoSec is Bigger Than Pentesting">InfoSec is Bigger Than Pentesting&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+          <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      (function() {
+          
+          
+          if (window.location.hostname == "localhost")
+              return;
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          var disqus_shortname = 'ajmcquay';
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+ 
+
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2018 - 2020</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://securingthe.net">AJ McQuay</a> | </span>
+         
+
+		 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-41546806-5', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+     </div>
+  </body>
+</html>

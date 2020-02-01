@@ -240,7 +240,7 @@
     </url>
   
     <url>
-      <loc>https://securingthe.net/tags/opinion/</loc>
+      <loc>https://securingthe.net/categories/opinion/</loc>
       
       <lastmod>2019-03-20T20:16:03+00:00</lastmod>
       
@@ -254,7 +254,7 @@
     </url>
   
     <url>
-      <loc>https://securingthe.net/categories/opinion/</loc>
+      <loc>https://securingthe.net/tags/opinion/</loc>
       
       <lastmod>2019-03-20T20:16:03+00:00</lastmod>
       
@@ -310,7 +310,7 @@
     </url>
   
     <url>
-      <loc>https://securingthe.net/categories/hackthebox/</loc>
+      <loc>https://securingthe.net/tags/hackthebox/</loc>
       
       <lastmod>2018-05-05T02:47:50+00:00</lastmod>
       
@@ -324,7 +324,7 @@
     </url>
   
     <url>
-      <loc>https://securingthe.net/tags/hackthebox/</loc>
+      <loc>https://securingthe.net/categories/hackthebox/</loc>
       
       <lastmod>2018-05-05T02:47:50+00:00</lastmod>
       
@@ -352,7 +352,7 @@
     </url>
   
     <url>
-      <loc>https://securingthe.net/tags/linux/</loc>
+      <loc>https://securingthe.net/categories/linux/</loc>
       
       <lastmod>2018-05-05T02:47:50+00:00</lastmod>
       
@@ -366,7 +366,7 @@
     </url>
   
     <url>
-      <loc>https://securingthe.net/categories/linux/</loc>
+      <loc>https://securingthe.net/tags/linux/</loc>
       
       <lastmod>2018-05-05T02:47:50+00:00</lastmod>
       
@@ -394,20 +394,6 @@
     </url>
   
     <url>
-      <loc>https://securingthe.net/tags/ansible/</loc>
-      
-      <lastmod>2018-03-09T18:04:36+00:00</lastmod>
-      
-      
-      <changefreq>monthly</changefreq>
-      
-      
-      <priority>0.5</priority>
-      
-      
-    </url>
-  
-    <url>
       <loc>https://securingthe.net/categories/ansible/</loc>
       
       <lastmod>2018-03-09T18:04:36+00:00</lastmod>
@@ -422,7 +408,7 @@
     </url>
   
     <url>
-      <loc>https://securingthe.net/categories/automation/</loc>
+      <loc>https://securingthe.net/tags/ansible/</loc>
       
       <lastmod>2018-03-09T18:04:36+00:00</lastmod>
       
@@ -437,6 +423,20 @@
   
     <url>
       <loc>https://securingthe.net/tags/automation/</loc>
+      
+      <lastmod>2018-03-09T18:04:36+00:00</lastmod>
+      
+      
+      <changefreq>monthly</changefreq>
+      
+      
+      <priority>0.5</priority>
+      
+      
+    </url>
+  
+    <url>
+      <loc>https://securingthe.net/categories/automation/</loc>
       
       <lastmod>2018-03-09T18:04:36+00:00</lastmod>
       

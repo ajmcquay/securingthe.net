@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noodp"/>
+  
+  
+  
+  
+  
+  <link rel="prev" href="https://securingthe.net/post/starting-my-oscp-journey/" />
+  <link rel="next" href="https://securingthe.net/post/common-question-what-certs-should-i-get/" />
+  <link rel="canonical" href="https://securingthe.net/post/oscp-t-minus-1-week/" />
+  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
+  <title>
+       
+       
+           OSCP: T-minus 1 week | Securing The Net
+       
+  </title>
+  <meta name="title" content="OSCP: T-minus 1 week | Securing The Net">
+    
+  
+  <link rel="stylesheet" href="/font/iconfont.css">
+  <link rel="stylesheet" href="/css/main.min.css">
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="OSCP: T-minus 1 week"/>
+<meta name="twitter:description" content="I get access to the PWK course material in a week, so I figured I&rsquo;d write up a quick post about how I&rsquo;ve been preparing.
+After I registered for the course I read through the syllabus and made note of the areas in which I was least confident. The main topics that jumped out at me were buffer overflows and web application attacks. I did some searching and found some great resources."/>
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BlogPosting",
+  "headline": "OSCP: T-minus 1 week",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https:\/\/securingthe.net\/post\/oscp-t-minus-1-week\/"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https:\/\/securingthe.net\/green.png",
+    "width":  800 ,
+    "height":  600 
+  },
+  "genre": "post",
+  "keywords": "OSCP",
+  "wordcount":  286 ,
+  "url": "https:\/\/securingthe.net\/post\/oscp-t-minus-1-week\/",
+  "datePublished": "2019-03-08T22:38:11\x2b00:00",
+  "dateModified": "2019-03-08T22:38:11\x2b00:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "AJ McQuay",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https:\/\/securingthe.net\/avatar.jpg",
+      "width":  800 ,
+      "height":  600 
+    }
+  },
+  "author": {
+    "@type": "Person",
+    "name": "AJ McQuay"
+  },
+  "description": ""
+}
+</script>
+</head>
+
+  
+
+
+
+  <body class="">
+    <div class="wrapper">
+        <nav class="navbar">
+    <div class="container">
+        <div class="navbar-header header-logo">
+        	<a href="https://securingthe.net">Securing The Net</a>
+        </div>
+        <div class="menu navbar-right">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile" id="nav-mobile" style="display: none">
+     <div class="container">
+        <div class="navbar-header">
+            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://securingthe.net">Securing The Net</a></div>
+            <div class="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+     
+          <div class="menu" id="mobile-menu">
+                
+                
+                <a class="menu-item" href="/posts/" title="">Blog</a>
+                
+                <a class="menu-item" href="/categories/" title="">Categories</a>
+                
+                <a class="menu-item" href="/about" title="">About</a>
+                
+        </div>
+    </div>
+</nav>
+
+    	 <main class="main">
+          <div class="container">
+      		
+<article class="post-warp">
+    <header class="post-header">
+        <h1 class="post-title">OSCP: T-minus 1 week</h1>
+        <div class="post-meta">
+            Written by <a href="https://securingthe.net" rel="author">AJ McQuay</a> with ♥ 
+                <span class="post-time">
+                    on <time datetime=2019-03-08 >8 March 2019</time>
+                </span>
+                in
+                <i class="iconfont icon-folder"></i>
+                <span class="post-category">
+                        <a href="https://securingthe.net/categories/oscp/"> OSCP </a>
+                        
+                </span>
+                <i class="iconfont icon-timer"></i>
+                2 min
+        </div>
+    </header>
+    <div class="post-content">
+        
+
+        
+
+        
+        
+     
+          
+          
+          
+
+          
+          
+          
+
+          <p>I get access to the PWK course material in a week, so I figured I&rsquo;d write up a quick post about how I&rsquo;ve been preparing.</p>
+<p>After I registered for the course I read through <a href="https://www.offensive-security.com/documentation/penetration-testing-with-kali.pdf">the syllabus</a> and made note of the areas in which I was least confident.  The main topics that jumped out at me were buffer overflows and web application attacks. I did some searching and found some great resources.</p>
+<p><a href="https://www.abatchy.com/2017/03/how-to-prepare-for-pwkoscp-noob">This post on abatchy&rsquo;s blog</a> has been a huge help, and it led me to the <a href="https://www.corelan.be/index.php/2009/07/19/exploit-writing-tutorial-part-1-stack-based-overflows/">first post in the Corelan series</a> on buffer overflows. Combined with the <a href="https://github.com/justinsteven/dostackbufferoverflowgood">dostackbufferoverflowgood lesson on Github</a> I feel like I at least have enough of a grasp on things to work through the PWK BO material.</p>
+<p>As for web application attacks, I plan to follow abatchy&rsquo;s advice and see how far I can get with <a href="http://overthewire.org/wargames/natas/">Overthewire: Natas</a> over the next few days.</p>
+<p>Outside of preparing for the course content, I still need to decide on how I&rsquo;ll be handling my notes throughout the class/lab/exam.  I will probably run the PWK Kali VM on my Windows 10 machine.  It&rsquo;s a 17&rdquo; laptop with a beefier processor and more RAM than my ThinkPad (running Ubuntu), so I may go with OneNote over CherryTree within the Kali VM.</p>
+<p><a href="https://github.com/patrikx3/onenote">This Electron app</a> makes it pretty easy to use OneNote on Linux. That would give me a backup option if I run into clipboard issues between the Windows host and the PWK Kali image, or if the OneNote web app has problems in Kali (which I&rsquo;ve run into before).</p>
+<p>I&rsquo;m looking forward to getting started and plan to post somewhat regular updates here to track my progress.</p>
+<hr>
+<p><em>Photo by <a href="https://unsplash.com/photos/FXFz-sW0uwo?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Markus Spiske</a> on <a href="https://unsplash.com/search/photos/hacker?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></em></p>
+
+    </div>
+
+    <div class="post-copyright">
+             
+            <p class="copyright-item">
+                <span>Author:</span>
+                <span>AJ McQuay </span>
+                </p>
+            
+           
+            <p class="copyright-item">
+                    <span>Words:</span>
+                   <span>286</span>
+            </p>
+            
+            <p class="copyright-item">
+                
+                <span>Share:</span>
+                <span>
+
+      
+        <a href="//twitter.com/share?url=https%3a%2f%2fsecuringthe.net%2fpost%2foscp-t-minus-1-week%2f&amp;text=OSCP%3a%20T-minus%201%20week&amp;via=x41x4a" target="_blank" title="Share on Twitter">
+          <i class="iconfont icon-twitter"></i>
+        </a>
+        
+      
+      
+      
+      
+        <a href="//reddit.com/submit?url=https%3a%2f%2fsecuringthe.net%2fpost%2foscp-t-minus-1-week%2f&amp;title=OSCP%3a%20T-minus%201%20week" target="_blank" title="Share on Reddit">
+          <i class="iconfont icon-reddit"></i>
+        </a>
+        
+      
+      
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fsecuringthe.net%2fpost%2foscp-t-minus-1-week%2f&amp;title=OSCP%3a%20T-minus%201%20week" target="_blank" title="Share on LinkedIn">
+          <i class="iconfont icon-linkedin"></i>
+        </a>
+        
+      
+      
+        
+      
+        
+      
+
+          
+
+          
+
+          
+
+          
+</span>
+                
+            </p>
+
+             
+            <p class="copyright-item">
+                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
+            </p>
+            
+    </div>
+
+  
+    <div class="post-tags">
+        
+            <section>
+            <i class="iconfont icon-icon-tag"></i>Tag: 
+            
+            <span class="tag"><a href="https://securingthe.net/tags/oscp/">
+                    #OSCP</a></span>
+            
+            </section>
+        
+        <section>
+                <a href="javascript:window.history.back();">Back</a></span> · 
+                <span><a href="https://securingthe.net">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+        <a href="https://securingthe.net/post/starting-my-oscp-journey/" class="prev" rel="prev" title="Starting my OSCP journey"><i class="iconfont icon-dajiantou"></i>&nbsp;Starting my OSCP journey</a>
+         
+        
+        <a href="https://securingthe.net/post/common-question-what-certs-should-i-get/" class="next" rel="next" title="Common question: What certs should I get?">Common question: What certs should I get?&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+    </div>
+
+    <div class="post-comment">
+          
+          <div id="disqus_thread"></div>
+  <script type="text/javascript">
+      (function() {
+          
+          
+          if (window.location.hostname == "localhost")
+              return;
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          var disqus_shortname = 'ajmcquay';
+          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+ 
+
+          
+    </div>
+</article>
+          </div>
+		   </main>
+      <footer class="footer">
+    <div class="copyright">
+        &copy;
+        
+        <span itemprop="copyrightYear">2018 - 2020</span>
+        
+         
+            <span class="author" itemprop="copyrightHolder"><a href="https://securingthe.net">AJ McQuay</a> | </span>
+         
+
+		 
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    
+    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+    
+  
+
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-41546806-5', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+     </div>
+  </body>
+</html>
