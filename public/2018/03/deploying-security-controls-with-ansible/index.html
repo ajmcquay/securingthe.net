@@ -1,780 +1,295 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Deploying Security Controls with Ansible | Securing The Net</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noodp" />
-<meta name="Description" content="Tech ramblings from the desert">
-<link rel="next" href="https://securingthe.net/2018/03/infosec-is-bigger-than-pentesting/" />
-<link rel="canonical" href="https://securingthe.net/2018/03/deploying-security-controls-with-ansible/" />
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="theme-color" content="#ffffff">
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Deploying Security Controls with Ansible"/>
-<meta name="twitter:description" content="I use several tools for various security or compliance controls on production Linux servers. Some of those aren&rsquo;t automatically installed/maintained through our package management utility, and with 100&#43; machines it is far too time-consuming to manually deal with each one. I&rsquo;ve started experimenting with Ansible to simplify this and thought I&rsquo;d share the first role I&rsquo;ve written while I&rsquo;m learning.
-Identify Tools and Required Tasks The first step was to identify what tools I wanted the playbook to manage, and what steps I take to install and configure them."/>
-<script type="application/ld+json">
-    {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "Deploying Security Controls with Ansible",
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https:\/\/securingthe.net\/2018\/03\/deploying-security-controls-with-ansible\/"
-    },
-    
-        "image": {
-            "@type": "ImageObject",
-            "url": "https:\/\/securingthe.net\/cover.png",
-            "width":  800 ,
-            "height":  600 
-        },
-    
-    "genre": "posts",
-    
-        "keywords": "Ansible, Automation, Tools",
-    
-    "wordcount":  923 ,
-    "url": "https:\/\/securingthe.net\/2018\/03\/deploying-security-controls-with-ansible\/",
-    
-        "datePublished": "2018-03-09T18:04:36\x2b00:00",
-    
-    
-        "dateModified": "2020-02-01T16:19:02-07:00",
-    
-    
-        "license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.",
-    
-    
-        "publisher": {
-            "@type": "Organization",
-            "name": "AJ McQuay",
-            "logo": {
-            "@type": "ImageObject",
-            "url": "https:\/\/securingthe.net\/logo.png",
-            "width":  127 ,
-            "height":  40 
-            }
-        },
-    
-    
-    "description": ""
-    }
-    </script>
-<link rel="stylesheet" href="/css/style.min.css">
-<link rel="stylesheet" href="/css/lib/fontawesome-free/all.min.min.css">
-
-<link rel="stylesheet" href="/css/lib/animate/animate.min.min.css">
-
-
-    </head>
-    <body>
-        <script>
-            window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
-            window.isDark && document.body.classList.add('dark-theme');
-        </script>
-        <div class="wrapper">
-            <nav class="navbar">
-    <div class="navbar-container">
-        <div class="navbar-header animated bounceIn">
-            <a href="https://securingthe.net/">Securing The Net</a>
-        </div>
-        <div class="navbar-menu">
-            
-            
-                <a class="menu-item" href="https://securingthe.net/posts" title="">Posts</a>
-            
-                <a class="menu-item" href="https://securingthe.net/tags" title="">Tags</a>
-            
-                <a class="menu-item" href="https://securingthe.net/categories" title="">Categories</a>
-            
-                <a class="menu-item" href="https://securingthe.net/posts/about/" title="">About</a>
-            
-                <a class="menu-item" href="https://securingthe.net" title=""><i class="fas fa-language fa-fw"></i></a>
-            
-            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="Switch Theme"></i></a>
-        </div>
-    </div>
-</nav>
-<nav class="navbar-mobile">
-     <div class="navbar-container">
-        <div class="navbar-header">
-            <div class="navbar-header-title animated bounceIn">
-                <a href="https://securingthe.net/">Securing The Net</a>
-            </div>
-            <div class="menu-toggle" id="menu-toggle">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-        <div class="navbar-menu" id="mobile-menu">
-            
-            
-                <a class="menu-item" href="https://securingthe.net/posts" title="">Posts</a>
-            
-                <a class="menu-item" href="https://securingthe.net/tags" title="">Tags</a>
-            
-                <a class="menu-item" href="https://securingthe.net/categories" title="">Categories</a>
-            
-                <a class="menu-item" href="https://securingthe.net/posts/about/" title="">About</a>
-            
-                <a class="menu-item" href="https://securingthe.net" title=""><i class="fas fa-language fa-fw"></i></a>
-            
-            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"></i></a>
-        </div>
-    </div>
-</nav><main class="main">
-                <div class="container">
-                    
-    
-    
-    
-       
-    
-
-    <article class="post-warp">
-        <h1 class="post-title animated flipInX">Deploying Security Controls with Ansible</h1>
-
-        <div class="post-meta">
-            <div class="post-meta-main">
-                <a class="author" href="https://securingthe.net/" rel="author"><i class="fas fa-user-circle fa-fw"></i>AJ McQuay&nbsp;</a>
-                <span class="post-category">
-                        included in
-                        <i class="far fa-folder fa-fw"></i><a href="https://securingthe.net/categories/ansible/">Ansible</a>
-                            <i class="far fa-folder fa-fw"></i><a href="https://securingthe.net/categories/automation/">Automation</a>
-                            <i class="far fa-folder fa-fw"></i><a href="https://securingthe.net/categories/tools/">Tools</a>
-                            
-                    </span>
-            </div>
-            <div class="post-meta-other">
-                <i class="far fa-calendar-alt fa-fw"></i><time datetime=2018-03-09>2018-03-09</time>&nbsp;
-                <i class="fas fa-pencil-alt fa-fw"></i>about 923 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>5 min&nbsp;</div>
-        </div>
-
-        
-
-        
-
-        <div class="post-content">
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            <p>I use several tools for various security or compliance controls on production Linux servers. Some of those aren&rsquo;t automatically installed/maintained through our package management utility, and with 100+ machines it is far too time-consuming to manually deal with each one. I&rsquo;ve started experimenting with Ansible to simplify this and thought I&rsquo;d share the first role I&rsquo;ve written while I&rsquo;m learning.</p>
-<a class="post-dummy-target" id="identify-tools-and-required-tasks"></a><h2>Identify Tools and Required Tasks</h2>
-<p>The first step was to identify what tools I wanted the playbook to manage, and what steps I take to install and configure them. Two tools I use that aren&rsquo;t managed by Spacewalk are Samhain and M/Monit.</p>
-<a class="post-dummy-target" id="samhain"></a><h3>Samhain</h3>
-<p>We currently deploy Samhain in a simple standalone fashion that logs locally, then those logs get picked up by our SIEM. I download and compile Samhain from source but don&rsquo;t use a ton of options at compile time as we aren&rsquo;t currently running a Yule server. That means the required tasks are pretty simple:</p>
-<ul>
-<li>Download Samhain</li>
-<li>Extract &amp; verify PGP signature</li>
-<li>Configure, compile, install</li>
-<li>Copy in preferred config</li>
-<li>Initialize or re-initialize file signature database</li>
-<li>Start the daemon</li>
-</ul>
-<p>I opted to split these steps into two tasks named install and update.</p>
-<a class="post-dummy-target" id="mmonit"></a><h3>M/Monit</h3>
-<p>M/Monit is just a centralized dashboard used to manage multiple instances of the Linux utility monit. Setting this up just requires customizing the monit configuration file with M/Monit server details and any custom services you want to manage. The tasks here include:</p>
-<ul>
-<li>Make sure monit is installed</li>
-<li>Backup current/default monitrc</li>
-<li>Install new monitrc from template</li>
-<li>Start or restart the service</li>
-</ul>
-<a class="post-dummy-target" id="create-ansible-role-structure"></a><h2>Create Ansible role structure</h2>
-<p>Now it&rsquo;s time to create the folder hierarchy for our Ansible job. When using roles, Ansible expects certain files to exist in specific directories and will automatically pull in your variable files, handlers, templates, etc. If you&rsquo;re unfamiliar, read up on roles here.</p>
-<p>Here&rsquo;s my file/folder structure:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-nix" data-lang="nix"><span class="sr">ansible/security-tools</span><span class="err">/</span>
-<span class="err">├</span><span class="err">─</span><span class="err">─</span> <span class="n">ansible</span><span class="o">.</span><span class="n">cfg</span>
-<span class="err">├</span><span class="err">─</span><span class="err">─</span> <span class="n">inventories</span>
-<span class="err">│</span>   <span class="err">└</span><span class="err">─</span><span class="err">─</span> <span class="n">production</span>
-<span class="err">│</span>       <span class="err">└</span><span class="err">─</span><span class="err">─</span> <span class="n">hosts</span>
-<span class="err">├</span><span class="err">─</span><span class="err">─</span> <span class="n">main</span><span class="o">.</span><span class="n">yml</span>
-<span class="err">└</span><span class="err">─</span><span class="err">─</span> <span class="n">roles</span>
-    <span class="err">├</span><span class="err">─</span><span class="err">─</span> <span class="n">monit</span>
-    <span class="err">│</span>   <span class="err">├</span><span class="err">─</span><span class="err">─</span> <span class="n">files</span>
-    <span class="err">│</span>   <span class="err">├</span><span class="err">─</span><span class="err">─</span> <span class="n">handlers</span>
-    <span class="err">│</span>   <span class="err">│</span>   <span class="err">└</span><span class="err">─</span><span class="err">─</span> <span class="n">main</span><span class="o">.</span><span class="n">yml</span>
-    <span class="err">│</span>   <span class="err">├</span><span class="err">─</span><span class="err">─</span> <span class="n">tasks</span>
-    <span class="err">│</span>   <span class="err">│</span>   <span class="err">└</span><span class="err">─</span><span class="err">─</span> <span class="n">main</span><span class="o">.</span><span class="n">yml</span>
-    <span class="err">│</span>   <span class="err">├</span><span class="err">─</span><span class="err">─</span> <span class="n">templates</span>
-    <span class="err">│</span>   <span class="err">│</span>   <span class="err">└</span><span class="err">─</span><span class="err">─</span> <span class="n">monitrc</span><span class="o">.</span><span class="n">j2</span>
-    <span class="err">│</span>   <span class="err">└</span><span class="err">─</span><span class="err">─</span> <span class="n">vars</span>
-    <span class="err">│</span>       <span class="err">└</span><span class="err">─</span><span class="err">─</span> <span class="n">main</span><span class="o">.</span><span class="n">yml</span>
-    <span class="err">└</span><span class="err">─</span><span class="err">─</span> <span class="n">samhain</span>
-        <span class="err">├</span><span class="err">─</span><span class="err">─</span> <span class="n">files</span>
-        <span class="err">│</span>   <span class="err">└</span><span class="err">─</span><span class="err">─</span> <span class="n">samhainrc</span>
-        <span class="err">├</span><span class="err">─</span><span class="err">─</span> <span class="n">handlers</span>
-        <span class="err">├</span><span class="err">─</span><span class="err">─</span> <span class="n">tasks</span>
-        <span class="err">│</span>   <span class="err">├</span><span class="err">─</span><span class="err">─</span> <span class="n">install</span><span class="o">.</span><span class="n">yml</span>
-        <span class="err">│</span>   <span class="err">├</span><span class="err">─</span><span class="err">─</span> <span class="n">main</span><span class="o">.</span><span class="n">yml</span>
-        <span class="err">│</span>   <span class="err">└</span><span class="err">─</span><span class="err">─</span> <span class="n">update</span><span class="o">.</span><span class="n">yml</span>
-        <span class="err">├</span><span class="err">─</span><span class="err">─</span> <span class="n">templates</span>
-        <span class="err">└</span><span class="err">─</span><span class="err">─</span> <span class="n">vars</span>
-            <span class="err">└</span><span class="err">─</span><span class="err">─</span> <span class="n">main</span><span class="o">.</span><span class="n">yml</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>The primary playbook is executed by running the command ansible-playbook main.yml. Here&rsquo;s what it looks like:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">---<span class="w">
-</span><span class="w"></span>- <span class="k">hosts</span><span class="p">:</span><span class="w"> </span>all<span class="w">
-</span><span class="w">  </span><span class="k">become</span><span class="p">:</span><span class="w"> </span>yes<span class="w">
-</span><span class="w">  </span><span class="k">roles</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">    </span>- {<span class="k">name: samhain, tags</span><span class="p">:</span><span class="w"> </span>samhain}<span class="w">
-</span><span class="w">    </span>- {<span class="k">name: monit, tags</span><span class="p">:</span><span class="w"> </span>monit}<span class="w">
-</span></code></pre></td></tr></table>
-</div>
-</div><p>Pretty simple, right? I added tags so that I can pick and choose which roles I want to run as this project expands. For example I can run just the monit role with the command <code>ansible-playbook main.yml --tags monit</code>.</p>
-<a class="post-dummy-target" id="roles-in-detail"></a><h2>Roles in Detail</h2>
-<a class="post-dummy-target" id="monit"></a><h3>Monit</h3>
-<p>Let&rsquo;s take a closer look at each role now, starting with Monit. Here&rsquo;s the roles/monit/tasks/main.yml task file:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">---<span class="w">
-</span><span class="w"> </span>- <span class="k">stat</span><span class="p">:</span><span class="w"> </span>path={{<span class="w"> </span>monitrc_path<span class="w"> </span>}}<span class="w">
-</span><span class="w">   </span><span class="k">register</span><span class="p">:</span><span class="w"> </span>rc<span class="w">
-</span><span class="w">
-</span><span class="w"> </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>install<span class="w"> </span>monit<span class="w"> </span>on<span class="w"> </span>CentOS<span class="w"> </span>hosts<span class="w">
-</span><span class="w">   </span><span class="k">yum</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">     </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>monit<span class="w">
-</span><span class="w">     </span><span class="k">state</span><span class="p">:</span><span class="w"> </span>present<span class="w">
-</span><span class="w">   </span><span class="k">when</span><span class="p">:</span><span class="w"> </span>ansible_distribution<span class="w"> </span>==<span class="w"> </span><span class="s2">&#34;CentOS&#34;</span><span class="w"> </span>and<span class="w"> </span>ansible_distribution_major_version<span class="w"> </span>&gt;<span class="w"> </span><span class="s1">&#39;5&#39;</span><span class="w">
-</span><span class="w">
-</span><span class="w"> </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>install<span class="w"> </span>monit<span class="w"> </span>on<span class="w"> </span>Ubuntu<span class="w"> </span>hosts<span class="w">
-</span><span class="w">   </span><span class="k">apt</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">     </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>monit<span class="w">
-</span><span class="w">     </span><span class="k">state</span><span class="p">:</span><span class="w"> </span>present<span class="w">
-</span><span class="w">   </span><span class="k">when</span><span class="p">:</span><span class="w"> </span>ansible_distribution<span class="w"> </span>!=<span class="w"> </span><span class="s2">&#34;CentOS&#34;</span><span class="w">
-</span><span class="w">
-</span><span class="w"> </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>backup<span class="w"> </span>current<span class="w"> </span>monitrc<span class="w"> </span>file<span class="w">
-</span><span class="w">   </span><span class="k">command</span><span class="p">:</span><span class="w"> </span>mv<span class="w"> </span>{{<span class="w"> </span>monitrc_path<span class="w"> </span>}}<span class="w"> </span>/etc/monitrc.bak<span class="w">
-</span><span class="w">   </span><span class="k">when</span><span class="p">:</span><span class="w"> </span>rc.stat.exists<span class="w">
-</span><span class="w">
-</span><span class="w"> </span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>write<span class="w"> </span>new<span class="w"> </span>monitrc<span class="w"> </span>file<span class="w"> </span>and<span class="w"> </span>restart<span class="w"> </span>the<span class="w"> </span>service<span class="w">
-</span><span class="w">   </span><span class="k">template</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">     </span><span class="k">src</span><span class="p">:</span><span class="w"> </span>monitrc.j2<span class="w">
-</span><span class="w">     </span><span class="k">dest</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;{{ monitrc_path }}&#34;</span><span class="w">
-</span><span class="w">     </span><span class="k">owner</span><span class="p">:</span><span class="w"> </span>root<span class="w">
-</span><span class="w">     </span><span class="k">mode</span><span class="p">:</span><span class="w"> </span><span class="m">0600</span><span class="w">
-</span><span class="w">   </span><span class="k">notify</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">     </span>- stop<span class="w"> </span>monit<span class="w"> </span>service<span class="w">
-</span><span class="w">     </span>- start<span class="w"> </span>monit<span class="w"> </span>service<span class="w">
-</span></code></pre></td></tr></table>
-</div>
-</div><p>You can see it referencing the variable <code>{{ monitrc_path }}</code>, template file <code>monitrc.j2</code>, and handlers <code>stop monit service</code> and <code>start monit service</code>. Ansible automatically pulls these in from <code>roles/monit/vars/main.yml</code>, <code>roles/monit/templates/</code>, and <code>roles/monit/handlers/main.yml</code>, respectively.</p>
-<p>The vars file contains a single line: <code>monitrc_path: /etc/monitrc</code></p>
-<p>I won&rsquo;t attach the entire monitrc template, but it just substitutes a single variable from the facts Ansible gathers on each host when first running a playbook. Example:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-nix" data-lang="nix"><span class="n">set</span> <span class="n">httpd</span> <span class="n">port</span> <span class="mi">2812</span> <span class="n">and</span>
-    <span class="n">use</span> <span class="n">address</span> <span class="p">{</span><span class="p">{</span> <span class="n">ansible_default_ipv4</span><span class="o">.</span><span class="n">address</span> <span class="p">}</span><span class="p">}</span>
-</code></pre></td></tr></table>
-</div>
-</div><p>Finally, <code>roles/monit/handlers/main.yml</code> contains:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">---<span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>stop<span class="w"> </span>monit<span class="w"> </span>service<span class="w">
-</span><span class="w">  </span><span class="k">service</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">    </span><span class="k">name</span><span class="p">:</span><span class="w"> </span>monit<span class="w">
-</span><span class="w">    </span><span class="k">state</span><span class="p">:</span><span class="w"> </span>stopped<span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>start<span class="w"> </span>monit<span class="w"> </span>service<span class="w">
-</span><span class="w">  </span><span class="k">command</span><span class="p">:</span><span class="w"> </span>monit<span class="w"> </span>-c<span class="w"> </span>/etc/monitrc<span class="w">
-</span></code></pre></td></tr></table>
-</div>
-</div><a class="post-dummy-target" id="samhain-1"></a><h3>Samhain</h3>
-<p>Now for a quicker look at the Samhain role. Here are the contents of roles/samhain/tasks/main.yml:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">---<span class="w">
-</span><span class="w"></span>- <span class="k">include</span><span class="p">:</span><span class="w"> </span>install.yml<span class="w">
-</span><span class="w"></span>- <span class="k">include</span><span class="p">:</span><span class="w"> </span>update.yml<span class="w">
-</span></code></pre></td></tr></table>
-</div>
-</div><p>This simply calls the separate install and update tasks. I typically comment one of them out and just run install if it&rsquo;s a new system needing security tools installed the first time, or update if it&rsquo;s an existing system that just needs an update to the samhain config file.</p>
-<p>Install task:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span><span class="lnt">32
-</span><span class="lnt">33
-</span><span class="lnt">34
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">---<span class="w">
-</span><span class="w"></span>- <span class="k">stat</span><span class="p">:</span><span class="w"> </span>path={{<span class="w"> </span>samhain_database<span class="w"> </span>}}<span class="w">
-</span><span class="w">  </span><span class="k">register</span><span class="p">:</span><span class="w"> </span>sam_db<span class="w">
-</span><span class="w"></span>- <span class="k">stat</span><span class="p">:</span><span class="w"> </span>path={{<span class="w"> </span>samhainrc_path<span class="w"> </span>}}<span class="w">
-</span><span class="w">  </span><span class="k">register</span><span class="p">:</span><span class="w"> </span>sam_path<span class="w">
-</span><span class="w"></span>- <span class="k">stat</span><span class="p">:</span><span class="w"> </span>path={{<span class="w"> </span>samhain_process<span class="w"> </span>}}<span class="w">
-</span><span class="w">  </span><span class="k">register</span><span class="p">:</span><span class="w"> </span>samhain_pid<span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>Download<span class="w"> </span>Samhain<span class="w"> </span>package<span class="w">
-</span><span class="w">  </span><span class="k">get_url</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">    </span><span class="k">url</span><span class="p">:</span><span class="w"> </span>http<span class="p">:</span>//www.la-samhna.de/samhain/samhain-current.tar.gz<span class="w">
-</span><span class="w">    </span><span class="k">dest</span><span class="p">:</span><span class="w"> </span>/opt<span class="w">
-</span><span class="w">    </span><span class="k">checksum</span><span class="p">:</span><span class="w"> </span>&lt;insert<span class="w"> </span>checksum<span class="w"> </span>for<span class="w"> </span>current<span class="w"> </span>version<span class="w"> </span>of<span class="w"> </span>Samhain&gt;<span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>Unpack<span class="w"> </span>Samhain<span class="w"> </span>tarball<span class="w">
-</span><span class="w">  </span><span class="k">unarchive</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">    </span><span class="k">src</span><span class="p">:</span><span class="w"> </span>/opt/samhain-current.tar.gz<span class="w">
-</span><span class="w">    </span><span class="k">dest</span><span class="p">:</span><span class="w"> </span>/opt/<span class="w">
-</span><span class="w">    </span><span class="k">remote_src</span><span class="p">:</span><span class="w"> </span>True<span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>Import<span class="w"> </span>Samhain<span class="w"> </span>development<span class="w"> </span>key<span class="w">
-</span><span class="w">  </span><span class="k">command</span><span class="p">:</span><span class="w"> </span>gpg<span class="w"> </span>--keyserver<span class="w"> </span>pgp.key-server.io<span class="w"> </span>--recv-key<span class="w"> </span>0F571F6C<span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>Check<span class="w"> </span>key<span class="w"> </span>fingerprint<span class="w">
-</span><span class="w">  </span><span class="k">command</span><span class="p">:</span><span class="w"> </span>gpg<span class="w"> </span>--fingerprint<span class="w"> </span>0F571F6C<span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>Verify<span class="w"> </span>PGP<span class="w"> </span>signature<span class="w">
-</span><span class="w">  </span><span class="k">shell</span><span class="p">:</span><span class="w"> </span>gpg<span class="w"> </span>--verify<span class="w"> </span>/opt/samhain-{{<span class="w"> </span>samhain_version<span class="w"> </span>}}.tar.gz.asc<span class="w"> </span>/opt/samhain-{{<span class="w"> </span>samhain_version<span class="w"> </span>}}.tar.gz<span class="w">
-</span><span class="w">  </span><span class="k">register</span><span class="p">:</span><span class="w"> </span>gpg_check<span class="w">
-</span><span class="w"></span>- <span class="k">debug</span><span class="p">:</span><span class="w"> </span>msg={{gpg_check}}<span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>Unzip<span class="w"> </span>second-stage<span class="w"> </span>tar<span class="w"> </span>file<span class="w">
-</span><span class="w">  </span><span class="k">unarchive</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">    </span><span class="k">src</span><span class="p">:</span><span class="w"> </span>/opt/samhain-{{<span class="w"> </span>samhain_version<span class="w"> </span>}}.tar.gz<span class="w">
-</span><span class="w">    </span><span class="k">dest</span><span class="p">:</span><span class="w"> </span>/opt<span class="w">
-</span><span class="w">    </span><span class="k">remote_src</span><span class="p">:</span><span class="w"> </span>True<span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>Install<span class="w"> </span>Samhain<span class="w">
-</span><span class="w">  </span><span class="k">shell</span><span class="p">:</span><span class="w"> </span>cd<span class="w"> </span>/opt/samhain-{{<span class="w"> </span>samhain_version<span class="w"> </span>}}<span class="w"> </span><span class="cp">&amp;&amp;</span><span class="w"> </span>./configure<span class="w"> </span><span class="cp">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span><span class="cp">&amp;&amp;</span><span class="w"> </span>make<span class="w"> </span>install<span class="w">
-</span><span class="w">  </span><span class="k">args</span><span class="p">:</span><span class="w">
-</span><span class="w"></span><span class="w">    </span><span class="k">creates</span><span class="p">:</span><span class="w"> </span>/etc/samhainrc<span class="w">
-</span></code></pre></td></tr></table>
-</div>
-</div><p>Update task:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml">---<span class="w">
-</span><span class="w"></span>- <span class="k">stat</span><span class="p">:</span><span class="w"> </span>path={{<span class="w"> </span>samhain_database<span class="w"> </span>}}<span class="w">
-</span><span class="w">  </span><span class="k">register</span><span class="p">:</span><span class="w"> </span>db<span class="w">
-</span><span class="w"></span>- <span class="k">stat</span><span class="p">:</span><span class="w"> </span>path={{<span class="w"> </span>samhainrc_path<span class="w"> </span>}}<span class="w">
-</span><span class="w">  </span><span class="k">register</span><span class="p">:</span><span class="w"> </span>rc<span class="w">
-</span><span class="w"></span>- <span class="k">stat</span><span class="p">:</span><span class="w"> </span>path={{<span class="w"> </span>samhain_process<span class="w"> </span>}}<span class="w">
-</span><span class="w">  </span><span class="k">register</span><span class="p">:</span><span class="w"> </span>pid<span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>Stop<span class="w"> </span>samhain<span class="w"> </span>process<span class="w">
-</span><span class="w">  </span><span class="k">command</span><span class="p">:</span><span class="w"> </span>/usr/local/sbin/samhain<span class="w"> </span>stop<span class="w">
-</span><span class="w">  </span><span class="k">when</span><span class="p">:</span><span class="w"> </span>pid.stat.exists<span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>Copy<span class="w"> </span>samhainrc<span class="w"> </span>file<span class="w"> </span>to<span class="w"> </span>client<span class="w">
-</span><span class="w">  </span><span class="k">copy</span><span class="p">:</span><span class="w"> </span>src=samhainrc<span class="w"> </span>dest=/tmp/samhainrc<span class="w">
-</span><span class="w">    </span>owner=root<span class="w"> </span>group=root<span class="w"> </span>mode=<span class="m">0644</span><span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>Backup<span class="w"> </span>current<span class="w"> </span>samhainrc<span class="w">
-</span><span class="w">  </span><span class="k">command</span><span class="p">:</span><span class="w"> </span>mv<span class="w"> </span>{{<span class="w"> </span>samhainrc_path<span class="w"> </span>}}<span class="w"> </span>/etc/samhainrc.bak<span class="w">
-</span><span class="w">  </span><span class="k">when</span><span class="p">:</span><span class="w"> </span>rc.stat.exists<span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>Move<span class="w"> </span>samhainrc<span class="w"> </span>to<span class="w"> </span>/etc<span class="w">
-</span><span class="w">  </span><span class="k">command</span><span class="p">:</span><span class="w"> </span>mv<span class="w"> </span>/tmp/samhainrc<span class="w"> </span>{{<span class="w"> </span>samhainrc_path<span class="w"> </span>}}<span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>Backup<span class="w"> </span>existing<span class="w"> </span>samhain<span class="w"> </span>database<span class="w">
-</span><span class="w">  </span><span class="k">command</span><span class="p">:</span><span class="w"> </span>mv<span class="w"> </span>{{<span class="w"> </span>samhain_database<span class="w"> </span>}}<span class="w"> </span>/var/lib/samhain/samhain_file.bak<span class="w">
-</span><span class="w">  </span><span class="k">when</span><span class="p">:</span><span class="w"> </span>db.stat.exists<span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>Update<span class="w"> </span>samhain<span class="w"> </span>database<span class="w">
-</span><span class="w">  </span><span class="k">command</span><span class="p">:</span><span class="w"> </span>/usr/local/sbin/samhain<span class="w"> </span>-t<span class="w"> </span>init<span class="w">
-</span><span class="w"></span>- <span class="k">name</span><span class="p">:</span><span class="w"> </span>Start<span class="w"> </span>samhain<span class="w">
-</span><span class="w">  </span><span class="k">command</span><span class="p">:</span><span class="w"> </span>/usr/local/sbin/samhain<span class="w"> </span>-D<span class="w"> </span>-t<span class="w"> </span>check<span class="w">
-</span></code></pre></td></tr></table>
-</div>
-</div><p>The file referenced in the copy operation is located at roles/samhain/files/samhainrc.</p>
-<p>Vars file:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-yaml" data-lang="yaml"><span class="w">    </span><span class="k">samhain_database</span><span class="p">:</span><span class="w"> </span>/var/lib/samhain/samhain_file<span class="w">
-</span><span class="w">    </span><span class="k">samhainrc_path</span><span class="p">:</span><span class="w"> </span>/etc/samhainrc<span class="w">
-</span><span class="w">    </span><span class="k">samhain_process</span><span class="p">:</span><span class="w"> </span>/var/run/samhain.pid<span class="w">
-</span><span class="w">    </span><span class="k">samhain_version</span><span class="p">:</span><span class="w"> </span>&lt;insert<span class="w"> </span>current<span class="w"> </span>Samhain<span class="w"> </span>version&gt;<span class="w">
-</span></code></pre></td></tr></table>
-</div>
-</div><p>Conclusion</p>
-<p>This is all fairly simple but has greatly reduced the amount of time I spend installing and maintaining these tools. I realize the Samhain role doesn&rsquo;t adhere to Ansible&rsquo;s idea of idempotence very well due to the heavy usage of the command module. I&rsquo;m looking for ways to improve it, but it does what I need with some basic error handling for now.</p>
-<p>Hopefully this helps illustrate how Ansible roles work and some of the advantages roles have versus doing everything from one giant playbook. I&rsquo;m relatively new to Ansible so feel free to leave a reply below or reach out on Twitter if you have questions, comments, or even suggestions on how this could be improved.</p>
-
-        </div>
-
-        <div class="post-footer" id="post-footer">
-    <div class="post-info">
-        <div class="post-info-line">
-            <div class="post-info-mod">
-                <span>This article is updated with 2020-02-01</span>
-            </div>
-            <div class="post-info-license">
-                
-            </div>
-        </div>
-        <div class="post-info-line">
-            <div class="post-info-md">
-                
-                    
-                        <span><a class="link-to-markdown" href="https://securingthe.net/2018/03/deploying-security-controls-with-ansible/index.md" target="_blank"></a></span>
-                    
-                
-            </div>
-            <div class="post-info-share">
-                
-                    <span>
-    
-        <a href="//twitter.com/share?url=https%3a%2f%2fsecuringthe.net%2f2018%2f03%2fdeploying-security-controls-with-ansible%2f&amp;text=Deploying%20Security%20Controls%20with%20Ansible&amp;via=x41x4a" target="_blank" title="Share on Twitter">
-            <i class="fab fa-twitter fa-fw"></i>
-        </a>
-    
-    
-    
-        <a href="//reddit.com/submit?url=https%3a%2f%2fsecuringthe.net%2f2018%2f03%2fdeploying-security-controls-with-ansible%2f&amp;title=Deploying%20Security%20Controls%20with%20Ansible" target="_blank" title="Share on Reddit">
-            <i class="fab fa-reddit fa-fw"></i>
-        </a>
-    
-    
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fsecuringthe.net%2f2018%2f03%2fdeploying-security-controls-with-ansible%2f&amp;title=Deploying%20Security%20Controls%20with%20Ansible" target="_blank" title="Share on LinkedIn">
-            <i class="fab fa-linkedin fa-fw"></i>
-        </a>
-    
-    
-    
-    
-    
-    
-    
-</span>
-                
-            </div>
-        </div>
-    </div>
-
-    <div class="post-info-more">
-        <section>
-            
-                
-                    <span class="tag">
-                        <a href="https://securingthe.net/tags/ansible/"><i class="fas fa-tag fa-fw"></i>Ansible</a>
-                    </span>
-                
-                    <span class="tag">
-                        <a href="https://securingthe.net/tags/automation/"><i class="fas fa-tag fa-fw"></i>Automation</a>
-                    </span>
-                
-                    <span class="tag">
-                        <a href="https://securingthe.net/tags/tools/"><i class="fas fa-tag fa-fw"></i>Tools</a>
-                    </span>
-                
-            
-        </section>
-        <section>
-            <span><a href="javascript:window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="https://securingthe.net/">Home</a></span>
-        </section>
-    </div>
-
-    <div class="post-nav">
-        
-        
-            <a href="https://securingthe.net/2018/03/infosec-is-bigger-than-pentesting/" class="next" rel="next" title="InfoSec is Bigger Than Pentesting">InfoSec is Bigger Than Pentesting<i class="fas fa-angle-right fa-fw"></i></a>
-        
-    </div>
-</div>
-
-        <div class="post-comment">
-            
-            
-
-            
-        </div>
-    </article></div>
-            </main>
-            <footer class="footer">
-    <div class="copyright">
-        <div class="copyright-line">
-            Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a>
-        </div>
-        <div class="copyright-line">
-            <i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://securingthe.net/">AJ McQuay</a></span><span class="license">&nbsp;|&nbsp;<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
-    </div>
-</footer>
-
-
-    
-    
-
-
-
-
-    
-    
-
-
-
-
-    
-    
-
-
-
-
-
-    
-    
-
-
-
-    
-    
-
-
-
-    
-    
-
-
-
-
-
-    
-    
-
-
-
-
-
-
-    
-    
-
-
-
-    
-    
-
-
-
-
-
-    
-    
-
-
-
-
-    
-    
-
-
-
-
-    
-    
-
-
-
-    
-    
-
-
-
-
-
-    
-    
-
-
-<script src="/js/lib/jquery/jquery.slim.min.min.js"></script>
-<script src="/js/lib/lazysizes/lazysizes.min.min.js"></script>
-<script src="/js/lib/smooth-scroll/smooth-scroll.polyfills.min.min.js"></script><script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script>
-
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-
-
-
-
-
-<script src="/js/blog.min.js"></script>
-
-
-    
-</div>
-        <a href="#" class="dynamic-to-top" id="dynamic-to-top" data-scroll><span>&nbsp;</span></a>
-    </body>
-</html>
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>Deploying Security Controls with Ansible | Securing The Net</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=Description content="Tech ramblings from the desert"><link rel=next href=https://securingthe.net/2018/03/infosec-is-bigger-than-pentesting/><link rel=canonical href=https://securingthe.net/2018/03/deploying-security-controls-with-ansible/><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><meta name=twitter:card content="summary"><meta name=twitter:title content="Deploying Security Controls with Ansible"><meta name=twitter:description content="I use several tools for various security or compliance controls on production Linux servers. Some of those aren&rsquo;t automatically installed/maintained through our package management utility, and with 100+ machines it is far too time-consuming to manually deal with each one. I&rsquo;ve started experimenting with Ansible to simplify this and thought I&rsquo;d share the first role I&rsquo;ve written while I&rsquo;m learning.
+Identify Tools and Required Tasks The first step was to identify what tools I wanted the playbook to manage, and what steps I take to install and configure them."><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Deploying Security Controls with Ansible","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/securingthe.net\/2018\/03\/deploying-security-controls-with-ansible\/"},"image":{"@type":"ImageObject","url":"https:\/\/securingthe.net\/cover.png","width":800,"height":600},"genre":"posts","keywords":"Ansible, Automation, Tools","wordcount":923,"url":"https:\/\/securingthe.net\/2018\/03\/deploying-security-controls-with-ansible\/","datePublished":"2018-03-09T18:04:36\x2b00:00","dateModified":"2020-02-01T16:19:02-07:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"AJ McQuay","logo":{"@type":"ImageObject","url":"https:\/\/securingthe.net\/logo.png","width":127,"height":40}},"description":""}</script><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/css/lib/fontawesome-free/all.min.min.css><link rel=stylesheet href=/css/lib/animate/animate.min.min.css></head><body><script>window.isDark=(window.localStorage&&window.localStorage.getItem('theme'))==='dark';window.isDark&&document.body.classList.add('dark-theme');</script><div class=wrapper><nav class=navbar><div class=navbar-container><div class="navbar-header animated bounceIn"><a href=https://securingthe.net/>Securing The Net</a></div><div class=navbar-menu><a class=menu-item href=https://securingthe.net/posts>Posts</a>
+<a class=menu-item href=https://securingthe.net/tags>Tags</a>
+<a class=menu-item href=https://securingthe.net/categories>Categories</a>
+<a class=menu-item href=https://securingthe.net/posts/about/>About</a>
+<a class=menu-item href=https://securingthe.net><i class="fas fa-language fa-fw"></i></a><a href=javascript:void(0); class=theme-switch><i class="fas fa-adjust fa-rotate-180 fa-fw" title="Switch Theme"></i></a></div></div></nav><nav class=navbar-mobile><div class=navbar-container><div class=navbar-header><div class="navbar-header-title animated bounceIn"><a href=https://securingthe.net/>Securing The Net</a></div><div class=menu-toggle id=menu-toggle><span></span><span></span><span></span></div></div><div class=navbar-menu id=mobile-menu><a class=menu-item href=https://securingthe.net/posts>Posts</a>
+<a class=menu-item href=https://securingthe.net/tags>Tags</a>
+<a class=menu-item href=https://securingthe.net/categories>Categories</a>
+<a class=menu-item href=https://securingthe.net/posts/about/>About</a>
+<a class=menu-item href=https://securingthe.net><i class="fas fa-language fa-fw"></i></a><a href=javascript:void(0); class=theme-switch><i class="fas fa-adjust fa-rotate-180 fa-fw"></i></a></div></div></nav><main class=main><div class=container><article class=post-warp><h1 class="post-title animated flipInX">Deploying Security Controls with Ansible</h1><div class=post-meta><div class=post-meta-main><a class=author href=https://securingthe.net/ rel=author><i class="fas fa-user-circle fa-fw"></i>AJ McQuay&nbsp;</a>
+<span class=post-category>included in
+<i class="far fa-folder fa-fw"></i><a href=https://securingthe.net/categories/ansible/>Ansible</a>
+<i class="far fa-folder fa-fw"></i><a href=https://securingthe.net/categories/automation/>Automation</a>
+<i class="far fa-folder fa-fw"></i><a href=https://securingthe.net/categories/tools/>Tools</a></span></div><div class=post-meta-other><i class="far fa-calendar-alt fa-fw"></i><time datetime=2018-03-09>2018-03-09</time>&nbsp;
+<i class="fas fa-pencil-alt fa-fw"></i>about 923 words&nbsp;
+<i class="far fa-clock fa-fw"></i>5 min&nbsp;</div></div><div class=post-content><p>I use several tools for various security or compliance controls on production Linux servers. Some of those aren&rsquo;t automatically installed/maintained through our package management utility, and with 100+ machines it is far too time-consuming to manually deal with each one. I&rsquo;ve started experimenting with Ansible to simplify this and thought I&rsquo;d share the first role I&rsquo;ve written while I&rsquo;m learning.</p><a class=post-dummy-target id=identify-tools-and-required-tasks></a><h2>Identify Tools and Required Tasks</h2><p>The first step was to identify what tools I wanted the playbook to manage, and what steps I take to install and configure them. Two tools I use that aren&rsquo;t managed by Spacewalk are Samhain and M/Monit.</p><a class=post-dummy-target id=samhain></a><h3>Samhain</h3><p>We currently deploy Samhain in a simple standalone fashion that logs locally, then those logs get picked up by our SIEM. I download and compile Samhain from source but don&rsquo;t use a ton of options at compile time as we aren&rsquo;t currently running a Yule server. That means the required tasks are pretty simple:</p><ul><li>Download Samhain</li><li>Extract & verify PGP signature</li><li>Configure, compile, install</li><li>Copy in preferred config</li><li>Initialize or re-initialize file signature database</li><li>Start the daemon</li></ul><p>I opted to split these steps into two tasks named install and update.</p><a class=post-dummy-target id=mmonit></a><h3>M/Monit</h3><p>M/Monit is just a centralized dashboard used to manage multiple instances of the Linux utility monit. Setting this up just requires customizing the monit configuration file with M/Monit server details and any custom services you want to manage. The tasks here include:</p><ul><li>Make sure monit is installed</li><li>Backup current/default monitrc</li><li>Install new monitrc from template</li><li>Start or restart the service</li></ul><a class=post-dummy-target id=create-ansible-role-structure></a><h2>Create Ansible role structure</h2><p>Now it&rsquo;s time to create the folder hierarchy for our Ansible job. When using roles, Ansible expects certain files to exist in specific directories and will automatically pull in your variable files, handlers, templates, etc. If you&rsquo;re unfamiliar, read up on roles here.</p><p>Here&rsquo;s my file/folder structure:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-nix data-lang=nix><span class=sr>ansible/security-tools</span><span class=err>/</span>
+<span class=err>├</span><span class=err>─</span><span class=err>─</span> <span class=n>ansible</span><span class=o>.</span><span class=n>cfg</span>
+<span class=err>├</span><span class=err>─</span><span class=err>─</span> <span class=n>inventories</span>
+<span class=err>│</span>   <span class=err>└</span><span class=err>─</span><span class=err>─</span> <span class=n>production</span>
+<span class=err>│</span>       <span class=err>└</span><span class=err>─</span><span class=err>─</span> <span class=n>hosts</span>
+<span class=err>├</span><span class=err>─</span><span class=err>─</span> <span class=n>main</span><span class=o>.</span><span class=n>yml</span>
+<span class=err>└</span><span class=err>─</span><span class=err>─</span> <span class=n>roles</span>
+    <span class=err>├</span><span class=err>─</span><span class=err>─</span> <span class=n>monit</span>
+    <span class=err>│</span>   <span class=err>├</span><span class=err>─</span><span class=err>─</span> <span class=n>files</span>
+    <span class=err>│</span>   <span class=err>├</span><span class=err>─</span><span class=err>─</span> <span class=n>handlers</span>
+    <span class=err>│</span>   <span class=err>│</span>   <span class=err>└</span><span class=err>─</span><span class=err>─</span> <span class=n>main</span><span class=o>.</span><span class=n>yml</span>
+    <span class=err>│</span>   <span class=err>├</span><span class=err>─</span><span class=err>─</span> <span class=n>tasks</span>
+    <span class=err>│</span>   <span class=err>│</span>   <span class=err>└</span><span class=err>─</span><span class=err>─</span> <span class=n>main</span><span class=o>.</span><span class=n>yml</span>
+    <span class=err>│</span>   <span class=err>├</span><span class=err>─</span><span class=err>─</span> <span class=n>templates</span>
+    <span class=err>│</span>   <span class=err>│</span>   <span class=err>└</span><span class=err>─</span><span class=err>─</span> <span class=n>monitrc</span><span class=o>.</span><span class=n>j2</span>
+    <span class=err>│</span>   <span class=err>└</span><span class=err>─</span><span class=err>─</span> <span class=n>vars</span>
+    <span class=err>│</span>       <span class=err>└</span><span class=err>─</span><span class=err>─</span> <span class=n>main</span><span class=o>.</span><span class=n>yml</span>
+    <span class=err>└</span><span class=err>─</span><span class=err>─</span> <span class=n>samhain</span>
+        <span class=err>├</span><span class=err>─</span><span class=err>─</span> <span class=n>files</span>
+        <span class=err>│</span>   <span class=err>└</span><span class=err>─</span><span class=err>─</span> <span class=n>samhainrc</span>
+        <span class=err>├</span><span class=err>─</span><span class=err>─</span> <span class=n>handlers</span>
+        <span class=err>├</span><span class=err>─</span><span class=err>─</span> <span class=n>tasks</span>
+        <span class=err>│</span>   <span class=err>├</span><span class=err>─</span><span class=err>─</span> <span class=n>install</span><span class=o>.</span><span class=n>yml</span>
+        <span class=err>│</span>   <span class=err>├</span><span class=err>─</span><span class=err>─</span> <span class=n>main</span><span class=o>.</span><span class=n>yml</span>
+        <span class=err>│</span>   <span class=err>└</span><span class=err>─</span><span class=err>─</span> <span class=n>update</span><span class=o>.</span><span class=n>yml</span>
+        <span class=err>├</span><span class=err>─</span><span class=err>─</span> <span class=n>templates</span>
+        <span class=err>└</span><span class=err>─</span><span class=err>─</span> <span class=n>vars</span>
+            <span class=err>└</span><span class=err>─</span><span class=err>─</span> <span class=n>main</span><span class=o>.</span><span class=n>yml</span>
+</code></pre></td></tr></table></div></div><p>The primary playbook is executed by running the command ansible-playbook main.yml. Here&rsquo;s what it looks like:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-yaml data-lang=yaml>---<span class=w>
+</span><span class=w></span>- <span class=k>hosts</span><span class=p>:</span><span class=w> </span>all<span class=w>
+</span><span class=w>  </span><span class=k>become</span><span class=p>:</span><span class=w> </span>yes<span class=w>
+</span><span class=w>  </span><span class=k>roles</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>    </span>- {<span class=k>name: samhain, tags</span><span class=p>:</span><span class=w> </span>samhain}<span class=w>
+</span><span class=w>    </span>- {<span class=k>name: monit, tags</span><span class=p>:</span><span class=w> </span>monit}<span class=w>
+</span></code></pre></td></tr></table></div></div><p>Pretty simple, right? I added tags so that I can pick and choose which roles I want to run as this project expands. For example I can run just the monit role with the command <code>ansible-playbook main.yml --tags monit</code>.</p><a class=post-dummy-target id=roles-in-detail></a><h2>Roles in Detail</h2><a class=post-dummy-target id=monit></a><h3>Monit</h3><p>Let&rsquo;s take a closer look at each role now, starting with Monit. Here&rsquo;s the roles/monit/tasks/main.yml task file:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-yaml data-lang=yaml>---<span class=w>
+</span><span class=w> </span>- <span class=k>stat</span><span class=p>:</span><span class=w> </span>path={{<span class=w> </span>monitrc_path<span class=w> </span>}}<span class=w>
+</span><span class=w>   </span><span class=k>register</span><span class=p>:</span><span class=w> </span>rc<span class=w>
+</span><span class=w>
+</span><span class=w> </span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>install<span class=w> </span>monit<span class=w> </span>on<span class=w> </span>CentOS<span class=w> </span>hosts<span class=w>
+</span><span class=w>   </span><span class=k>yum</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>     </span><span class=k>name</span><span class=p>:</span><span class=w> </span>monit<span class=w>
+</span><span class=w>     </span><span class=k>state</span><span class=p>:</span><span class=w> </span>present<span class=w>
+</span><span class=w>   </span><span class=k>when</span><span class=p>:</span><span class=w> </span>ansible_distribution<span class=w> </span>==<span class=w> </span><span class=s2>&#34;CentOS&#34;</span><span class=w> </span>and<span class=w> </span>ansible_distribution_major_version<span class=w> </span>&gt;<span class=w> </span><span class=s1>&#39;5&#39;</span><span class=w>
+</span><span class=w>
+</span><span class=w> </span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>install<span class=w> </span>monit<span class=w> </span>on<span class=w> </span>Ubuntu<span class=w> </span>hosts<span class=w>
+</span><span class=w>   </span><span class=k>apt</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>     </span><span class=k>name</span><span class=p>:</span><span class=w> </span>monit<span class=w>
+</span><span class=w>     </span><span class=k>state</span><span class=p>:</span><span class=w> </span>present<span class=w>
+</span><span class=w>   </span><span class=k>when</span><span class=p>:</span><span class=w> </span>ansible_distribution<span class=w> </span>!=<span class=w> </span><span class=s2>&#34;CentOS&#34;</span><span class=w>
+</span><span class=w>
+</span><span class=w> </span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>backup<span class=w> </span>current<span class=w> </span>monitrc<span class=w> </span>file<span class=w>
+</span><span class=w>   </span><span class=k>command</span><span class=p>:</span><span class=w> </span>mv<span class=w> </span>{{<span class=w> </span>monitrc_path<span class=w> </span>}}<span class=w> </span>/etc/monitrc.bak<span class=w>
+</span><span class=w>   </span><span class=k>when</span><span class=p>:</span><span class=w> </span>rc.stat.exists<span class=w>
+</span><span class=w>
+</span><span class=w> </span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>write<span class=w> </span>new<span class=w> </span>monitrc<span class=w> </span>file<span class=w> </span>and<span class=w> </span>restart<span class=w> </span>the<span class=w> </span>service<span class=w>
+</span><span class=w>   </span><span class=k>template</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>     </span><span class=k>src</span><span class=p>:</span><span class=w> </span>monitrc.j2<span class=w>
+</span><span class=w>     </span><span class=k>dest</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ monitrc_path }}&#34;</span><span class=w>
+</span><span class=w>     </span><span class=k>owner</span><span class=p>:</span><span class=w> </span>root<span class=w>
+</span><span class=w>     </span><span class=k>mode</span><span class=p>:</span><span class=w> </span><span class=m>0600</span><span class=w>
+</span><span class=w>   </span><span class=k>notify</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>     </span>- stop<span class=w> </span>monit<span class=w> </span>service<span class=w>
+</span><span class=w>     </span>- start<span class=w> </span>monit<span class=w> </span>service<span class=w>
+</span></code></pre></td></tr></table></div></div><p>You can see it referencing the variable <code>{{ monitrc_path }}</code>, template file <code>monitrc.j2</code>, and handlers <code>stop monit service</code> and <code>start monit service</code>. Ansible automatically pulls these in from <code>roles/monit/vars/main.yml</code>, <code>roles/monit/templates/</code>, and <code>roles/monit/handlers/main.yml</code>, respectively.</p><p>The vars file contains a single line: <code>monitrc_path: /etc/monitrc</code></p><p>I won&rsquo;t attach the entire monitrc template, but it just substitutes a single variable from the facts Ansible gathers on each host when first running a playbook. Example:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-nix data-lang=nix><span class=n>set</span> <span class=n>httpd</span> <span class=n>port</span> <span class=mi>2812</span> <span class=n>and</span>
+    <span class=n>use</span> <span class=n>address</span> <span class=p>{</span><span class=p>{</span> <span class=n>ansible_default_ipv4</span><span class=o>.</span><span class=n>address</span> <span class=p>}</span><span class=p>}</span>
+</code></pre></td></tr></table></div></div><p>Finally, <code>roles/monit/handlers/main.yml</code> contains:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-yaml data-lang=yaml>---<span class=w>
+</span><span class=w></span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>stop<span class=w> </span>monit<span class=w> </span>service<span class=w>
+</span><span class=w>  </span><span class=k>service</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>    </span><span class=k>name</span><span class=p>:</span><span class=w> </span>monit<span class=w>
+</span><span class=w>    </span><span class=k>state</span><span class=p>:</span><span class=w> </span>stopped<span class=w>
+</span><span class=w></span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>start<span class=w> </span>monit<span class=w> </span>service<span class=w>
+</span><span class=w>  </span><span class=k>command</span><span class=p>:</span><span class=w> </span>monit<span class=w> </span>-c<span class=w> </span>/etc/monitrc<span class=w>
+</span></code></pre></td></tr></table></div></div><a class=post-dummy-target id=samhain-1></a><h3>Samhain</h3><p>Now for a quicker look at the Samhain role. Here are the contents of roles/samhain/tasks/main.yml:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-yaml data-lang=yaml>---<span class=w>
+</span><span class=w></span>- <span class=k>include</span><span class=p>:</span><span class=w> </span>install.yml<span class=w>
+</span><span class=w></span>- <span class=k>include</span><span class=p>:</span><span class=w> </span>update.yml<span class=w>
+</span></code></pre></td></tr></table></div></div><p>This simply calls the separate install and update tasks. I typically comment one of them out and just run install if it&rsquo;s a new system needing security tools installed the first time, or update if it&rsquo;s an existing system that just needs an update to the samhain config file.</p><p>Install task:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-yaml data-lang=yaml>---<span class=w>
+</span><span class=w></span>- <span class=k>stat</span><span class=p>:</span><span class=w> </span>path={{<span class=w> </span>samhain_database<span class=w> </span>}}<span class=w>
+</span><span class=w>  </span><span class=k>register</span><span class=p>:</span><span class=w> </span>sam_db<span class=w>
+</span><span class=w></span>- <span class=k>stat</span><span class=p>:</span><span class=w> </span>path={{<span class=w> </span>samhainrc_path<span class=w> </span>}}<span class=w>
+</span><span class=w>  </span><span class=k>register</span><span class=p>:</span><span class=w> </span>sam_path<span class=w>
+</span><span class=w></span>- <span class=k>stat</span><span class=p>:</span><span class=w> </span>path={{<span class=w> </span>samhain_process<span class=w> </span>}}<span class=w>
+</span><span class=w>  </span><span class=k>register</span><span class=p>:</span><span class=w> </span>samhain_pid<span class=w>
+</span><span class=w></span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>Download<span class=w> </span>Samhain<span class=w> </span>package<span class=w>
+</span><span class=w>  </span><span class=k>get_url</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>    </span><span class=k>url</span><span class=p>:</span><span class=w> </span>http<span class=p>:</span>//www.la-samhna.de/samhain/samhain-current.tar.gz<span class=w>
+</span><span class=w>    </span><span class=k>dest</span><span class=p>:</span><span class=w> </span>/opt<span class=w>
+</span><span class=w>    </span><span class=k>checksum</span><span class=p>:</span><span class=w> </span>&lt;insert<span class=w> </span>checksum<span class=w> </span>for<span class=w> </span>current<span class=w> </span>version<span class=w> </span>of<span class=w> </span>Samhain&gt;<span class=w>
+</span><span class=w></span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>Unpack<span class=w> </span>Samhain<span class=w> </span>tarball<span class=w>
+</span><span class=w>  </span><span class=k>unarchive</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>    </span><span class=k>src</span><span class=p>:</span><span class=w> </span>/opt/samhain-current.tar.gz<span class=w>
+</span><span class=w>    </span><span class=k>dest</span><span class=p>:</span><span class=w> </span>/opt/<span class=w>
+</span><span class=w>    </span><span class=k>remote_src</span><span class=p>:</span><span class=w> </span>True<span class=w>
+</span><span class=w></span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>Import<span class=w> </span>Samhain<span class=w> </span>development<span class=w> </span>key<span class=w>
+</span><span class=w>  </span><span class=k>command</span><span class=p>:</span><span class=w> </span>gpg<span class=w> </span>--keyserver<span class=w> </span>pgp.key-server.io<span class=w> </span>--recv-key<span class=w> </span>0F571F6C<span class=w>
+</span><span class=w></span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>Check<span class=w> </span>key<span class=w> </span>fingerprint<span class=w>
+</span><span class=w>  </span><span class=k>command</span><span class=p>:</span><span class=w> </span>gpg<span class=w> </span>--fingerprint<span class=w> </span>0F571F6C<span class=w>
+</span><span class=w></span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>Verify<span class=w> </span>PGP<span class=w> </span>signature<span class=w>
+</span><span class=w>  </span><span class=k>shell</span><span class=p>:</span><span class=w> </span>gpg<span class=w> </span>--verify<span class=w> </span>/opt/samhain-{{<span class=w> </span>samhain_version<span class=w> </span>}}.tar.gz.asc<span class=w> </span>/opt/samhain-{{<span class=w> </span>samhain_version<span class=w> </span>}}.tar.gz<span class=w>
+</span><span class=w>  </span><span class=k>register</span><span class=p>:</span><span class=w> </span>gpg_check<span class=w>
+</span><span class=w></span>- <span class=k>debug</span><span class=p>:</span><span class=w> </span>msg={{gpg_check}}<span class=w>
+</span><span class=w></span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>Unzip<span class=w> </span>second-stage<span class=w> </span>tar<span class=w> </span>file<span class=w>
+</span><span class=w>  </span><span class=k>unarchive</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>    </span><span class=k>src</span><span class=p>:</span><span class=w> </span>/opt/samhain-{{<span class=w> </span>samhain_version<span class=w> </span>}}.tar.gz<span class=w>
+</span><span class=w>    </span><span class=k>dest</span><span class=p>:</span><span class=w> </span>/opt<span class=w>
+</span><span class=w>    </span><span class=k>remote_src</span><span class=p>:</span><span class=w> </span>True<span class=w>
+</span><span class=w></span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>Install<span class=w> </span>Samhain<span class=w>
+</span><span class=w>  </span><span class=k>shell</span><span class=p>:</span><span class=w> </span>cd<span class=w> </span>/opt/samhain-{{<span class=w> </span>samhain_version<span class=w> </span>}}<span class=w> </span><span class=cp>&amp;&amp;</span><span class=w> </span>./configure<span class=w> </span><span class=cp>&amp;&amp;</span><span class=w> </span>make<span class=w> </span><span class=cp>&amp;&amp;</span><span class=w> </span>make<span class=w> </span>install<span class=w>
+</span><span class=w>  </span><span class=k>args</span><span class=p>:</span><span class=w>
+</span><span class=w></span><span class=w>    </span><span class=k>creates</span><span class=p>:</span><span class=w> </span>/etc/samhainrc<span class=w>
+</span></code></pre></td></tr></table></div></div><p>Update task:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-yaml data-lang=yaml>---<span class=w>
+</span><span class=w></span>- <span class=k>stat</span><span class=p>:</span><span class=w> </span>path={{<span class=w> </span>samhain_database<span class=w> </span>}}<span class=w>
+</span><span class=w>  </span><span class=k>register</span><span class=p>:</span><span class=w> </span>db<span class=w>
+</span><span class=w></span>- <span class=k>stat</span><span class=p>:</span><span class=w> </span>path={{<span class=w> </span>samhainrc_path<span class=w> </span>}}<span class=w>
+</span><span class=w>  </span><span class=k>register</span><span class=p>:</span><span class=w> </span>rc<span class=w>
+</span><span class=w></span>- <span class=k>stat</span><span class=p>:</span><span class=w> </span>path={{<span class=w> </span>samhain_process<span class=w> </span>}}<span class=w>
+</span><span class=w>  </span><span class=k>register</span><span class=p>:</span><span class=w> </span>pid<span class=w>
+</span><span class=w></span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>Stop<span class=w> </span>samhain<span class=w> </span>process<span class=w>
+</span><span class=w>  </span><span class=k>command</span><span class=p>:</span><span class=w> </span>/usr/local/sbin/samhain<span class=w> </span>stop<span class=w>
+</span><span class=w>  </span><span class=k>when</span><span class=p>:</span><span class=w> </span>pid.stat.exists<span class=w>
+</span><span class=w></span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>Copy<span class=w> </span>samhainrc<span class=w> </span>file<span class=w> </span>to<span class=w> </span>client<span class=w>
+</span><span class=w>  </span><span class=k>copy</span><span class=p>:</span><span class=w> </span>src=samhainrc<span class=w> </span>dest=/tmp/samhainrc<span class=w>
+</span><span class=w>    </span>owner=root<span class=w> </span>group=root<span class=w> </span>mode=<span class=m>0644</span><span class=w>
+</span><span class=w></span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>Backup<span class=w> </span>current<span class=w> </span>samhainrc<span class=w>
+</span><span class=w>  </span><span class=k>command</span><span class=p>:</span><span class=w> </span>mv<span class=w> </span>{{<span class=w> </span>samhainrc_path<span class=w> </span>}}<span class=w> </span>/etc/samhainrc.bak<span class=w>
+</span><span class=w>  </span><span class=k>when</span><span class=p>:</span><span class=w> </span>rc.stat.exists<span class=w>
+</span><span class=w></span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>Move<span class=w> </span>samhainrc<span class=w> </span>to<span class=w> </span>/etc<span class=w>
+</span><span class=w>  </span><span class=k>command</span><span class=p>:</span><span class=w> </span>mv<span class=w> </span>/tmp/samhainrc<span class=w> </span>{{<span class=w> </span>samhainrc_path<span class=w> </span>}}<span class=w>
+</span><span class=w></span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>Backup<span class=w> </span>existing<span class=w> </span>samhain<span class=w> </span>database<span class=w>
+</span><span class=w>  </span><span class=k>command</span><span class=p>:</span><span class=w> </span>mv<span class=w> </span>{{<span class=w> </span>samhain_database<span class=w> </span>}}<span class=w> </span>/var/lib/samhain/samhain_file.bak<span class=w>
+</span><span class=w>  </span><span class=k>when</span><span class=p>:</span><span class=w> </span>db.stat.exists<span class=w>
+</span><span class=w></span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>Update<span class=w> </span>samhain<span class=w> </span>database<span class=w>
+</span><span class=w>  </span><span class=k>command</span><span class=p>:</span><span class=w> </span>/usr/local/sbin/samhain<span class=w> </span>-t<span class=w> </span>init<span class=w>
+</span><span class=w></span>- <span class=k>name</span><span class=p>:</span><span class=w> </span>Start<span class=w> </span>samhain<span class=w>
+</span><span class=w>  </span><span class=k>command</span><span class=p>:</span><span class=w> </span>/usr/local/sbin/samhain<span class=w> </span>-D<span class=w> </span>-t<span class=w> </span>check<span class=w>
+</span></code></pre></td></tr></table></div></div><p>The file referenced in the copy operation is located at roles/samhain/files/samhainrc.</p><p>Vars file:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-yaml data-lang=yaml><span class=w>    </span><span class=k>samhain_database</span><span class=p>:</span><span class=w> </span>/var/lib/samhain/samhain_file<span class=w>
+</span><span class=w>    </span><span class=k>samhainrc_path</span><span class=p>:</span><span class=w> </span>/etc/samhainrc<span class=w>
+</span><span class=w>    </span><span class=k>samhain_process</span><span class=p>:</span><span class=w> </span>/var/run/samhain.pid<span class=w>
+</span><span class=w>    </span><span class=k>samhain_version</span><span class=p>:</span><span class=w> </span>&lt;insert<span class=w> </span>current<span class=w> </span>Samhain<span class=w> </span>version&gt;<span class=w>
+</span></code></pre></td></tr></table></div></div><p>Conclusion</p><p>This is all fairly simple but has greatly reduced the amount of time I spend installing and maintaining these tools. I realize the Samhain role doesn&rsquo;t adhere to Ansible&rsquo;s idea of idempotence very well due to the heavy usage of the command module. I&rsquo;m looking for ways to improve it, but it does what I need with some basic error handling for now.</p><p>Hopefully this helps illustrate how Ansible roles work and some of the advantages roles have versus doing everything from one giant playbook. I&rsquo;m relatively new to Ansible so feel free to leave a reply below or reach out on Twitter if you have questions, comments, or even suggestions on how this could be improved.</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>This article is updated with 2020-02-01</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-markdown href=https://securingthe.net/2018/03/deploying-security-controls-with-ansible/index.md target=_blank></a></span></div><div class=post-info-share><span><a href="//twitter.com/share?url=https%3a%2f%2fsecuringthe.net%2f2018%2f03%2fdeploying-security-controls-with-ansible%2f&text=Deploying%20Security%20Controls%20with%20Ansible&via=x41x4a" target=_blank title="Share on Twitter"><i class="fab fa-twitter fa-fw"></i></a><a href="//reddit.com/submit?url=https%3a%2f%2fsecuringthe.net%2f2018%2f03%2fdeploying-security-controls-with-ansible%2f&title=Deploying%20Security%20Controls%20with%20Ansible" target=_blank title="Share on Reddit"><i class="fab fa-reddit fa-fw"></i></a><a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fsecuringthe.net%2f2018%2f03%2fdeploying-security-controls-with-ansible%2f&title=Deploying%20Security%20Controls%20with%20Ansible" target=_blank title="Share on LinkedIn"><i class="fab fa-linkedin fa-fw"></i></a></span></div></div></div><div class=post-info-more><section><span class=tag><a href=https://securingthe.net/tags/ansible/><i class="fas fa-tag fa-fw"></i>Ansible</a></span>
+<span class=tag><a href=https://securingthe.net/tags/automation/><i class="fas fa-tag fa-fw"></i>Automation</a></span>
+<span class=tag><a href=https://securingthe.net/tags/tools/><i class="fas fa-tag fa-fw"></i>Tools</a></span></section><section><span><a href=javascript:window.history.back();>Back</a></span>&nbsp;|&nbsp;<span><a href=https://securingthe.net/>Home</a></span></section></div><div class=post-nav><a href=https://securingthe.net/2018/03/infosec-is-bigger-than-pentesting/ class=next rel=next title="InfoSec is Bigger Than Pentesting">InfoSec is Bigger Than Pentesting<i class="fas fa-angle-right fa-fw"></i></a></div></div><div class=post-comment><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")
+return;var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;var disqus_shortname="ajmcquay";dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></article></div></main><footer class=footer><div class=copyright><div class=copyright-line>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow noopener noreffer">Hugo</a>&nbsp;|&nbsp;Theme - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a></div><div class=copyright-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2019 - 2020</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://securingthe.net/>AJ McQuay</a></span><span class=license>&nbsp;|&nbsp;<a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer><script src=/js/lib/jquery/jquery.slim.min.min.js></script><script src=/js/lib/lazysizes/lazysizes.min.min.js></script><script src=/js/lib/smooth-scroll/smooth-scroll.polyfills.min.min.js></script><script>window.scroll=new SmoothScroll('[data-scroll]',{speed:300,speedAsDuration:true});</script><script src=/js/blog.min.js></script></div><a href=# class=dynamic-to-top id=dynamic-to-top data-scroll><span>&nbsp;</span></a></body></html>

@@ -1,119 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>OSCP on Securing The Net</title>
-    <link>https://securingthe.net/tags/oscp/</link>
-    <description>Recent content in OSCP on Securing The Net</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Mon, 24 Jun 2019 02:54:19 +0000</lastBuildDate>
-    
-	<atom:link href="https://securingthe.net/tags/oscp/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>My OSCP experience</title>
-      <link>https://securingthe.net/2019/06/oscp/</link>
-      <pubDate>Mon, 24 Jun 2019 02:54:19 +0000</pubDate>
-      
-      <guid>https://securingthe.net/2019/06/oscp/</guid>
-      <description>This morning, 7 days after submitting my exam and lab reports, I received an email from Offensive Security letting me know I had successfully completed the OSCP exam. I wanted to close out this series of posts by providing a recap of my exam experience. Sorry - no exam spoilers - just a look at how I handled the exam and some thoughts looking back over it and my time in the course/lab.</description>
-    </item>
-    
-    <item>
-      <title>PWK: Weeks 9-11</title>
-      <link>https://securingthe.net/2019/06/pwk-weeks-9-11/</link>
-      <pubDate>Fri, 07 Jun 2019 20:52:17 +0000</pubDate>
-      
-      <guid>https://securingthe.net/2019/06/pwk-weeks-9-11/</guid>
-      <description>My OSCP exam is in 72 hours. If all goes well, next week could be the end of this 12-week journey. I wanted to go ahead and post a write-up of the last few weeks. My goal when I started the lab was to complete 30 lab machines and I hit that mark in week 11.
-  Day 59  Completed host #24. Here I learned not to trust pre-compiled exploit binaries from GitHub.</description>
-    </item>
-    
-    <item>
-      <title>PWK: Weeks 7 &amp; 8</title>
-      <link>https://securingthe.net/2019/05/pwk-weeks-7-8/</link>
-      <pubDate>Sat, 11 May 2019 20:09:20 +0000</pubDate>
-      
-      <guid>https://securingthe.net/2019/05/pwk-weeks-7-8/</guid>
-      <description>It&amp;rsquo;s hard to believe I&amp;rsquo;m already starting my ninth week of the PWK course, it&amp;rsquo;s gone by extremely quickly. I took a few days off at the end of week 7 for some time away in Arizona with my wife, but I&amp;rsquo;ve been back at it for a few days now. Here&amp;rsquo;s an update on my progress.
-  Day 44  Rooted box #16. Recon, enumeration, and attempted (read: failed) exploitation of #17.</description>
-    </item>
-    
-    <item>
-      <title>PWK: Weeks 5 &amp; 6</title>
-      <link>https://securingthe.net/2019/04/pwk-weeks-5-6/</link>
-      <pubDate>Sun, 28 Apr 2019 04:19:36 +0000</pubDate>
-      
-      <guid>https://securingthe.net/2019/04/pwk-weeks-5-6/</guid>
-      <description>Last week was pretty busy and I didn&amp;rsquo;t get around to writing my week 5 recap. So, I decided to cover both week 5 and week 6 in one post. In the last two weeks I have completed several more lab machines including one of the &amp;lsquo;big 4&amp;rsquo;, gh0st. Here&amp;rsquo;s the daily breakout for week 5:
-  Day 30  Recon and enumeration against box 06. Tried exploits against a couple of services with no success, but think I have it narrowed down .</description>
-    </item>
-    
-    <item>
-      <title>PWK: Week 4</title>
-      <link>https://securingthe.net/2019/04/pwk-week-4/</link>
-      <pubDate>Wed, 17 Apr 2019 19:31:39 +0000</pubDate>
-      
-      <guid>https://securingthe.net/2019/04/pwk-week-4/</guid>
-      <description>It&amp;rsquo;s already been a month since I started the PWK course, and this past week was my first week fully dedicated to lab machines. Some have been easy, some difficult, but all have taught me at least one takeaway lesson.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>OSCP on Securing The Net</title><link>https://securingthe.net/tags/oscp/</link><description>Recent content in OSCP on Securing The Net</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 24 Jun 2019 02:54:19 +0000</lastBuildDate><atom:link href="https://securingthe.net/tags/oscp/index.xml" rel="self" type="application/rss+xml"/><item><title>My OSCP experience</title><link>https://securingthe.net/2019/06/oscp/</link><pubDate>Mon, 24 Jun 2019 02:54:19 +0000</pubDate><guid>https://securingthe.net/2019/06/oscp/</guid><description>This morning, 7 days after submitting my exam and lab reports, I received an email from Offensive Security letting me know I had successfully completed the OSCP exam. I wanted to close out this series of posts by providing a recap of my exam experience. Sorry - no exam spoilers - just a look at how I handled the exam and some thoughts looking back over it and my time in the course/lab.</description></item><item><title>PWK: Weeks 9-11</title><link>https://securingthe.net/2019/06/pwk-weeks-9-11/</link><pubDate>Fri, 07 Jun 2019 20:52:17 +0000</pubDate><guid>https://securingthe.net/2019/06/pwk-weeks-9-11/</guid><description>My OSCP exam is in 72 hours. If all goes well, next week could be the end of this 12-week journey. I wanted to go ahead and post a write-up of the last few weeks. My goal when I started the lab was to complete 30 lab machines and I hit that mark in week 11.
+Day 59 Completed host #24. Here I learned not to trust pre-compiled exploit binaries from GitHub.</description></item><item><title>PWK: Weeks 7 &amp; 8</title><link>https://securingthe.net/2019/05/pwk-weeks-7-8/</link><pubDate>Sat, 11 May 2019 20:09:20 +0000</pubDate><guid>https://securingthe.net/2019/05/pwk-weeks-7-8/</guid><description>It&amp;rsquo;s hard to believe I&amp;rsquo;m already starting my ninth week of the PWK course, it&amp;rsquo;s gone by extremely quickly. I took a few days off at the end of week 7 for some time away in Arizona with my wife, but I&amp;rsquo;ve been back at it for a few days now. Here&amp;rsquo;s an update on my progress.
+Day 44 Rooted box #16. Recon, enumeration, and attempted (read: failed) exploitation of #17.</description></item><item><title>PWK: Weeks 5 &amp; 6</title><link>https://securingthe.net/2019/04/pwk-weeks-5-6/</link><pubDate>Sun, 28 Apr 2019 04:19:36 +0000</pubDate><guid>https://securingthe.net/2019/04/pwk-weeks-5-6/</guid><description>Last week was pretty busy and I didn&amp;rsquo;t get around to writing my week 5 recap. So, I decided to cover both week 5 and week 6 in one post. In the last two weeks I have completed several more lab machines including one of the &amp;lsquo;big 4&amp;rsquo;, gh0st. Here&amp;rsquo;s the daily breakout for week 5:
+Day 30 Recon and enumeration against box 06. Tried exploits against a couple of services with no success, but think I have it narrowed down .</description></item><item><title>PWK: Week 4</title><link>https://securingthe.net/2019/04/pwk-week-4/</link><pubDate>Wed, 17 Apr 2019 19:31:39 +0000</pubDate><guid>https://securingthe.net/2019/04/pwk-week-4/</guid><description>It&amp;rsquo;s already been a month since I started the PWK course, and this past week was my first week fully dedicated to lab machines. Some have been easy, some difficult, but all have taught me at least one takeaway lesson.
 Here&amp;rsquo;s what my daily time commitment looked like in week 4:
-  Day 22  It seems I chose (at random) a machine in the top half of the difficulty spectrum for my first target, yay.</description>
-    </item>
-    
-    <item>
-      <title>PWK: Week 3</title>
-      <link>https://securingthe.net/2019/04/pwk-week-3/</link>
-      <pubDate>Tue, 09 Apr 2019 18:28:17 +0000</pubDate>
-      
-      <guid>https://securingthe.net/2019/04/pwk-week-3/</guid>
-      <description>I&amp;rsquo;m a couple of days into my fourth week of access to the PWK labs and course material, so here&amp;rsquo;s my recap of the previous week. Highlights include completing the videos, PDF, and exercises and getting started on lab machines.
+Day 22 It seems I chose (at random) a machine in the top half of the difficulty spectrum for my first target, yay.</description></item><item><title>PWK: Week 3</title><link>https://securingthe.net/2019/04/pwk-week-3/</link><pubDate>Tue, 09 Apr 2019 18:28:17 +0000</pubDate><guid>https://securingthe.net/2019/04/pwk-week-3/</guid><description>I&amp;rsquo;m a couple of days into my fourth week of access to the PWK labs and course material, so here&amp;rsquo;s my recap of the previous week. Highlights include completing the videos, PDF, and exercises and getting started on lab machines.
 Keeping with tradition, here&amp;rsquo;s my daily time breakdown:
-  Day 15  More work on chapter 13 exercises. I knew web app attacks would be one of my weak points, and that has been reflected in the time spent on this chapter.</description>
-    </item>
-    
-    <item>
-      <title>PWK: Week 2</title>
-      <link>https://securingthe.net/2019/04/pwk-week-2/</link>
-      <pubDate>Tue, 02 Apr 2019 02:21:42 +0000</pubDate>
-      
-      <guid>https://securingthe.net/2019/04/pwk-week-2/</guid>
-      <description>I&amp;rsquo;m starting my third week in Offensive Security&amp;rsquo;s Penetration Testing with Kali Linux (PWK) course, which means it&amp;rsquo;s time for a quick look at how my second week went.
+Day 15 More work on chapter 13 exercises. I knew web app attacks would be one of my weak points, and that has been reflected in the time spent on this chapter.</description></item><item><title>PWK: Week 2</title><link>https://securingthe.net/2019/04/pwk-week-2/</link><pubDate>Tue, 02 Apr 2019 02:21:42 +0000</pubDate><guid>https://securingthe.net/2019/04/pwk-week-2/</guid><description>I&amp;rsquo;m starting my third week in Offensive Security&amp;rsquo;s Penetration Testing with Kali Linux (PWK) course, which means it&amp;rsquo;s time for a quick look at how my second week went.
 I&amp;rsquo;m still working through the exercises and should wrap up chapter 13 tonight. Here&amp;rsquo;s a pretty chart thing:
-  And here&amp;rsquo;s a look at what I accomplished each of those days:
-Day 8  Chapter 8 exercises. Reminder: The &amp;ldquo;&amp;quot; character is important when working with hex characters.</description>
-    </item>
-    
-    <item>
-      <title>PWK: Week 1</title>
-      <link>https://securingthe.net/2019/03/pwk-week-1/</link>
-      <pubDate>Mon, 25 Mar 2019 02:12:43 +0000</pubDate>
-      
-      <guid>https://securingthe.net/2019/03/pwk-week-1/</guid>
-      <description>I started working on Offensive Security&amp;rsquo;s Penetration Testing with Kali Linux (PWK) course last weekend, and thought I&amp;rsquo;d write a quick post to recap my progress so far.
-Most sources I&amp;rsquo;ve come across recommend going through all of the reading, videos, and course exercises before tackling lab machines, so I decided to go that route. In the first week I finished the reading and videos through chapter 9, and completed exercises through chapter 7.</description>
-    </item>
-    
-    <item>
-      <title>OSCP: T-minus 1 week</title>
-      <link>https://securingthe.net/2019/03/oscp-t-minus-1-week/</link>
-      <pubDate>Fri, 08 Mar 2019 22:38:11 +0000</pubDate>
-      
-      <guid>https://securingthe.net/2019/03/oscp-t-minus-1-week/</guid>
-      <description>I get access to the PWK course material in a week, so I figured I&amp;rsquo;d write up a quick post about how I&amp;rsquo;ve been preparing.
-After I registered for the course I read through the syllabus and made note of the areas in which I was least confident. The main topics that jumped out at me were buffer overflows and web application attacks. I did some searching and found some great resources.</description>
-    </item>
-    
-    <item>
-      <title>Starting my OSCP journey</title>
-      <link>https://securingthe.net/2019/02/starting-my-oscp-journey/</link>
-      <pubDate>Mon, 25 Feb 2019 05:15:10 +0000</pubDate>
-      
-      <guid>https://securingthe.net/2019/02/starting-my-oscp-journey/</guid>
-      <description>It&amp;rsquo;s probably ironic considering one of my earlier blog posts is titled &amp;ldquo;Infosec is more than pentesting&amp;rdquo;, but I&amp;rsquo;ve decided to try my hand at the Offensive Security PWK course and OSCP certification.
-I haven&amp;rsquo;t published a blog post in nearly a year, and a lot has changed since then. The biggest change came last September when I left my employer of over 12 years to start a new job in the government sector.</description>
-    </item>
-    
-  </channel>
-</rss>
+And here&amp;rsquo;s a look at what I accomplished each of those days:
+Day 8 Chapter 8 exercises. Reminder: The &amp;ldquo;&amp;quot; character is important when working with hex characters.</description></item><item><title>PWK: Week 1</title><link>https://securingthe.net/2019/03/pwk-week-1/</link><pubDate>Mon, 25 Mar 2019 02:12:43 +0000</pubDate><guid>https://securingthe.net/2019/03/pwk-week-1/</guid><description>I started working on Offensive Security&amp;rsquo;s Penetration Testing with Kali Linux (PWK) course last weekend, and thought I&amp;rsquo;d write a quick post to recap my progress so far.
+Most sources I&amp;rsquo;ve come across recommend going through all of the reading, videos, and course exercises before tackling lab machines, so I decided to go that route. In the first week I finished the reading and videos through chapter 9, and completed exercises through chapter 7.</description></item><item><title>OSCP: T-minus 1 week</title><link>https://securingthe.net/2019/03/oscp-t-minus-1-week/</link><pubDate>Fri, 08 Mar 2019 22:38:11 +0000</pubDate><guid>https://securingthe.net/2019/03/oscp-t-minus-1-week/</guid><description>I get access to the PWK course material in a week, so I figured I&amp;rsquo;d write up a quick post about how I&amp;rsquo;ve been preparing.
+After I registered for the course I read through the syllabus and made note of the areas in which I was least confident. The main topics that jumped out at me were buffer overflows and web application attacks. I did some searching and found some great resources.</description></item><item><title>Starting my OSCP journey</title><link>https://securingthe.net/2019/02/starting-my-oscp-journey/</link><pubDate>Mon, 25 Feb 2019 05:15:10 +0000</pubDate><guid>https://securingthe.net/2019/02/starting-my-oscp-journey/</guid><description>It&amp;rsquo;s probably ironic considering one of my earlier blog posts is titled &amp;ldquo;Infosec is more than pentesting&amp;rdquo;, but I&amp;rsquo;ve decided to try my hand at the Offensive Security PWK course and OSCP certification.
+I haven&amp;rsquo;t published a blog post in nearly a year, and a lot has changed since then. The biggest change came last September when I left my employer of over 12 years to start a new job in the government sector.</description></item></channel></rss>

