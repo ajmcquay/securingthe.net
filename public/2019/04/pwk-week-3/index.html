@@ -1,17 +1,432 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>PWK: Week 3 | Securing The Net</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=Description content="Tech ramblings from the desert"><link rel=prev href=https://securingthe.net/2019/04/pwk-week-2/><link rel=next href=https://securingthe.net/2019/04/pwk-week-4/><link rel=canonical href=https://securingthe.net/2019/04/pwk-week-3/><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><meta name=twitter:card content="summary"><meta name=twitter:title content="PWK: Week 3"><meta name=twitter:description content="I&rsquo;m a couple of days into my fourth week of access to the PWK labs and course material, so here&rsquo;s my recap of the previous week. Highlights include completing the videos, PDF, and exercises and getting started on lab machines.
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>PWK: Week 3 | Securing The Net</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noodp" />
+<meta name="Description" content="Tech ramblings from the desert">
+<link rel="prev" href="https://securingthe.net/2019/04/pwk-week-2/" />
+<link rel="next" href="https://securingthe.net/2019/04/pwk-week-4/" />
+<link rel="canonical" href="https://securingthe.net/2019/04/pwk-week-3/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="PWK: Week 3"/>
+<meta name="twitter:description" content="I&rsquo;m a couple of days into my fourth week of access to the PWK labs and course material, so here&rsquo;s my recap of the previous week. Highlights include completing the videos, PDF, and exercises and getting started on lab machines.
 Keeping with tradition, here&rsquo;s my daily time breakdown:
-  Day 15  More work on chapter 13 exercises. I knew web app attacks would be one of my weak points, and that has been reflected in the time spent on this chapter."><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"PWK: Week 3","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/securingthe.net\/2019\/04\/pwk-week-3\/"},"image":{"@type":"ImageObject","url":"https:\/\/securingthe.net\/cover.png","width":800,"height":600},"genre":"posts","keywords":"OSCP","wordcount":260,"url":"https:\/\/securingthe.net\/2019\/04\/pwk-week-3\/","datePublished":"2019-04-09T18:28:17\x2b00:00","dateModified":"2020-02-01T16:19:02-07:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"AJ McQuay","logo":{"@type":"ImageObject","url":"https:\/\/securingthe.net\/logo.png","width":127,"height":40}},"description":""}</script><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/css/lib/fontawesome-free/all.min.min.css><link rel=stylesheet href=/css/lib/animate/animate.min.min.css></head><body><script>window.isDark=(window.localStorage&&window.localStorage.getItem('theme'))==='dark';window.isDark&&document.body.classList.add('dark-theme');</script><div class=wrapper><nav class=navbar><div class=navbar-container><div class="navbar-header animated bounceIn"><a href=https://securingthe.net/>Securing The Net</a></div><div class=navbar-menu><a class=menu-item href=https://securingthe.net/posts>Posts</a>
-<a class=menu-item href=https://securingthe.net/tags>Tags</a>
-<a class=menu-item href=https://securingthe.net/categories>Categories</a>
-<a class=menu-item href=https://securingthe.net/posts/about/>About</a>
-<a class=menu-item href=https://securingthe.net><i class="fas fa-language fa-fw"></i></a><a href=javascript:void(0); class=theme-switch><i class="fas fa-adjust fa-rotate-180 fa-fw" title="Switch Theme"></i></a></div></div></nav><nav class=navbar-mobile><div class=navbar-container><div class=navbar-header><div class="navbar-header-title animated bounceIn"><a href=https://securingthe.net/>Securing The Net</a></div><div class=menu-toggle id=menu-toggle><span></span><span></span><span></span></div></div><div class=navbar-menu id=mobile-menu><a class=menu-item href=https://securingthe.net/posts>Posts</a>
-<a class=menu-item href=https://securingthe.net/tags>Tags</a>
-<a class=menu-item href=https://securingthe.net/categories>Categories</a>
-<a class=menu-item href=https://securingthe.net/posts/about/>About</a>
-<a class=menu-item href=https://securingthe.net><i class="fas fa-language fa-fw"></i></a><a href=javascript:void(0); class=theme-switch><i class="fas fa-adjust fa-rotate-180 fa-fw"></i></a></div></div></nav><main class=main><div class=container><article class=post-warp><h1 class="post-title animated flipInX">PWK: Week 3</h1><div class=post-meta><div class=post-meta-main><a class=author href=https://securingthe.net/ rel=author><i class="fas fa-user-circle fa-fw"></i>AJ McQuay&nbsp;</a>
-<span class=post-category>included in
-<i class="far fa-folder fa-fw"></i><a href=https://securingthe.net/categories/oscp/>OSCP</a></span></div><div class=post-meta-other><i class="far fa-calendar-alt fa-fw"></i><time datetime=2019-04-09>2019-04-09</time>&nbsp;
-<i class="fas fa-pencil-alt fa-fw"></i>about 260 words&nbsp;
-<i class="far fa-clock fa-fw"></i>2 min&nbsp;</div></div><div class=post-content><p>I&rsquo;m a couple of days into my fourth week of access to the PWK labs and course material, so here&rsquo;s my recap of the previous week. Highlights include completing the videos, PDF, and exercises and getting started on lab machines.</p><p>Keeping with tradition, here&rsquo;s my daily time breakdown:</p><figure><img src=/content/images/2019/04/pwk-week3.png></figure><a class=post-dummy-target id=day-15></a><h2>Day 15</h2><ul><li>More work on chapter 13 exercises. I knew web app attacks would be one of my weak points, and that has been reflected in the time spent on this chapter. I wanted to make sure I understand each piece before moving on.</li></ul><a class=post-dummy-target id=day-16></a><h2>Day 16</h2><ul><li>Completed chapter 13 exercises. Completed videos, reading, and exercises for the first section of chapter 14.</li></ul><a class=post-dummy-target id=day-17></a><h2>Day 17</h2><ul><li>Finished up videos, reading, and exercises for chapter 14. Also rooted my first lab machine. I used Metasploit though, so does it <em>really</em> count?</li></ul><a class=post-dummy-target id=day-18></a><h2>Day 18</h2><ul><li>Videos, reading, and exercises for chapter 15.</li></ul><a class=post-dummy-target id=day-19></a><h2>Day 19</h2><ul><li>Videos, reading, and exercises for first half of chapter 16. Long scans are long. This chapter renewed my love for tmux, as I could leave a scan running in one tab while I handled other tasks in another.</li></ul><a class=post-dummy-target id=day-20></a><h2>Day 20</h2><ul><li>Completed videos, reading, and exercises for chapters 16 and 17.</li></ul><p>With family in town for a few days I went a bit lighter this week, only putting in 10.5 hours. That brings my total time investment up to 40 hours across three weeks. I expect that to ramp up quickly for the rest of my time since I&rsquo;ll be digging in to lab machines. Wish me luck!</p><p><em>Photo by <a href="https://unsplash.com/photos/Pyjp2zmxuLk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Kevin Horvat</a> on <a href="https://unsplash.com/search/photos/linux?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></em></p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>This article is updated with 2020-02-01</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-markdown href=https://securingthe.net/2019/04/pwk-week-3/index.md target=_blank></a></span></div><div class=post-info-share><span><a href="//twitter.com/share?url=https%3a%2f%2fsecuringthe.net%2f2019%2f04%2fpwk-week-3%2f&text=PWK%3a%20Week%203&via=x41x4a" target=_blank title="Share on Twitter"><i class="fab fa-twitter fa-fw"></i></a><a href="//reddit.com/submit?url=https%3a%2f%2fsecuringthe.net%2f2019%2f04%2fpwk-week-3%2f&title=PWK%3a%20Week%203" target=_blank title="Share on Reddit"><i class="fab fa-reddit fa-fw"></i></a><a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fsecuringthe.net%2f2019%2f04%2fpwk-week-3%2f&title=PWK%3a%20Week%203" target=_blank title="Share on LinkedIn"><i class="fab fa-linkedin fa-fw"></i></a></span></div></div></div><div class=post-info-more><section><span class=tag><a href=https://securingthe.net/tags/oscp/><i class="fas fa-tag fa-fw"></i>OSCP</a></span></section><section><span><a href=javascript:window.history.back();>Back</a></span>&nbsp;|&nbsp;<span><a href=https://securingthe.net/>Home</a></span></section></div><div class=post-nav><a href=https://securingthe.net/2019/04/pwk-week-2/ class=prev rel=prev title="PWK: Week 2"><i class="fas fa-angle-left fa-fw"></i>PWK: Week 2</a>
-<a href=https://securingthe.net/2019/04/pwk-week-4/ class=next rel=next title="PWK: Week 4">PWK: Week 4<i class="fas fa-angle-right fa-fw"></i></a></div></div><div class=post-comment><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")
-return;var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;var disqus_shortname="ajmcquay";dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></article></div></main><footer class=footer><div class=copyright><div class=copyright-line>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow noopener noreffer">Hugo</a>&nbsp;|&nbsp;Theme - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a></div><div class=copyright-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2019 - 2020</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://securingthe.net/>AJ McQuay</a></span><span class=license>&nbsp;|&nbsp;<a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer><script src=/js/lib/jquery/jquery.slim.min.min.js></script><script src=/js/lib/lazysizes/lazysizes.min.min.js></script><script src=/js/lib/smooth-scroll/smooth-scroll.polyfills.min.min.js></script><script>window.scroll=new SmoothScroll('[data-scroll]',{speed:300,speedAsDuration:true});</script><script src=/js/blog.min.js></script></div><a href=# class=dynamic-to-top id=dynamic-to-top data-scroll><span>&nbsp;</span></a></body></html>
+  Day 15  More work on chapter 13 exercises. I knew web app attacks would be one of my weak points, and that has been reflected in the time spent on this chapter."/>
+<script type="application/ld+json">
+    {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "PWK: Week 3",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https:\/\/securingthe.net\/2019\/04\/pwk-week-3\/"
+    },
+    
+        "image": {
+            "@type": "ImageObject",
+            "url": "https:\/\/securingthe.net\/cover.png",
+            "width":  800 ,
+            "height":  600 
+        },
+    
+    "genre": "posts",
+    
+        "keywords": "OSCP",
+    
+    "wordcount":  260 ,
+    "url": "https:\/\/securingthe.net\/2019\/04\/pwk-week-3\/",
+    
+        "datePublished": "2019-04-09T18:28:17\x2b00:00",
+    
+    
+        "dateModified": "2020-02-01T16:19:02-07:00",
+    
+    
+        "license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.",
+    
+    
+        "publisher": {
+            "@type": "Organization",
+            "name": "AJ McQuay",
+            "logo": {
+            "@type": "ImageObject",
+            "url": "https:\/\/securingthe.net\/logo.png",
+            "width":  127 ,
+            "height":  40 
+            }
+        },
+    
+    
+    "description": ""
+    }
+    </script>
+<link rel="stylesheet" href="/css/style.min.css">
+<link rel="stylesheet" href="/css/lib/fontawesome-free/all.min.min.css">
+
+<link rel="stylesheet" href="/css/lib/animate/animate.min.min.css">
+
+
+    </head>
+    <body>
+        <script>
+            window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            window.isDark && document.body.classList.add('dark-theme');
+        </script>
+        <div class="wrapper">
+            <nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-header animated bounceIn">
+            <a href="https://securingthe.net/">Securing The Net</a>
+        </div>
+        <div class="navbar-menu">
+            
+            
+                <a class="menu-item" href="https://securingthe.net/posts" title="">Posts</a>
+            
+                <a class="menu-item" href="https://securingthe.net/tags" title="">Tags</a>
+            
+                <a class="menu-item" href="https://securingthe.net/categories" title="">Categories</a>
+            
+                <a class="menu-item" href="https://securingthe.net/posts/about/" title="">About</a>
+            
+                <a class="menu-item" href="https://securingthe.net" title=""><i class="fas fa-language fa-fw"></i></a>
+            
+            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="Switch Theme"></i></a>
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile">
+     <div class="navbar-container">
+        <div class="navbar-header">
+            <div class="navbar-header-title animated bounceIn">
+                <a href="https://securingthe.net/">Securing The Net</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="navbar-menu" id="mobile-menu">
+            
+            
+                <a class="menu-item" href="https://securingthe.net/posts" title="">Posts</a>
+            
+                <a class="menu-item" href="https://securingthe.net/tags" title="">Tags</a>
+            
+                <a class="menu-item" href="https://securingthe.net/categories" title="">Categories</a>
+            
+                <a class="menu-item" href="https://securingthe.net/posts/about/" title="">About</a>
+            
+                <a class="menu-item" href="https://securingthe.net" title=""><i class="fas fa-language fa-fw"></i></a>
+            
+            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"></i></a>
+        </div>
+    </div>
+</nav><main class="main">
+                <div class="container">
+                    
+    
+    
+    
+       
+    
+
+    <article class="post-warp">
+        <h1 class="post-title animated flipInX">PWK: Week 3</h1>
+
+        <div class="post-meta">
+            <div class="post-meta-main">
+                <a class="author" href="https://securingthe.net/" rel="author"><i class="fas fa-user-circle fa-fw"></i>AJ McQuay&nbsp;</a>
+                <span class="post-category">
+                        included in
+                        <i class="far fa-folder fa-fw"></i><a href="https://securingthe.net/categories/oscp/">OSCP</a>
+                            
+                    </span>
+            </div>
+            <div class="post-meta-other">
+                <i class="far fa-calendar-alt fa-fw"></i><time datetime=2019-04-09>2019-04-09</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 260 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>2 min&nbsp;</div>
+        </div>
+
+        
+
+        
+
+        <div class="post-content">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <p>I&rsquo;m a couple of days into my fourth week of access to the PWK labs and course material, so here&rsquo;s my recap of the previous week.  Highlights include completing the videos, PDF, and exercises and getting started on lab machines.</p>
+<p>Keeping with tradition, here&rsquo;s my daily time breakdown:</p>
+<figure>
+    <img src="/content/images/2019/04/pwk-week3.png"/> 
+</figure>
+
+<a class="post-dummy-target" id="day-15"></a><h2>Day 15</h2>
+<ul>
+<li>More work on chapter 13 exercises.  I knew web app attacks would be one of my weak points, and that has been reflected in the time spent on this chapter.  I wanted to make sure I understand each piece before moving on.</li>
+</ul>
+<a class="post-dummy-target" id="day-16"></a><h2>Day 16</h2>
+<ul>
+<li>Completed chapter 13 exercises.  Completed videos, reading, and exercises for the first section of chapter 14.</li>
+</ul>
+<a class="post-dummy-target" id="day-17"></a><h2>Day 17</h2>
+<ul>
+<li>Finished up videos, reading, and exercises for chapter 14.  Also rooted my first lab machine.  I used Metasploit though, so does it <em>really</em> count?</li>
+</ul>
+<a class="post-dummy-target" id="day-18"></a><h2>Day 18</h2>
+<ul>
+<li>Videos, reading, and exercises for chapter 15.</li>
+</ul>
+<a class="post-dummy-target" id="day-19"></a><h2>Day 19</h2>
+<ul>
+<li>Videos, reading, and exercises for first half of chapter 16.  Long scans are long.  This chapter renewed my love for tmux, as I could leave a scan running in one tab while I handled other tasks in another.</li>
+</ul>
+<a class="post-dummy-target" id="day-20"></a><h2>Day 20</h2>
+<ul>
+<li>Completed videos, reading, and exercises for chapters 16 and 17.</li>
+</ul>
+<p>With family in town for a few days I went a bit lighter this week, only putting in 10.5 hours.  That brings my total time investment up to 40 hours across three weeks.  I expect that to ramp up quickly for the rest of my time since I&rsquo;ll be digging in to lab machines.  Wish me luck!</p>
+<p><em>Photo by <a href="https://unsplash.com/photos/Pyjp2zmxuLk?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Kevin Horvat</a> on <a href="https://unsplash.com/search/photos/linux?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></em></p>
+
+        </div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>This article is updated with 2020-02-01</span>
+            </div>
+            <div class="post-info-license">
+                
+            </div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md">
+                
+                    
+                        <span><a class="link-to-markdown" href="https://securingthe.net/2019/04/pwk-week-3/index.md" target="_blank"></a></span>
+                    
+                
+            </div>
+            <div class="post-info-share">
+                
+                    <span>
+    
+        <a href="//twitter.com/share?url=https%3a%2f%2fsecuringthe.net%2f2019%2f04%2fpwk-week-3%2f&amp;text=PWK%3a%20Week%203&amp;via=x41x4a" target="_blank" title="Share on Twitter">
+            <i class="fab fa-twitter fa-fw"></i>
+        </a>
+    
+    
+    
+        <a href="//reddit.com/submit?url=https%3a%2f%2fsecuringthe.net%2f2019%2f04%2fpwk-week-3%2f&amp;title=PWK%3a%20Week%203" target="_blank" title="Share on Reddit">
+            <i class="fab fa-reddit fa-fw"></i>
+        </a>
+    
+    
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fsecuringthe.net%2f2019%2f04%2fpwk-week-3%2f&amp;title=PWK%3a%20Week%203" target="_blank" title="Share on LinkedIn">
+            <i class="fab fa-linkedin fa-fw"></i>
+        </a>
+    
+    
+    
+    
+    
+    
+    
+</span>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section>
+            
+                
+                    <span class="tag">
+                        <a href="https://securingthe.net/tags/oscp/"><i class="fas fa-tag fa-fw"></i>OSCP</a>
+                    </span>
+                
+            
+        </section>
+        <section>
+            <span><a href="javascript:window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="https://securingthe.net/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+            <a href="https://securingthe.net/2019/04/pwk-week-2/" class="prev" rel="prev" title="PWK: Week 2"><i class="fas fa-angle-left fa-fw"></i>PWK: Week 2</a>
+        
+        
+            <a href="https://securingthe.net/2019/04/pwk-week-4/" class="next" rel="next" title="PWK: Week 4">PWK: Week 4<i class="fas fa-angle-right fa-fw"></i></a>
+        
+    </div>
+</div>
+
+        <div class="post-comment">
+            
+            
+
+            
+        </div>
+    </article></div>
+            </main>
+            <footer class="footer">
+    <div class="copyright">
+        <div class="copyright-line">
+            Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a>
+        </div>
+        <div class="copyright-line">
+            <i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://securingthe.net/">AJ McQuay</a></span><span class="license">&nbsp;|&nbsp;<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+    </div>
+</footer>
+
+
+    
+    
+
+
+
+
+    
+    
+
+
+
+
+    
+    
+
+
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+
+
+    
+    
+
+
+
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+
+
+    
+    
+
+
+
+
+    
+    
+
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+
+
+    
+    
+
+
+<script src="/js/lib/jquery/jquery.slim.min.min.js"></script>
+<script src="/js/lib/lazysizes/lazysizes.min.min.js"></script>
+<script src="/js/lib/smooth-scroll/smooth-scroll.polyfills.min.min.js"></script><script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script>
+
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+
+
+
+
+
+<script src="/js/blog.min.js"></script>
+
+
+    
+</div>
+        <a href="#" class="dynamic-to-top" id="dynamic-to-top" data-scroll><span>&nbsp;</span></a>
+    </body>
+</html>

@@ -1,16 +1,475 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><title>PWK: Weeks 9-11 | Securing The Net</title><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><meta name=Description content="Tech ramblings from the desert"><link rel=prev href=https://securingthe.net/2019/05/pwk-weeks-7-8/><link rel=next href=https://securingthe.net/2019/06/oscp/><link rel=canonical href=https://securingthe.net/2019/06/pwk-weeks-9-11/><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><meta name=twitter:card content="summary"><meta name=twitter:title content="PWK: Weeks 9-11"><meta name=twitter:description content="My OSCP exam is in 72 hours. If all goes well, next week could be the end of this 12-week journey. I wanted to go ahead and post a write-up of the last few weeks. My goal when I started the lab was to complete 30 lab machines and I hit that mark in week 11.
-  Day 59  Completed host #24. Here I learned not to trust pre-compiled exploit binaries from GitHub."><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"PWK: Weeks 9-11","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/securingthe.net\/2019\/06\/pwk-weeks-9-11\/"},"image":{"@type":"ImageObject","url":"https:\/\/securingthe.net\/cover.png","width":800,"height":600},"genre":"posts","keywords":"OSCP","wordcount":586,"url":"https:\/\/securingthe.net\/2019\/06\/pwk-weeks-9-11\/","datePublished":"2019-06-07T20:52:17\x2b00:00","dateModified":"2020-02-01T16:19:02-07:00","license":"This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher":{"@type":"Organization","name":"AJ McQuay","logo":{"@type":"ImageObject","url":"https:\/\/securingthe.net\/logo.png","width":127,"height":40}},"description":""}</script><link rel=stylesheet href=/css/style.min.css><link rel=stylesheet href=/css/lib/fontawesome-free/all.min.min.css><link rel=stylesheet href=/css/lib/animate/animate.min.min.css></head><body><script>window.isDark=(window.localStorage&&window.localStorage.getItem('theme'))==='dark';window.isDark&&document.body.classList.add('dark-theme');</script><div class=wrapper><nav class=navbar><div class=navbar-container><div class="navbar-header animated bounceIn"><a href=https://securingthe.net/>Securing The Net</a></div><div class=navbar-menu><a class=menu-item href=https://securingthe.net/posts>Posts</a>
-<a class=menu-item href=https://securingthe.net/tags>Tags</a>
-<a class=menu-item href=https://securingthe.net/categories>Categories</a>
-<a class=menu-item href=https://securingthe.net/posts/about/>About</a>
-<a class=menu-item href=https://securingthe.net><i class="fas fa-language fa-fw"></i></a><a href=javascript:void(0); class=theme-switch><i class="fas fa-adjust fa-rotate-180 fa-fw" title="Switch Theme"></i></a></div></div></nav><nav class=navbar-mobile><div class=navbar-container><div class=navbar-header><div class="navbar-header-title animated bounceIn"><a href=https://securingthe.net/>Securing The Net</a></div><div class=menu-toggle id=menu-toggle><span></span><span></span><span></span></div></div><div class=navbar-menu id=mobile-menu><a class=menu-item href=https://securingthe.net/posts>Posts</a>
-<a class=menu-item href=https://securingthe.net/tags>Tags</a>
-<a class=menu-item href=https://securingthe.net/categories>Categories</a>
-<a class=menu-item href=https://securingthe.net/posts/about/>About</a>
-<a class=menu-item href=https://securingthe.net><i class="fas fa-language fa-fw"></i></a><a href=javascript:void(0); class=theme-switch><i class="fas fa-adjust fa-rotate-180 fa-fw"></i></a></div></div></nav><main class=main><div class=container><article class=post-warp><h1 class="post-title animated flipInX">PWK: Weeks 9-11</h1><div class=post-meta><div class=post-meta-main><a class=author href=https://securingthe.net/ rel=author><i class="fas fa-user-circle fa-fw"></i>AJ McQuay&nbsp;</a>
-<span class=post-category>included in
-<i class="far fa-folder fa-fw"></i><a href=https://securingthe.net/categories/oscp/>OSCP</a></span></div><div class=post-meta-other><i class="far fa-calendar-alt fa-fw"></i><time datetime=2019-06-07>2019-06-07</time>&nbsp;
-<i class="fas fa-pencil-alt fa-fw"></i>about 586 words&nbsp;
-<i class="far fa-clock fa-fw"></i>3 min&nbsp;</div></div><div class=post-content><p>My OSCP exam is in 72 hours. If all goes well, next week could be the end of this 12-week journey. I wanted to go ahead and post a write-up of the last few weeks. My goal when I started the lab was to complete 30 lab machines and I hit that mark in week 11.</p><figure><img src=/content/images/2019/06/Screen-Shot-2019-06-07-at-2.20.45-PM.png></figure><a class=post-dummy-target id=day-59></a><h3>Day 59</h3><ul><li>Completed host #24. Here I learned not to trust pre-compiled exploit binaries from GitHub. I also had some issues with smbserver.py and had to mount a shared folder between my Kali VM and the Offsec-provided Windows 7 VM. Have multiple paths to transfer files between machines at your disposal!</li></ul><a class=post-dummy-target id=day-60></a><h3>Day 60</h3><ul><li>Recon and enumeration against <em>Pain</em>. Got a low privilege shell and started working on privesc.</li></ul><a class=post-dummy-target id=day-61></a><h3>Day 61</h3><ul><li>Completed <em>Pain</em>. That&rsquo;s 3 of the big 4 down, and 25 hosts toward my goal of 30. Primary lesson from this box is that details matter when preparing an exploit. Some bugs need the right environment to thrive. Also started initial discovery of box #26.</li></ul><a class=post-dummy-target id=day-62></a><h3>Day 62</h3><ul><li>Completed box 26. Pretty straightforward, I was briefly concerned that the host might not have been in the right state when I started. I just got lucky and chased the right rabbit pretty quickly. Also started enumeration of host 27.</li></ul><a class=post-dummy-target id=day-63></a><h3>Day 63</h3><ul><li>Did some initial recon against two targets that apparently have major dependencies on other systems. Decided to switch to another box for target #27, then completed it quickly. I also spent some time cleaning up my documentation a bit.</li></ul><figure><img src=/content/images/2019/06/Screen-Shot-2019-06-07-at-2.22.20-PM.png></figure><a class=post-dummy-target id=day-66></a><h3>Day 66</h3><ul><li>Completed target 27. This one taught me to be more thorough in my enumeration (hint, don&rsquo;t just scan TCP ports). Started recon and enumeration of target 28.</li></ul><a class=post-dummy-target id=day-67></a><h3>Day 67</h3><ul><li>Completed #29 in about 15 minutes. Started enumeration against <em>Humble,</em> which I ceremoniously chose as my 30th target.</li></ul><a class=post-dummy-target id=day-69></a><h3>Day 69</h3><ul><li>Attempted (and failed) exploitation against <em>Humble.</em> Still haven&rsquo;t obtained a low-privilege shell yet. I need more webapp testing experience.</li></ul><a class=post-dummy-target id=day-70></a><h3>Day 70</h3><ul><li>Finally got a low-priv shell on <em>Humble</em>. Started enumerating for privesc.</li></ul><figure><img src=/content/images/2019/06/Screen-Shot-2019-06-07-at-2.23.57-PM.png></figure><a class=post-dummy-target id=day-71></a><h3>Day 71</h3><ul><li>Identified the path to escalate privileges on <em>Humble</em> and what appears to be the exploit I&rsquo;ll need to use. Did some testing but more is needed.</li></ul><a class=post-dummy-target id=day-72></a><h3>Day 72</h3><ul><li>Finally completed <em>Humble</em> and reached my goal of 30 compromised lab machines. I learned a lot here about being detail-oriented with exploit code, and researching how applications I&rsquo;m unfamiliar with work and are configured to fit all the puzzle pieces together.</li></ul><a class=post-dummy-target id=day-73></a><h3>Day 73</h3><ul><li>Started working on my lab & exercise report.</li></ul><a class=post-dummy-target id=day-74></a><h3>Day 74</h3><ul><li>Finished the lab & exercise report.</li></ul><a class=post-dummy-target id=day-75></a><h3>Day 75</h3><ul><li>I started going through buffer overflow exercises again and making some notes around workflow</li></ul><a class=post-dummy-target id=day-76></a><h3>Day 76</h3><ul><li>I started and completed host 31 to unlock the Dev subnet. I realized I hadn&rsquo;t unlocked it yet and just wanted to check that box.</li></ul><p>Through week 11 I have invested 130.5 hours into the course and labs. As for this past week (week 12) I have mostly focused on going through buffer overflow resources and compiling a reference sheet for things I want to remember during the exam without having to think about them. Command shortcuts, methods to consider in certain situations, etc.</p><p>I also plan to write down some &lsquo;exam principles&rsquo; I&rsquo;d like to stick to, and to set up a series of alarms on my phone to remind myself to take breaks, eat, and step away during the exam. Wish me luck, hopefully by this time next week I&rsquo;ll officially be an OSCP!</p><p><em>Photo by <a href="https://unsplash.com/@marvin_ronsdorf?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Marvin Ronsdorf</a> on <a href="https://unsplash.com/search/photos/finish?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></em></p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>This article is updated with 2020-02-01</span></div><div class=post-info-license></div></div><div class=post-info-line><div class=post-info-md><span><a class=link-to-markdown href=https://securingthe.net/2019/06/pwk-weeks-9-11/index.md target=_blank></a></span></div><div class=post-info-share><span><a href="//twitter.com/share?url=https%3a%2f%2fsecuringthe.net%2f2019%2f06%2fpwk-weeks-9-11%2f&text=PWK%3a%20Weeks%209-11&via=x41x4a" target=_blank title="Share on Twitter"><i class="fab fa-twitter fa-fw"></i></a><a href="//reddit.com/submit?url=https%3a%2f%2fsecuringthe.net%2f2019%2f06%2fpwk-weeks-9-11%2f&title=PWK%3a%20Weeks%209-11" target=_blank title="Share on Reddit"><i class="fab fa-reddit fa-fw"></i></a><a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fsecuringthe.net%2f2019%2f06%2fpwk-weeks-9-11%2f&title=PWK%3a%20Weeks%209-11" target=_blank title="Share on LinkedIn"><i class="fab fa-linkedin fa-fw"></i></a></span></div></div></div><div class=post-info-more><section><span class=tag><a href=https://securingthe.net/tags/oscp/><i class="fas fa-tag fa-fw"></i>OSCP</a></span></section><section><span><a href=javascript:window.history.back();>Back</a></span>&nbsp;|&nbsp;<span><a href=https://securingthe.net/>Home</a></span></section></div><div class=post-nav><a href=https://securingthe.net/2019/05/pwk-weeks-7-8/ class=prev rel=prev title="PWK: Weeks 7 & 8"><i class="fas fa-angle-left fa-fw"></i>PWK: Weeks 7 & 8</a>
-<a href=https://securingthe.net/2019/06/oscp/ class=next rel=next title="My OSCP experience">My OSCP experience<i class="fas fa-angle-right fa-fw"></i></a></div></div><div class=post-comment><div id=disqus_thread></div><script type=text/javascript>(function(){if(window.location.hostname=="localhost")
-return;var dsq=document.createElement("script");dsq.type="text/javascript";dsq.async=true;var disqus_shortname="ajmcquay";dsq.src="//"+disqus_shortname+".disqus.com/embed.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(dsq);})();</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></div></article></div></main><footer class=footer><div class=copyright><div class=copyright-line>Powered by <a href=https://gohugo.io/ target=_blank rel="external nofollow noopener noreffer">Hugo</a>&nbsp;|&nbsp;Theme - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a></div><div class=copyright-line><i class="far fa-copyright fa-fw"></i><span itemprop=copyrightYear>2019 - 2020</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://securingthe.net/>AJ McQuay</a></span><span class=license>&nbsp;|&nbsp;<a rel="license external nofollow noopener noreffer" href=https://creativecommons.org/licenses/by-nc/4.0/ target=_blank>CC BY-NC 4.0</a></span></div></div></footer><script src=/js/lib/jquery/jquery.slim.min.min.js></script><script src=/js/lib/lazysizes/lazysizes.min.min.js></script><script src=/js/lib/smooth-scroll/smooth-scroll.polyfills.min.min.js></script><script>window.scroll=new SmoothScroll('[data-scroll]',{speed:300,speedAsDuration:true});</script><script src=/js/blog.min.js></script></div><a href=# class=dynamic-to-top id=dynamic-to-top data-scroll><span>&nbsp;</span></a></body></html>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>PWK: Weeks 9-11 | Securing The Net</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noodp" />
+<meta name="Description" content="Tech ramblings from the desert">
+<link rel="prev" href="https://securingthe.net/2019/05/pwk-weeks-7-8/" />
+<link rel="next" href="https://securingthe.net/2019/06/oscp/" />
+<link rel="canonical" href="https://securingthe.net/2019/06/pwk-weeks-9-11/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="PWK: Weeks 9-11"/>
+<meta name="twitter:description" content="My OSCP exam is in 72 hours. If all goes well, next week could be the end of this 12-week journey. I wanted to go ahead and post a write-up of the last few weeks. My goal when I started the lab was to complete 30 lab machines and I hit that mark in week 11.
+  Day 59  Completed host #24. Here I learned not to trust pre-compiled exploit binaries from GitHub."/>
+<script type="application/ld+json">
+    {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "PWK: Weeks 9-11",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https:\/\/securingthe.net\/2019\/06\/pwk-weeks-9-11\/"
+    },
+    
+        "image": {
+            "@type": "ImageObject",
+            "url": "https:\/\/securingthe.net\/cover.png",
+            "width":  800 ,
+            "height":  600 
+        },
+    
+    "genre": "posts",
+    
+        "keywords": "OSCP",
+    
+    "wordcount":  586 ,
+    "url": "https:\/\/securingthe.net\/2019\/06\/pwk-weeks-9-11\/",
+    
+        "datePublished": "2019-06-07T20:52:17\x2b00:00",
+    
+    
+        "dateModified": "2020-02-01T16:19:02-07:00",
+    
+    
+        "license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.",
+    
+    
+        "publisher": {
+            "@type": "Organization",
+            "name": "AJ McQuay",
+            "logo": {
+            "@type": "ImageObject",
+            "url": "https:\/\/securingthe.net\/logo.png",
+            "width":  127 ,
+            "height":  40 
+            }
+        },
+    
+    
+    "description": ""
+    }
+    </script>
+<link rel="stylesheet" href="/css/style.min.css">
+<link rel="stylesheet" href="/css/lib/fontawesome-free/all.min.min.css">
+
+<link rel="stylesheet" href="/css/lib/animate/animate.min.min.css">
+
+
+    </head>
+    <body>
+        <script>
+            window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            window.isDark && document.body.classList.add('dark-theme');
+        </script>
+        <div class="wrapper">
+            <nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-header animated bounceIn">
+            <a href="https://securingthe.net/">Securing The Net</a>
+        </div>
+        <div class="navbar-menu">
+            
+            
+                <a class="menu-item" href="https://securingthe.net/posts" title="">Posts</a>
+            
+                <a class="menu-item" href="https://securingthe.net/tags" title="">Tags</a>
+            
+                <a class="menu-item" href="https://securingthe.net/categories" title="">Categories</a>
+            
+                <a class="menu-item" href="https://securingthe.net/posts/about/" title="">About</a>
+            
+                <a class="menu-item" href="https://securingthe.net" title=""><i class="fas fa-language fa-fw"></i></a>
+            
+            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="Switch Theme"></i></a>
+        </div>
+    </div>
+</nav>
+<nav class="navbar-mobile">
+     <div class="navbar-container">
+        <div class="navbar-header">
+            <div class="navbar-header-title animated bounceIn">
+                <a href="https://securingthe.net/">Securing The Net</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="navbar-menu" id="mobile-menu">
+            
+            
+                <a class="menu-item" href="https://securingthe.net/posts" title="">Posts</a>
+            
+                <a class="menu-item" href="https://securingthe.net/tags" title="">Tags</a>
+            
+                <a class="menu-item" href="https://securingthe.net/categories" title="">Categories</a>
+            
+                <a class="menu-item" href="https://securingthe.net/posts/about/" title="">About</a>
+            
+                <a class="menu-item" href="https://securingthe.net" title=""><i class="fas fa-language fa-fw"></i></a>
+            
+            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"></i></a>
+        </div>
+    </div>
+</nav><main class="main">
+                <div class="container">
+                    
+    
+    
+    
+       
+    
+
+    <article class="post-warp">
+        <h1 class="post-title animated flipInX">PWK: Weeks 9-11</h1>
+
+        <div class="post-meta">
+            <div class="post-meta-main">
+                <a class="author" href="https://securingthe.net/" rel="author"><i class="fas fa-user-circle fa-fw"></i>AJ McQuay&nbsp;</a>
+                <span class="post-category">
+                        included in
+                        <i class="far fa-folder fa-fw"></i><a href="https://securingthe.net/categories/oscp/">OSCP</a>
+                            
+                    </span>
+            </div>
+            <div class="post-meta-other">
+                <i class="far fa-calendar-alt fa-fw"></i><time datetime=2019-06-07>2019-06-07</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 586 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>3 min&nbsp;</div>
+        </div>
+
+        
+
+        
+
+        <div class="post-content">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <p>My OSCP exam is in 72 hours.  If all goes well, next week could be the end of this 12-week journey.  I wanted to go ahead and post a write-up of the last few weeks. My goal when I started the lab was to complete 30 lab machines and I hit that mark in week 11.</p>
+<figure>
+    <img src="/content/images/2019/06/Screen-Shot-2019-06-07-at-2.20.45-PM.png"/> 
+</figure>
+
+<a class="post-dummy-target" id="day-59"></a><h3>Day 59</h3>
+<ul>
+<li>Completed host #24.  Here I learned not to trust pre-compiled exploit binaries from GitHub.  I also had some issues with smbserver.py and had to mount a shared folder between my Kali VM and the Offsec-provided Windows 7 VM. Have multiple paths to transfer files between machines at your disposal!</li>
+</ul>
+<a class="post-dummy-target" id="day-60"></a><h3>Day 60</h3>
+<ul>
+<li>Recon and enumeration against <em>Pain</em>.  Got a low privilege shell and started working on privesc.</li>
+</ul>
+<a class="post-dummy-target" id="day-61"></a><h3>Day 61</h3>
+<ul>
+<li>Completed <em>Pain</em>. That&rsquo;s 3 of the big 4 down, and 25 hosts toward my goal of 30. Primary lesson from this box is that details matter when preparing an exploit. Some bugs need the right environment to thrive. Also started initial discovery of box #26.</li>
+</ul>
+<a class="post-dummy-target" id="day-62"></a><h3>Day 62</h3>
+<ul>
+<li>Completed box 26.  Pretty straightforward, I was briefly concerned that the host might not have been in the right state when I started. I just got lucky and chased the right rabbit pretty quickly.  Also started enumeration of host 27.</li>
+</ul>
+<a class="post-dummy-target" id="day-63"></a><h3>Day 63</h3>
+<ul>
+<li>Did some initial recon against two targets that apparently have major dependencies on other systems.  Decided to switch to another box for target #27, then completed it quickly. I also spent some time cleaning up my documentation a bit.</li>
+</ul>
+<figure>
+    <img src="/content/images/2019/06/Screen-Shot-2019-06-07-at-2.22.20-PM.png"/> 
+</figure>
+
+<a class="post-dummy-target" id="day-66"></a><h3>Day 66</h3>
+<ul>
+<li>Completed target 27. This one taught me to be more thorough in my enumeration (hint, don&rsquo;t just scan TCP ports). Started recon and enumeration of target 28.</li>
+</ul>
+<a class="post-dummy-target" id="day-67"></a><h3>Day 67</h3>
+<ul>
+<li>Completed #29 in about 15 minutes. Started enumeration against <em>Humble,</em> which I ceremoniously chose as my 30th target.</li>
+</ul>
+<a class="post-dummy-target" id="day-69"></a><h3>Day 69</h3>
+<ul>
+<li>Attempted (and failed) exploitation against <em>Humble.</em> Still haven&rsquo;t obtained a low-privilege shell yet. I need more webapp testing experience.</li>
+</ul>
+<a class="post-dummy-target" id="day-70"></a><h3>Day 70</h3>
+<ul>
+<li>Finally got a low-priv shell on <em>Humble</em>. Started enumerating for privesc.</li>
+</ul>
+<figure>
+    <img src="/content/images/2019/06/Screen-Shot-2019-06-07-at-2.23.57-PM.png"/> 
+</figure>
+
+<a class="post-dummy-target" id="day-71"></a><h3>Day 71</h3>
+<ul>
+<li>Identified the path to escalate privileges on <em>Humble</em> and what appears to be the exploit I&rsquo;ll need to use. Did some testing but more is needed.</li>
+</ul>
+<a class="post-dummy-target" id="day-72"></a><h3>Day 72</h3>
+<ul>
+<li>Finally completed <em>Humble</em> and reached my goal of 30 compromised lab machines. I learned a lot here about being detail-oriented with exploit code, and researching how applications I&rsquo;m unfamiliar with work and are configured to fit all the puzzle pieces together.</li>
+</ul>
+<a class="post-dummy-target" id="day-73"></a><h3>Day 73</h3>
+<ul>
+<li>Started working on my lab &amp; exercise report.</li>
+</ul>
+<a class="post-dummy-target" id="day-74"></a><h3>Day 74</h3>
+<ul>
+<li>Finished the lab &amp; exercise report.</li>
+</ul>
+<a class="post-dummy-target" id="day-75"></a><h3>Day 75</h3>
+<ul>
+<li>I started going through buffer overflow exercises again and making some notes around workflow</li>
+</ul>
+<a class="post-dummy-target" id="day-76"></a><h3>Day 76</h3>
+<ul>
+<li>I started and completed host 31 to unlock the Dev subnet. I realized I hadn&rsquo;t unlocked it yet and just wanted to check that box.</li>
+</ul>
+<p>Through week 11 I have invested 130.5 hours into the course and labs. As for this past week (week 12) I have mostly focused on going through buffer overflow resources and compiling a reference sheet for things I want to remember during the exam without having to think about them. Command shortcuts, methods to consider in certain situations, etc.</p>
+<p>I also plan to write down some &lsquo;exam principles&rsquo; I&rsquo;d like to stick to, and to set up a series of alarms on my phone to remind myself to take breaks, eat, and step away during the exam. Wish me luck, hopefully by this time next week I&rsquo;ll officially be an OSCP!</p>
+<p><em>Photo by <a href="https://unsplash.com/@marvin_ronsdorf?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Marvin Ronsdorf</a> on <a href="https://unsplash.com/search/photos/finish?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></em></p>
+
+        </div>
+
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>This article is updated with 2020-02-01</span>
+            </div>
+            <div class="post-info-license">
+                
+            </div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md">
+                
+                    
+                        <span><a class="link-to-markdown" href="https://securingthe.net/2019/06/pwk-weeks-9-11/index.md" target="_blank"></a></span>
+                    
+                
+            </div>
+            <div class="post-info-share">
+                
+                    <span>
+    
+        <a href="//twitter.com/share?url=https%3a%2f%2fsecuringthe.net%2f2019%2f06%2fpwk-weeks-9-11%2f&amp;text=PWK%3a%20Weeks%209-11&amp;via=x41x4a" target="_blank" title="Share on Twitter">
+            <i class="fab fa-twitter fa-fw"></i>
+        </a>
+    
+    
+    
+        <a href="//reddit.com/submit?url=https%3a%2f%2fsecuringthe.net%2f2019%2f06%2fpwk-weeks-9-11%2f&amp;title=PWK%3a%20Weeks%209-11" target="_blank" title="Share on Reddit">
+            <i class="fab fa-reddit fa-fw"></i>
+        </a>
+    
+    
+        <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fsecuringthe.net%2f2019%2f06%2fpwk-weeks-9-11%2f&amp;title=PWK%3a%20Weeks%209-11" target="_blank" title="Share on LinkedIn">
+            <i class="fab fa-linkedin fa-fw"></i>
+        </a>
+    
+    
+    
+    
+    
+    
+    
+</span>
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section>
+            
+                
+                    <span class="tag">
+                        <a href="https://securingthe.net/tags/oscp/"><i class="fas fa-tag fa-fw"></i>OSCP</a>
+                    </span>
+                
+            
+        </section>
+        <section>
+            <span><a href="javascript:window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="https://securingthe.net/">Home</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+        
+            <a href="https://securingthe.net/2019/05/pwk-weeks-7-8/" class="prev" rel="prev" title="PWK: Weeks 7 &amp; 8"><i class="fas fa-angle-left fa-fw"></i>PWK: Weeks 7 &amp; 8</a>
+        
+        
+            <a href="https://securingthe.net/2019/06/oscp/" class="next" rel="next" title="My OSCP experience">My OSCP experience<i class="fas fa-angle-right fa-fw"></i></a>
+        
+    </div>
+</div>
+
+        <div class="post-comment">
+            
+            
+
+            
+        </div>
+    </article></div>
+            </main>
+            <footer class="footer">
+    <div class="copyright">
+        <div class="copyright-line">
+            Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a>
+        </div>
+        <div class="copyright-line">
+            <i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://securingthe.net/">AJ McQuay</a></span><span class="license">&nbsp;|&nbsp;<a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+    </div>
+</footer>
+
+
+    
+    
+
+
+
+
+    
+    
+
+
+
+
+    
+    
+
+
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+
+
+    
+    
+
+
+
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+
+
+    
+    
+
+
+
+
+    
+    
+
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+
+
+    
+    
+
+
+<script src="/js/lib/jquery/jquery.slim.min.min.js"></script>
+<script src="/js/lib/lazysizes/lazysizes.min.min.js"></script>
+<script src="/js/lib/smooth-scroll/smooth-scroll.polyfills.min.min.js"></script><script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script>
+
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+
+
+
+
+
+<script src="/js/blog.min.js"></script>
+
+
+    
+</div>
+        <a href="#" class="dynamic-to-top" id="dynamic-to-top" data-scroll><span>&nbsp;</span></a>
+    </body>
+</html>

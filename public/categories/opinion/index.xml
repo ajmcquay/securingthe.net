@@ -1,3 +1,36 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Opinion on Securing The Net</title><link>https://securingthe.net/categories/opinion/</link><description>Recent content in Opinion on Securing The Net</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 20 Mar 2019 20:16:03 +0000</lastBuildDate><atom:link href="https://securingthe.net/categories/opinion/index.xml" rel="self" type="application/rss+xml"/><item><title>Common question: What certs should I get?</title><link>https://securingthe.net/2019/03/common-question-what-certs-should-i-get/</link><pubDate>Wed, 20 Mar 2019 20:16:03 +0000</pubDate><guid>https://securingthe.net/2019/03/common-question-what-certs-should-i-get/</guid><description>I recently had a discussion around certifications with one of the people I&amp;rsquo;m mentoring, and thought it might be worth summarizing here. Certs can often be a polarizing topic in the information security world, so let me preface this post by very clearly stating my opinion about certs:
-I believe certs are a great way to get past HR filters or to send certain signals to a hiring manager, but are not necessarily indicative of (or a replacement for) hands-on experience.</description></item><item><title>InfoSec is Bigger Than Pentesting</title><link>https://securingthe.net/2018/03/infosec-is-bigger-than-pentesting/</link><pubDate>Fri, 30 Mar 2018 12:36:10 +0000</pubDate><guid>https://securingthe.net/2018/03/infosec-is-bigger-than-pentesting/</guid><description>So far this year I&amp;rsquo;ve interviewed several candidates for a security analyst position. It&amp;rsquo;s a pretty straightforward blue team role involving things like vulnerability assessment and remediation, identifying anomalies in user or system activity, and some internal audit functions. Unfortunately most of the candidates I&amp;rsquo;ve encountered are only interested in pure pentesting jobs.
-The cool kids table I get it, red team has all the fun right? Writing exploits, popping shells, they&amp;rsquo;re the Top Gun pilots of infosec.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Opinion on Securing The Net</title>
+    <link>https://securingthe.net/categories/opinion/</link>
+    <description>Recent content in Opinion on Securing The Net</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Wed, 20 Mar 2019 20:16:03 +0000</lastBuildDate>
+    
+	<atom:link href="https://securingthe.net/categories/opinion/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Common question: What certs should I get?</title>
+      <link>https://securingthe.net/2019/03/common-question-what-certs-should-i-get/</link>
+      <pubDate>Wed, 20 Mar 2019 20:16:03 +0000</pubDate>
+      
+      <guid>https://securingthe.net/2019/03/common-question-what-certs-should-i-get/</guid>
+      <description>I recently had a discussion around certifications with one of the people I&amp;rsquo;m mentoring, and thought it might be worth summarizing here. Certs can often be a polarizing topic in the information security world, so let me preface this post by very clearly stating my opinion about certs:
+I believe certs are a great way to get past HR filters or to send certain signals to a hiring manager, but are not necessarily indicative of (or a replacement for) hands-on experience.</description>
+    </item>
+    
+    <item>
+      <title>InfoSec is Bigger Than Pentesting</title>
+      <link>https://securingthe.net/2018/03/infosec-is-bigger-than-pentesting/</link>
+      <pubDate>Fri, 30 Mar 2018 12:36:10 +0000</pubDate>
+      
+      <guid>https://securingthe.net/2018/03/infosec-is-bigger-than-pentesting/</guid>
+      <description>So far this year I&amp;rsquo;ve interviewed several candidates for a security analyst position. It&amp;rsquo;s a pretty straightforward blue team role involving things like vulnerability assessment and remediation, identifying anomalies in user or system activity, and some internal audit functions. Unfortunately most of the candidates I&amp;rsquo;ve encountered are only interested in pure pentesting jobs.
+The cool kids table I get it, red team has all the fun right? Writing exploits, popping shells, they&amp;rsquo;re the Top Gun pilots of infosec.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,2 +1,26 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Automation on Securing The Net</title><link>https://securingthe.net/categories/automation/</link><description>Recent content in Automation on Securing The Net</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 09 Mar 2018 18:04:36 +0000</lastBuildDate><atom:link href="https://securingthe.net/categories/automation/index.xml" rel="self" type="application/rss+xml"/><item><title>Deploying Security Controls with Ansible</title><link>https://securingthe.net/2018/03/deploying-security-controls-with-ansible/</link><pubDate>Fri, 09 Mar 2018 18:04:36 +0000</pubDate><guid>https://securingthe.net/2018/03/deploying-security-controls-with-ansible/</guid><description>I use several tools for various security or compliance controls on production Linux servers. Some of those aren&amp;rsquo;t automatically installed/maintained through our package management utility, and with 100+ machines it is far too time-consuming to manually deal with each one. I&amp;rsquo;ve started experimenting with Ansible to simplify this and thought I&amp;rsquo;d share the first role I&amp;rsquo;ve written while I&amp;rsquo;m learning.
-Identify Tools and Required Tasks The first step was to identify what tools I wanted the playbook to manage, and what steps I take to install and configure them.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Automation on Securing The Net</title>
+    <link>https://securingthe.net/categories/automation/</link>
+    <description>Recent content in Automation on Securing The Net</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Fri, 09 Mar 2018 18:04:36 +0000</lastBuildDate>
+    
+	<atom:link href="https://securingthe.net/categories/automation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Deploying Security Controls with Ansible</title>
+      <link>https://securingthe.net/2018/03/deploying-security-controls-with-ansible/</link>
+      <pubDate>Fri, 09 Mar 2018 18:04:36 +0000</pubDate>
+      
+      <guid>https://securingthe.net/2018/03/deploying-security-controls-with-ansible/</guid>
+      <description>I use several tools for various security or compliance controls on production Linux servers. Some of those aren&amp;rsquo;t automatically installed/maintained through our package management utility, and with 100+ machines it is far too time-consuming to manually deal with each one. I&amp;rsquo;ve started experimenting with Ansible to simplify this and thought I&amp;rsquo;d share the first role I&amp;rsquo;ve written while I&amp;rsquo;m learning.
+Identify Tools and Required Tasks The first step was to identify what tools I wanted the playbook to manage, and what steps I take to install and configure them.</description>
+    </item>
+    
+  </channel>
+</rss>
