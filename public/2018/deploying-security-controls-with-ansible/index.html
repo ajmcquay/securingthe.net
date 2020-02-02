@@ -1,174 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  <meta http-equiv="content-type" content="text/html;charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noodp"/>
-  
-  
-  
-  
-  
-  
-  <link rel="next" href="https://securingthe.net/2018/infosec-is-bigger-than-pentesting/" />
-  <link rel="canonical" href="https://securingthe.net/2018/deploying-security-controls-with-ansible/" />
-  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="theme-color" content="#ffffff">
-  <title>
-       
-       
-           Deploying Security Controls with Ansible | Securing The Net
-       
-  </title>
-  <meta name="title" content="Deploying Security Controls with Ansible | Securing The Net">
-    
-  
-  <link rel="stylesheet" href="/font/iconfont.css">
-  <link rel="stylesheet" href="/css/main.min.css">
-
-
-  <meta name="twitter:card" content="summary"/>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Deploying Security Controls with Ansible | Securing The Net</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noodp" />
+<meta name="Description" content="Tech ramblings from the desert">
+<link rel="next" href="https://securingthe.net/2018/infosec-is-bigger-than-pentesting/" />
+<link rel="canonical" href="https://securingthe.net/2018/deploying-security-controls-with-ansible/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Deploying Security Controls with Ansible"/>
 <meta name="twitter:description" content="I use several tools for various security or compliance controls on production Linux servers. Some of those aren&rsquo;t automatically installed/maintained through our package management utility, and with 100&#43; machines it is far too time-consuming to manually deal with each one. I&rsquo;ve started experimenting with Ansible to simplify this and thought I&rsquo;d share the first role I&rsquo;ve written while I&rsquo;m learning.
 Identify Tools and Required Tasks The first step was to identify what tools I wanted the playbook to manage, and what steps I take to install and configure them."/>
-
-  <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "BlogPosting",
-  "headline": "Deploying Security Controls with Ansible",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https:\/\/securingthe.net\/2018\/deploying-security-controls-with-ansible\/"
-  },
-  "image": {
-    "@type": "ImageObject",
-    "url": "https:\/\/securingthe.net\/green.png",
-    "width":  800 ,
-    "height":  600 
-  },
-  "genre": "posts",
-  "keywords": "Ansible, Automation, Tools",
-  "wordcount":  1108 ,
-  "url": "https:\/\/securingthe.net\/2018\/deploying-security-controls-with-ansible\/",
-  "datePublished": "2018-03-09T18:04:36\x2b00:00",
-  "dateModified": "2018-03-09T18:04:36\x2b00:00",
-  
-  "publisher": {
-    "@type": "Organization",
-    "name": "AJ McQuay",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https:\/\/securingthe.net\/avatar.jpg",
-      "width":  300 ,
-      "height":  110 
+<script type="application/ld+json">
+    {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Deploying Security Controls with Ansible",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https:\/\/securingthe.net\/2018\/deploying-security-controls-with-ansible\/"
+    },
+    
+        "image": {
+            "@type": "ImageObject",
+            "url": "https:\/\/securingthe.net\/green.png",
+            "width":  800 ,
+            "height":  600 
+        },
+    
+    "genre": "posts",
+    
+        "keywords": "Ansible, Automation, Tools",
+    
+    "wordcount":  1108 ,
+    "url": "https:\/\/securingthe.net\/2018\/deploying-security-controls-with-ansible\/",
+    
+        "datePublished": "2018-03-09T18:04:36\x2b00:00",
+    
+    
+        "dateModified": "2018-03-09T18:04:36\x2b00:00",
+    
+    
+    
+        "publisher": {
+            "@type": "Organization",
+            "name": "AJ McQuay",
+            "logo": {
+            "@type": "ImageObject",
+            "url": "https:\/\/securingthe.net\/avatar.jpg",
+            "width":  300 ,
+            "height":  110 
+            }
+        },
+    
+    
+    "description": ""
     }
-  },
-  "author": {
-    "@type": "Person",
-    "name": "AJ McQuay"
-  },
-  "description": ""
-}
-</script>
-</head>
+    </script>
+<link rel="stylesheet" href="/css/style.min.css">
+<link rel="stylesheet" href="/css/lib/fontawesome-free/all.min.min.css">
 
-  
+<link rel="stylesheet" href="/css/lib/animate/animate.min.min.css">
 
 
-
-  <body class="">
-    <div class="wrapper">
-        <nav class="navbar">
-    <div class="container">
-        <div class="navbar-header header-logo">
-        	<a href="https://securingthe.net">Securing The Net</a>
+    </head>
+    <body>
+        <script>
+            window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            window.isDark && document.body.classList.add('dark-theme');
+        </script>
+        <div class="wrapper">
+            <nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-header animated bounceIn">
+            <a href="https://securingthe.net">Securing The Net</a>
         </div>
-        <div class="menu navbar-right">
-                
-                
-                <a class="menu-item" href="/posts/" title="">Blog</a>
-                
-                <a class="menu-item" href="/categories/" title="">Categories</a>
-                
-                <a class="menu-item" href="/posts/about/" title="">About</a>
-                
-                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        <div class="navbar-menu">
+            
+            
+                <a class="menu-item" href="https://securingthe.net/posts/" title="">Blog</a>
+            
+                <a class="menu-item" href="https://securingthe.net/categories/" title="">Categories</a>
+            
+                <a class="menu-item" href="https://securingthe.net/posts/about/" title="">About</a>
+            
+            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="Switch Theme"></i></a>
         </div>
     </div>
 </nav>
-<nav class="navbar-mobile" id="nav-mobile" style="display: none">
-     <div class="container">
+<nav class="navbar-mobile">
+     <div class="navbar-container">
         <div class="navbar-header">
-            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://securingthe.net">Securing The Net</a></div>
-            <div class="menu-toggle">
+            <div class="navbar-header-title animated bounceIn">
+                <a href="https://securingthe.net">Securing The Net</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
                 <span></span><span></span><span></span>
             </div>
         </div>
-     
-          <div class="menu" id="mobile-menu">
-                
-                
-                <a class="menu-item" href="/posts/" title="">Blog</a>
-                
-                <a class="menu-item" href="/categories/" title="">Categories</a>
-                
-                <a class="menu-item" href="/posts/about/" title="">About</a>
-                
+        <div class="navbar-menu" id="mobile-menu">
+            
+            
+                <a class="menu-item" href="https://securingthe.net/posts/" title="">Blog</a>
+            
+                <a class="menu-item" href="https://securingthe.net/categories/" title="">Categories</a>
+            
+                <a class="menu-item" href="https://securingthe.net/posts/about/" title="">About</a>
+            
+            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"></i></a>
         </div>
     </div>
-</nav>
+</nav><main class="main">
+                <div class="container">
+                    
+    
+    
+    
+       
+    
 
-    	 <main class="main">
-          <div class="container">
-      		
-<article class="post-warp">
-    <header class="post-header">
-        <h1 class="post-title">Deploying Security Controls with Ansible</h1>
+    <article class="post-warp">
+        <h1 class="post-title animated flipInX">Deploying Security Controls with Ansible</h1>
+
         <div class="post-meta">
-            Written by <a href="https://securingthe.net" rel="author">AJ McQuay</a> with ♥ 
-                <span class="post-time">
-                    on <time datetime=2018-03-09 >9 March 2018</time>
-                </span>
-                in
-                <i class="iconfont icon-folder"></i>
+            <div class="post-meta-main">
+                <a class="author" href="https://securingthe.net" rel="author"><i class="fas fa-user-circle fa-fw"></i>AJ McQuay&nbsp;</a>
                 <span class="post-category">
-                        <a href="https://securingthe.net/categories/ansible/"> Ansible </a>
-                        <a href="https://securingthe.net/categories/automation/"> Automation </a>
-                        <a href="https://securingthe.net/categories/tools/"> Tools </a>
-                        
-                </span>
-                <i class="iconfont icon-timer"></i>
-                6 min
+                        included in
+                        <i class="far fa-folder fa-fw"></i><a href="https://securingthe.net/categories/ansible/">Ansible</a>
+                            <i class="far fa-folder fa-fw"></i><a href="https://securingthe.net/categories/automation/">Automation</a>
+                            <i class="far fa-folder fa-fw"></i><a href="https://securingthe.net/categories/tools/">Tools</a>
+                            
+                    </span>
+            </div>
+            <div class="post-meta-other">
+                <i class="far fa-calendar-alt fa-fw"></i><time datetime=2018-03-09>2018-03-09</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 1108 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>6 min&nbsp;</div>
         </div>
-    </header>
-    <div class="post-content">
-        
 
         
 
         
-        
-     
-          
-          
-          
 
-          
-          
-          
-
-          <p>I use several tools for various security or compliance controls on production Linux servers. Some of those aren&rsquo;t automatically installed/maintained through our package management utility, and with 100+ machines it is far too time-consuming to manually deal with each one. I&rsquo;ve started experimenting with Ansible to simplify this and thought I&rsquo;d share the first role I&rsquo;ve written while I&rsquo;m learning.</p>
-<h2 id="identify-tools-and-required-tasks">Identify Tools and Required Tasks</h2>
+        <div class="post-content">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <p>I use several tools for various security or compliance controls on production Linux servers. Some of those aren&rsquo;t automatically installed/maintained through our package management utility, and with 100+ machines it is far too time-consuming to manually deal with each one. I&rsquo;ve started experimenting with Ansible to simplify this and thought I&rsquo;d share the first role I&rsquo;ve written while I&rsquo;m learning.</p>
+<a class="post-dummy-target" id="identify-tools-and-required-tasks"></a><h2>Identify Tools and Required Tasks</h2>
 <p>The first step was to identify what tools I wanted the playbook to manage, and what steps I take to install and configure them. Two tools I use that aren&rsquo;t managed by Spacewalk are Samhain and M/Monit.</p>
-<h3 id="samhain">Samhain</h3>
+<a class="post-dummy-target" id="samhain"></a><h3>Samhain</h3>
 <p>We currently deploy Samhain in a simple standalone fashion that logs locally, then those logs get picked up by our SIEM. I download and compile Samhain from source but don&rsquo;t use a ton of options at compile time as we aren&rsquo;t currently running a Yule server. That means the required tasks are pretty simple:</p>
 <ul>
 <li>Download Samhain</li>
@@ -179,7 +192,7 @@ Identify Tools and Required Tasks The first step was to identify what tools I wa
 <li>Start the daemon</li>
 </ul>
 <p>I opted to split these steps into two tasks named install and update.</p>
-<h3 id="mmonit">M/Monit</h3>
+<a class="post-dummy-target" id="mmonit"></a><h3>M/Monit</h3>
 <p>M/Monit is just a centralized dashboard used to manage multiple instances of the Linux utility monit. Setting this up just requires customizing the monit configuration file with M/Monit server details and any custom services you want to manage. The tasks here include:</p>
 <ul>
 <li>Make sure monit is installed</li>
@@ -187,7 +200,7 @@ Identify Tools and Required Tasks The first step was to identify what tools I wa
 <li>Install new monitrc from template</li>
 <li>Start or restart the service</li>
 </ul>
-<h2 id="create-ansible-role-structure">Create Ansible role structure</h2>
+<a class="post-dummy-target" id="create-ansible-role-structure"></a><h2>Create Ansible role structure</h2>
 <p>Now it&rsquo;s time to create the folder hierarchy for our Ansible job. When using roles, Ansible expects certain files to exist in specific directories and will automatically pull in your variable files, handlers, templates, etc. If you&rsquo;re unfamiliar, read up on roles here.</p>
 <p>Here&rsquo;s my file/folder structure:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nix" data-lang="nix"><span style="color:#e6db74">ansible/security-tools</span><span style="color:#960050;background-color:#1e0010">/</span>
@@ -226,8 +239,8 @@ Identify Tools and Required Tasks The first step was to identify what tools I wa
     - {<span style="color:#66d9ef">name: samhain, tags</span>: samhain}
     - {<span style="color:#66d9ef">name: monit, tags</span>: monit}
 </code></pre></div><p>Pretty simple, right? I added tags so that I can pick and choose which roles I want to run as this project expands. For example I can run just the monit role with the command <code>ansible-playbook main.yml --tags monit</code>.</p>
-<h2 id="roles-in-detail">Roles in Detail</h2>
-<h3 id="monit">Monit</h3>
+<a class="post-dummy-target" id="roles-in-detail"></a><h2>Roles in Detail</h2>
+<a class="post-dummy-target" id="monit"></a><h3>Monit</h3>
 <p>Let&rsquo;s take a closer look at each role now, starting with Monit. Here&rsquo;s the roles/monit/tasks/main.yml task file:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
  - <span style="color:#66d9ef">stat</span>: path={{ monitrc_path }}
@@ -271,7 +284,7 @@ Identify Tools and Required Tasks The first step was to identify what tools I wa
     <span style="color:#66d9ef">state</span>: stopped
 - <span style="color:#66d9ef">name</span>: start monit service
   <span style="color:#66d9ef">command</span>: monit -c /etc/monitrc
-</code></pre></div><h3 id="samhain-1">Samhain</h3>
+</code></pre></div><a class="post-dummy-target" id="samhain-1"></a><h3>Samhain</h3>
 <p>Now for a quicker look at the Samhain role. Here are the contents of roles/samhain/tasks/main.yml:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">---
 - <span style="color:#66d9ef">include</span>: install.yml
@@ -348,144 +361,141 @@ Identify Tools and Required Tasks The first step was to identify what tools I wa
 <p>This is all fairly simple but has greatly reduced the amount of time I spend installing and maintaining these tools. I realize the Samhain role doesn&rsquo;t adhere to Ansible&rsquo;s idea of idempotence very well due to the heavy usage of the command module. I&rsquo;m looking for ways to improve it, but it does what I need with some basic error handling for now.</p>
 <p>Hopefully this helps illustrate how Ansible roles work and some of the advantages roles have versus doing everything from one giant playbook. I&rsquo;m relatively new to Ansible so feel free to leave a reply below or reach out on Twitter if you have questions, comments, or even suggestions on how this could be improved.</p>
 
-    </div>
+        </div>
 
-    <div class="post-copyright">
-             
-            <p class="copyright-item">
-                <span>Author:</span>
-                <span>AJ McQuay </span>
-                </p>
-            
-           
-            <p class="copyright-item">
-                    <span>Words:</span>
-                   <span>1108</span>
-            </p>
-            
-            <p class="copyright-item">
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>This article is updated with 2018-03-09</span>
+            </div>
+            <div class="post-info-license">
                 
-                <span>Share:</span>
-                <span>
-
-      
+            </div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md">
+                
+            </div>
+            <div class="post-info-share">
+                
+                    <span>
+    
         <a href="//twitter.com/share?url=https%3a%2f%2fsecuringthe.net%2f2018%2fdeploying-security-controls-with-ansible%2f&amp;text=Deploying%20Security%20Controls%20with%20Ansible&amp;via=x41x4a" target="_blank" title="Share on Twitter">
-          <i class="iconfont icon-twitter"></i>
+            <i class="fab fa-twitter fa-fw"></i>
         </a>
-        
-      
-      
-      
-      
+    
+    
+    
         <a href="//reddit.com/submit?url=https%3a%2f%2fsecuringthe.net%2f2018%2fdeploying-security-controls-with-ansible%2f&amp;title=Deploying%20Security%20Controls%20with%20Ansible" target="_blank" title="Share on Reddit">
-          <i class="iconfont icon-reddit"></i>
+            <i class="fab fa-reddit fa-fw"></i>
         </a>
-        
-      
-      
+    
+    
         <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fsecuringthe.net%2f2018%2fdeploying-security-controls-with-ansible%2f&amp;title=Deploying%20Security%20Controls%20with%20Ansible" target="_blank" title="Share on LinkedIn">
-          <i class="iconfont icon-linkedin"></i>
+            <i class="fab fa-linkedin fa-fw"></i>
         </a>
-        
-      
-      
-        
-      
-        
-      
-
-          
-
-          
-
-          
-
-          
+    
+    
+    
+    
+    
+    
+    
 </span>
                 
-            </p>
-
-             
-            <p class="copyright-item">
-                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
-            </p>
-            
+            </div>
+        </div>
     </div>
 
-  
-    <div class="post-tags">
-        
-            <section>
-            <i class="iconfont icon-icon-tag"></i>Tag: 
-            
-            <span class="tag"><a href="https://securingthe.net/tags/ansible/">
-                    #Ansible</a></span>
-            
-            <span class="tag"><a href="https://securingthe.net/tags/automation/">
-                    #Automation</a></span>
-            
-            <span class="tag"><a href="https://securingthe.net/tags/tools/">
-                    #Tools</a></span>
-            
-            </section>
-        
+    <div class="post-info-more">
         <section>
-                <a href="javascript:window.history.back();">Back</a></span> · 
-                <span><a href="https://securingthe.net">Home</a></span>
+            
+                
+                    <span class="tag">
+                        <a href="https://securingthe.net/tags/ansible/"><i class="fas fa-tag fa-fw"></i>Ansible</a>
+                    </span>
+                
+                    <span class="tag">
+                        <a href="https://securingthe.net/tags/automation/"><i class="fas fa-tag fa-fw"></i>Automation</a>
+                    </span>
+                
+                    <span class="tag">
+                        <a href="https://securingthe.net/tags/tools/"><i class="fas fa-tag fa-fw"></i>Tools</a>
+                    </span>
+                
+            
+        </section>
+        <section>
+            <span><a href="javascript:window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="https://securingthe.net">Home</a></span>
         </section>
     </div>
 
     <div class="post-nav">
-         
         
-        <a href="https://securingthe.net/2018/infosec-is-bigger-than-pentesting/" class="next" rel="next" title="InfoSec is Bigger Than Pentesting">InfoSec is Bigger Than Pentesting&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+            <a href="https://securingthe.net/2018/infosec-is-bigger-than-pentesting/" class="next" rel="next" title="InfoSec is Bigger Than Pentesting">InfoSec is Bigger Than Pentesting<i class="fas fa-angle-right fa-fw"></i></a>
         
     </div>
+</div>
 
-    <div class="post-comment">
-          
-          <div id="disqus_thread"></div>
-  <script type="text/javascript">
-      (function() {
-          
-          
-          if (window.location.hostname == "localhost")
-              return;
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          var disqus_shortname = 'ajmcquay';
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="post-comment">
+            
+            
 
- 
-
-          
-    </div>
-</article>
-          </div>
-		   </main>
-      <footer class="footer">
+            
+        </div>
+    </article></div>
+            </main>
+            <footer class="footer">
     <div class="copyright">
-        &copy;
-        
-        <span itemprop="copyrightYear">2018 - 2020</span>
-        
-         
-            <span class="author" itemprop="copyrightHolder"><a href="https://securingthe.net">AJ McQuay</a> | </span>
-         
-
-		 
+        <div class="copyright-line">
+            Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a>
+        </div>
+        <div class="copyright-line">
+            <i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2018 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://securingthe.net">AJ McQuay</a></span><span class="license">&nbsp;|&nbsp;Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
     </div>
 </footer>
 
 
+    
+    
 
 
 
 
+    
+    
+
+
+
+
+    
+    
+
+
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+
+
+    
+    
 
 
 
@@ -494,14 +504,70 @@ Identify Tools and Required Tasks The first step was to identify what tools I wa
 
     
     
-    <script src="/js/vendor_no_gallery.min.js" async=""></script>
+
+
+
     
-  
+    
 
 
 
 
 
+    
+    
+
+
+
+
+    
+    
+
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+
+
+    
+    
+
+
+<script src="/js/lib/jquery/jquery.slim.min.min.js"></script>
+<script src="/js/lib/lazysizes/lazysizes.min.min.js"></script>
+<script src="/js/lib/smooth-scroll/smooth-scroll.polyfills.min.min.js"></script><script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script>
+
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+
+
+
+
+
+<script src="/js/blog.min.js"></script>
+
+
+    
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -513,8 +579,7 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-
-
-     </div>
-  </body>
+</div>
+        <a href="#" class="dynamic-to-top" id="dynamic-to-top" data-scroll><span>&nbsp;</span></a>
+    </body>
 </html>

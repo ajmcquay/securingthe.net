@@ -1,33 +1,41 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Securing The Net on Securing The Net</title>
-    <link>https://securingthe.net/</link>
-    <description>Recent content in Securing The Net on Securing The Net</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <lastBuildDate>Mon, 24 Jun 2019 02:54:19 +0000</lastBuildDate>
-    <atom:link href="https://securingthe.net/" rel="self" type="application/rss+xml" />
-    
-    <item>
-      <title>Posts</title>
-      <link>https://securingthe.net/posts/</link>
-      <pubDate>Mon, 24 Jun 2019 02:54:19 +0000</pubDate>
-      
-      <guid>https://securingthe.net/posts/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>About</title>
-      <link>https://securingthe.net/about/</link>
-      <pubDate>Wed, 06 Mar 2019 15:47:41 +0000</pubDate>
-      
-      <guid>https://securingthe.net/about/</guid>
-      <description>&lt;p&gt;I am an infosec professional with a background in networking (routing &amp;amp; switching, DSL/WAN) and Linux administration. I spent the last few years running a PCI-DSS compliance program and starting a blue team practice for my previous employer. Now I&amp;rsquo;m involved in risk management and information assurance, but hope to get back into the technical bits of information security again in the next few years.&lt;/p&gt;
+    <channel>
+        <title>Securing The Net on Securing The Net</title>
+        <link>https://securingthe.net/</link>
+        <description>Recent content in Securing The Net on Securing The Net</description>
+        <generator>Hugo -- gohugo.io</generator>
+        
+            <language>en</language>
+        
+        
+        
+            <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+        
+        
+            <lastBuildDate>Mon, 24 Jun 2019 02:54:19 +0000</lastBuildDate>
+        
+        <atom:link href="https://securingthe.net/" rel="self" type="application/rss+xml" />
+        
+            <item>
+                <title>Posts</title>
+                <link>https://securingthe.net/posts/</link>
+                <pubDate>Mon, 24 Jun 2019 02:54:19 +0000</pubDate>
+                
+                <guid>https://securingthe.net/posts/</guid>
+                <description></description>
+            </item>
+        
+            <item>
+                <title>About</title>
+                <link>https://securingthe.net/about/</link>
+                <pubDate>Wed, 06 Mar 2019 15:47:41 +0000</pubDate>
+                
+                <guid>https://securingthe.net/about/</guid>
+                <description>&lt;p&gt;I am an infosec professional with a background in networking (routing &amp;amp; switching, DSL/WAN) and Linux administration. I spent the last few years running a PCI-DSS compliance program and starting a blue team practice for my previous employer. Now I&amp;rsquo;m involved in risk management and information assurance, but hope to get back into the technical bits of information security again in the next few years.&lt;/p&gt;
 &lt;p&gt;I&amp;rsquo;m interested in topics like network forensics, threat hunting, penetration testing, and malware analysis/reverse engineering.  I currently hold the OSCP, CISSP, and CISA certifications. I&amp;rsquo;d like to learn more Python too, eventually.&lt;/p&gt;
 &lt;p&gt;I also play delay pedals with my guitar and make noise with friends under the moniker &lt;a href=&#34;https://afterosmosis.bandcamp.com&#34;&gt;&lt;em&gt;After Osmosis&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;
 </description>
-    </item>
-    
-  </channel>
+            </item>
+        
+    </channel>
 </rss>

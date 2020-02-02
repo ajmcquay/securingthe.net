@@ -1,171 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-  <meta http-equiv="content-type" content="text/html;charset=utf-8">
-  <meta http-equiv="X-UA-Compatible" content="chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noodp"/>
-  
-  
-  
-  
-  
-  <link rel="prev" href="https://securingthe.net/2019/pwk-weeks-9-11/" />
-  
-  <link rel="canonical" href="https://securingthe.net/2019/oscp/" />
-  <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="theme-color" content="#ffffff">
-  <title>
-       
-       
-           My OSCP experience | Securing The Net
-       
-  </title>
-  <meta name="title" content="My OSCP experience | Securing The Net">
-    
-  
-  <link rel="stylesheet" href="/font/iconfont.css">
-  <link rel="stylesheet" href="/css/main.min.css">
-
-
-  <meta name="twitter:card" content="summary"/>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>My OSCP experience | Securing The Net</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noodp" />
+<meta name="Description" content="Tech ramblings from the desert">
+<link rel="prev" href="https://securingthe.net/2019/pwk-weeks-9-11/" />
+<link rel="canonical" href="https://securingthe.net/2019/oscp/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+<meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="My OSCP experience"/>
 <meta name="twitter:description" content="This morning, 7 days after submitting my exam and lab reports, I received an email from Offensive Security letting me know I had successfully completed the OSCP exam. I wanted to close out this series of posts by providing a recap of my exam experience. Sorry - no exam spoilers - just a look at how I handled the exam and some thoughts looking back over it and my time in the course/lab."/>
-
-  <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "BlogPosting",
-  "headline": "My OSCP experience",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https:\/\/securingthe.net\/2019\/oscp\/"
-  },
-  "image": {
-    "@type": "ImageObject",
-    "url": "https:\/\/securingthe.net\/green.png",
-    "width":  800 ,
-    "height":  600 
-  },
-  "genre": "posts",
-  "keywords": "OSCP",
-  "wordcount":  909 ,
-  "url": "https:\/\/securingthe.net\/2019\/oscp\/",
-  "datePublished": "2019-06-24T02:54:19\x2b00:00",
-  "dateModified": "2019-06-24T02:54:19\x2b00:00",
-  
-  "publisher": {
-    "@type": "Organization",
-    "name": "AJ McQuay",
-    "logo": {
-      "@type": "ImageObject",
-      "url": "https:\/\/securingthe.net\/avatar.jpg",
-      "width":  300 ,
-      "height":  110 
+<script type="application/ld+json">
+    {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "My OSCP experience",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https:\/\/securingthe.net\/2019\/oscp\/"
+    },
+    
+        "image": {
+            "@type": "ImageObject",
+            "url": "https:\/\/securingthe.net\/green.png",
+            "width":  800 ,
+            "height":  600 
+        },
+    
+    "genre": "posts",
+    
+        "keywords": "OSCP",
+    
+    "wordcount":  909 ,
+    "url": "https:\/\/securingthe.net\/2019\/oscp\/",
+    
+        "datePublished": "2019-06-24T02:54:19\x2b00:00",
+    
+    
+        "dateModified": "2019-06-24T02:54:19\x2b00:00",
+    
+    
+    
+        "publisher": {
+            "@type": "Organization",
+            "name": "AJ McQuay",
+            "logo": {
+            "@type": "ImageObject",
+            "url": "https:\/\/securingthe.net\/avatar.jpg",
+            "width":  300 ,
+            "height":  110 
+            }
+        },
+    
+    
+    "description": ""
     }
-  },
-  "author": {
-    "@type": "Person",
-    "name": "AJ McQuay"
-  },
-  "description": ""
-}
-</script>
-</head>
+    </script>
+<link rel="stylesheet" href="/css/style.min.css">
+<link rel="stylesheet" href="/css/lib/fontawesome-free/all.min.min.css">
 
-  
+<link rel="stylesheet" href="/css/lib/animate/animate.min.min.css">
 
 
-
-  <body class="">
-    <div class="wrapper">
-        <nav class="navbar">
-    <div class="container">
-        <div class="navbar-header header-logo">
-        	<a href="https://securingthe.net">Securing The Net</a>
+    </head>
+    <body>
+        <script>
+            window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            window.isDark && document.body.classList.add('dark-theme');
+        </script>
+        <div class="wrapper">
+            <nav class="navbar">
+    <div class="navbar-container">
+        <div class="navbar-header animated bounceIn">
+            <a href="https://securingthe.net">Securing The Net</a>
         </div>
-        <div class="menu navbar-right">
-                
-                
-                <a class="menu-item" href="/posts/" title="">Blog</a>
-                
-                <a class="menu-item" href="/categories/" title="">Categories</a>
-                
-                <a class="menu-item" href="/posts/about/" title="">About</a>
-                
-                <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;
+        <div class="navbar-menu">
+            
+            
+                <a class="menu-item" href="https://securingthe.net/posts/" title="">Blog</a>
+            
+                <a class="menu-item" href="https://securingthe.net/categories/" title="">Categories</a>
+            
+                <a class="menu-item" href="https://securingthe.net/posts/about/" title="">About</a>
+            
+            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw" title="Switch Theme"></i></a>
         </div>
     </div>
 </nav>
-<nav class="navbar-mobile" id="nav-mobile" style="display: none">
-     <div class="container">
+<nav class="navbar-mobile">
+     <div class="navbar-container">
         <div class="navbar-header">
-            <div>  <a href="javascript:void(0);" class="theme-switch"><i class="iconfont icon-sun"></i></a>&nbsp;<a href="https://securingthe.net">Securing The Net</a></div>
-            <div class="menu-toggle">
+            <div class="navbar-header-title animated bounceIn">
+                <a href="https://securingthe.net">Securing The Net</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle">
                 <span></span><span></span><span></span>
             </div>
         </div>
-     
-          <div class="menu" id="mobile-menu">
-                
-                
-                <a class="menu-item" href="/posts/" title="">Blog</a>
-                
-                <a class="menu-item" href="/categories/" title="">Categories</a>
-                
-                <a class="menu-item" href="/posts/about/" title="">About</a>
-                
+        <div class="navbar-menu" id="mobile-menu">
+            
+            
+                <a class="menu-item" href="https://securingthe.net/posts/" title="">Blog</a>
+            
+                <a class="menu-item" href="https://securingthe.net/categories/" title="">Categories</a>
+            
+                <a class="menu-item" href="https://securingthe.net/posts/about/" title="">About</a>
+            
+            <a href="javascript:void(0);" class="theme-switch"><i class="fas fa-adjust fa-rotate-180 fa-fw"></i></a>
         </div>
     </div>
-</nav>
+</nav><main class="main">
+                <div class="container">
+                    
+    
+    
+    
+       
+    
 
-    	 <main class="main">
-          <div class="container">
-      		
-<article class="post-warp">
-    <header class="post-header">
-        <h1 class="post-title">My OSCP experience</h1>
+    <article class="post-warp">
+        <h1 class="post-title animated flipInX">My OSCP experience</h1>
+
         <div class="post-meta">
-            Written by <a href="https://securingthe.net" rel="author">AJ McQuay</a> with ♥ 
-                <span class="post-time">
-                    on <time datetime=2019-06-24 >24 June 2019</time>
-                </span>
-                in
-                <i class="iconfont icon-folder"></i>
+            <div class="post-meta-main">
+                <a class="author" href="https://securingthe.net" rel="author"><i class="fas fa-user-circle fa-fw"></i>AJ McQuay&nbsp;</a>
                 <span class="post-category">
-                        <a href="https://securingthe.net/categories/oscp/"> OSCP </a>
-                        
-                </span>
-                <i class="iconfont icon-timer"></i>
-                5 min
+                        included in
+                        <i class="far fa-folder fa-fw"></i><a href="https://securingthe.net/categories/oscp/">OSCP</a>
+                            
+                    </span>
+            </div>
+            <div class="post-meta-other">
+                <i class="far fa-calendar-alt fa-fw"></i><time datetime=2019-06-24>2019-06-24</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>about 909 words&nbsp;
+                <i class="far fa-clock fa-fw"></i>5 min&nbsp;</div>
         </div>
-    </header>
-    <div class="post-content">
+
         
 
         
+
+        <div class="post-content">
             
-        
-
-        
-        
-     
-          
-          
-          
-
-          
-          
-          
-
-          <p>This morning, 7 days after submitting my exam and lab reports, I received an email from Offensive Security letting me know I had successfully completed the OSCP exam.  I wanted to close out this series of posts by providing a recap of my exam experience.  Sorry - no exam spoilers - just a look at how I handled the exam and some thoughts looking back over it and my time in the course/lab.</p>
-<h1 id="exam---day-1">Exam - Day 1</h1>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <p>This morning, 7 days after submitting my exam and lab reports, I received an email from Offensive Security letting me know I had successfully completed the OSCP exam.  I wanted to close out this series of posts by providing a recap of my exam experience.  Sorry - no exam spoilers - just a look at how I handled the exam and some thoughts looking back over it and my time in the course/lab.</p>
+<a class="post-dummy-target" id="exam---day-1"></a><h1>Exam - Day 1</h1>
 <p>My exam started at 9AM on a Monday. Per the instructions from OffSec I connected to the webcam and ScreenConnect sessions 15 minutes early to connect with my proctor and verify my identity. I got my exam information email right at 9, connected the VPN, ran a couple of tests with the proctor, and was on my way.</p>
 <p>The first thing I did was connect to my exam control panel and read through all the instructions for each machine. I used OneNote to document everything related to the course so far, so I&rsquo;d already prepared a section for the exam. I had a template set up for tracking my activities per-host (which I highly recommend). It was simple but effective, here&rsquo;s a screenshot:</p>
 <figure>
@@ -177,145 +188,140 @@
 <p>After a lunch break I focused on the 10-point box, but after a couple of hours making no progress I stepped away for 5-10 minutes and switched to the second 20-point machine. By the time I took a dinner break with my wife &amp; kids at 5PM I had a user-level shell on 20pt #2. At this point I estimated I now had 60 points. If I could either root the 10-point host or get a foothold on the 25pt before getting some sleep, I&rsquo;d be pretty content with my progress.</p>
 <p>I got back to work at 7:30PM, and looking back this is where I didn&rsquo;t handle my time well. I split my attention between both the 10- and 25-point machines, and in retrospect I should have chosen one of them and given it all of my attention. I wound up rooting the 10-point host in this window but it would have gone much faster if I would have concentrated on it alone.</p>
 <p>With an estimated score of 70 points I took another 20-30 minute break around 9:30PM and watched a bit of television with my wife to clear my head. I worked one more block of time from 10PM to 12AM trying to make some progress on the 25-point hose, but to no avail. I set an alarm for 5AM and went to bed, with my goals for the morning being to either escalate privileges on the second 20-point host or fine a foothold on the 25-point machine.</p>
-<h1 id="exam---day-2">Exam - Day 2</h1>
+<a class="post-dummy-target" id="exam---day-2"></a><h1>Exam - Day 2</h1>
 <p>I woke up Tuesday at 5AM, brushed my teeth, made some coffee, and let the proctor know I was ready to resume. I had decided to devote all of my attention to the 25-point host, and within 90 minutes I had found my way in and obtained a low privilege shell. I now estimated my score to be 80 points (including the lab report), so I was pretty confident I could pass if my exam report was adequate. I identified a likely privilege escalation vector, but my initial attempt was not successful.</p>
 <p>At 7AM I decided to end my exam 2 hours early. I confirmed with the proctors, terminated my VPN, and got my kids ready and out the door for school. I then spent the next few hours using my notes to develop the exam report, and got it submitted to Offensive Security around 1:30PM. I had email confirmation that they had received the files within the hour. One week later on the following Tuesday morning, I got confirmation that I had passed the exam and become OSCP certified.</p>
-<h1 id="looking-back---my-advice">Looking back - my advice</h1>
+<a class="post-dummy-target" id="looking-back---my-advice"></a><h1>Looking back - my advice</h1>
 <p>Overall I am very pleased with my experience in the PWK course. I had some familiarity with basic penetration testing concepts due to the time I had spent in the HackTheBox environment, but the PWK course reinforced those ideas and greatly expanded on them. The most valuable lesson I learned was how to research and be persistent.</p>
 <p>One piece of advice I would give to anyone considering or currently pursuing the OSCP certification is to avoid being reliant on tools or scripts. Make sure you understand the fundamentals and understand how things work. The tools are great and come in handy in other settings, but for this exam I would recommend being able to do things manually and have an eye for detail as you enumerate and work on privilege escalation.</p>
 
-    </div>
+        </div>
 
-    <div class="post-copyright">
-             
-            <p class="copyright-item">
-                <span>Author:</span>
-                <span>AJ McQuay </span>
-                </p>
-            
-           
-            <p class="copyright-item">
-                    <span>Words:</span>
-                   <span>909</span>
-            </p>
-            
-            <p class="copyright-item">
+        <div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>This article is updated with 2019-06-24</span>
+            </div>
+            <div class="post-info-license">
                 
-                <span>Share:</span>
-                <span>
-
-      
+            </div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md">
+                
+            </div>
+            <div class="post-info-share">
+                
+                    <span>
+    
         <a href="//twitter.com/share?url=https%3a%2f%2fsecuringthe.net%2f2019%2foscp%2f&amp;text=My%20OSCP%20experience&amp;via=x41x4a" target="_blank" title="Share on Twitter">
-          <i class="iconfont icon-twitter"></i>
+            <i class="fab fa-twitter fa-fw"></i>
         </a>
-        
-      
-      
-      
-      
+    
+    
+    
         <a href="//reddit.com/submit?url=https%3a%2f%2fsecuringthe.net%2f2019%2foscp%2f&amp;title=My%20OSCP%20experience" target="_blank" title="Share on Reddit">
-          <i class="iconfont icon-reddit"></i>
+            <i class="fab fa-reddit fa-fw"></i>
         </a>
-        
-      
-      
+    
+    
         <a href="//www.linkedin.com/shareArticle?url=https%3a%2f%2fsecuringthe.net%2f2019%2foscp%2f&amp;title=My%20OSCP%20experience" target="_blank" title="Share on LinkedIn">
-          <i class="iconfont icon-linkedin"></i>
+            <i class="fab fa-linkedin fa-fw"></i>
         </a>
-        
-      
-      
-        
-      
-        
-      
-
-          
-
-          
-
-          
-
-          
+    
+    
+    
+    
+    
+    
+    
 </span>
                 
-            </p>
-
-             
-            <p class="copyright-item">
-                Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a>
-            </p>
-            
+            </div>
+        </div>
     </div>
 
-  
-    <div class="post-tags">
-        
-            <section>
-            <i class="iconfont icon-icon-tag"></i>Tag: 
-            
-            <span class="tag"><a href="https://securingthe.net/tags/oscp/">
-                    #OSCP</a></span>
-            
-            </section>
-        
+    <div class="post-info-more">
         <section>
-                <a href="javascript:window.history.back();">Back</a></span> · 
-                <span><a href="https://securingthe.net">Home</a></span>
+            
+                
+                    <span class="tag">
+                        <a href="https://securingthe.net/tags/oscp/"><i class="fas fa-tag fa-fw"></i>OSCP</a>
+                    </span>
+                
+            
+        </section>
+        <section>
+            <span><a href="javascript:window.history.back();">Back</a></span>&nbsp;|&nbsp;<span><a href="https://securingthe.net">Home</a></span>
         </section>
     </div>
 
     <div class="post-nav">
         
-        <a href="https://securingthe.net/2019/pwk-weeks-9-11/" class="prev" rel="prev" title="PWK: Weeks 9-11"><i class="iconfont icon-dajiantou"></i>&nbsp;PWK: Weeks 9-11</a>
-         
+            <a href="https://securingthe.net/2019/pwk-weeks-9-11/" class="prev" rel="prev" title="PWK: Weeks 9-11"><i class="fas fa-angle-left fa-fw"></i>PWK: Weeks 9-11</a>
+        
         
     </div>
+</div>
 
-    <div class="post-comment">
-          
-          <div id="disqus_thread"></div>
-  <script type="text/javascript">
-      (function() {
-          
-          
-          if (window.location.hostname == "localhost")
-              return;
-          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-          var disqus_shortname = 'ajmcquay';
-          dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-      })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-  <a href="https://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        <div class="post-comment">
+            
+            
 
- 
-
-          
-    </div>
-</article>
-          </div>
-		   </main>
-      <footer class="footer">
+            
+        </div>
+    </article></div>
+            </main>
+            <footer class="footer">
     <div class="copyright">
-        &copy;
-        
-        <span itemprop="copyrightYear">2018 - 2020</span>
-        
-         
-            <span class="author" itemprop="copyrightHolder"><a href="https://securingthe.net">AJ McQuay</a> | </span>
-         
-
-		 
+        <div class="copyright-line">
+            Powered by <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a>&nbsp;|&nbsp;Theme - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer">LoveIt<i class="far fa-heart fa-fw"></i></a>
+        </div>
+        <div class="copyright-line">
+            <i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2018 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="https://securingthe.net">AJ McQuay</a></span><span class="license">&nbsp;|&nbsp;Released under <a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
     </div>
 </footer>
 
 
+    
+    
 
 
 
 
+    
+    
+
+
+
+
+    
+    
+
+
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+
+
+    
+    
 
 
 
@@ -323,16 +329,71 @@
 
 
     
-    <link crossorigin="anonymous" integrity="sha384-yziQACfvCVwLqVFLqkWBYRO3XeA4EqzfXKGwaWnenYn5XzqfJFlFdKEmvutIQdKb" href="https://lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">
-      
-     <script src="/js/vendor_gallery.min.js" async="" ></script>
     
-  
+
+
+
+    
+    
 
 
 
 
 
+    
+    
+
+
+
+
+    
+    
+
+
+
+
+    
+    
+
+
+
+    
+    
+
+
+
+
+
+    
+    
+
+
+<script src="/js/lib/jquery/jquery.slim.min.min.js"></script>
+<script src="/js/lib/lazysizes/lazysizes.min.min.js"></script>
+<script src="/js/lib/smooth-scroll/smooth-scroll.polyfills.min.min.js"></script><script>window.scroll = new SmoothScroll('[data-scroll]', {speed: 300, speedAsDuration: true});</script>
+
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    
+
+
+
+
+
+
+<script src="/js/blog.min.js"></script>
+
+
+    
 <script type="application/javascript">
 var doNotTrack = false;
 if (!doNotTrack) {
@@ -344,8 +405,7 @@ if (!doNotTrack) {
 </script>
 <script async src='https://www.google-analytics.com/analytics.js'></script>
 
-
-
-     </div>
-  </body>
+</div>
+        <a href="#" class="dynamic-to-top" id="dynamic-to-top" data-scroll><span>&nbsp;</span></a>
+    </body>
 </html>
