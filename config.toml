@@ -176,7 +176,7 @@ unsafe = true
     #Vine = "xxxx"
     #Googlescholar = "xxxx"
     #Researchgate = "xxxx"
-    Mastodon = "afterosmosis"
+    #Mastodon = "afterosmosis"
     #Thingiverse = "xxxx"
     #Devto = "xxxx"
 
