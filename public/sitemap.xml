@@ -1,6 +1,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     
         <url>
+            <loc>https://securingthe.net/2020/02/blog-changes-and-other-updates/</loc>
+            
+                <lastmod>2020-02-01T23:00:00+00:00</lastmod>
+            
+            
+                <changefreq>weekly</changefreq>
+            
+            
+                <priority>0.5</priority>
+            
+            
+        </url>
+    
+        <url>
             <loc>https://securingthe.net/categories/</loc>
             
                 <lastmod>2020-02-01T16:19:02-07:00</lastmod>
@@ -15,7 +29,7 @@
         </url>
     
         <url>
-            <loc>https://securingthe.net/2019/06/oscp/</loc>
+            <loc>https://securingthe.net/tags/news/</loc>
             
                 <lastmod>2020-02-01T16:19:02-07:00</lastmod>
             
@@ -29,21 +43,7 @@
         </url>
     
         <url>
-            <loc>https://securingthe.net/categories/oscp/</loc>
-            
-                <lastmod>2020-02-01T16:19:02-07:00</lastmod>
-            
-            
-                <changefreq>weekly</changefreq>
-            
-            
-                <priority>0.5</priority>
-            
-            
-        </url>
-    
-        <url>
-            <loc>https://securingthe.net/tags/oscp/</loc>
+            <loc>https://securingthe.net/categories/news/</loc>
             
                 <lastmod>2020-02-01T16:19:02-07:00</lastmod>
             
@@ -86,6 +86,48 @@
     
         <url>
             <loc>https://securingthe.net/tags/</loc>
+            
+                <lastmod>2020-02-01T16:19:02-07:00</lastmod>
+            
+            
+                <changefreq>weekly</changefreq>
+            
+            
+                <priority>0.5</priority>
+            
+            
+        </url>
+    
+        <url>
+            <loc>https://securingthe.net/2019/06/oscp/</loc>
+            
+                <lastmod>2020-02-01T16:19:02-07:00</lastmod>
+            
+            
+                <changefreq>weekly</changefreq>
+            
+            
+                <priority>0.5</priority>
+            
+            
+        </url>
+    
+        <url>
+            <loc>https://securingthe.net/tags/oscp/</loc>
+            
+                <lastmod>2020-02-01T16:19:02-07:00</lastmod>
+            
+            
+                <changefreq>weekly</changefreq>
+            
+            
+                <priority>0.5</priority>
+            
+            
+        </url>
+    
+        <url>
+            <loc>https://securingthe.net/categories/oscp/</loc>
             
                 <lastmod>2020-02-01T16:19:02-07:00</lastmod>
             
@@ -183,34 +225,6 @@
         </url>
     
         <url>
-            <loc>https://securingthe.net/tags/news/</loc>
-            
-                <lastmod>2020-02-01T16:19:02-07:00</lastmod>
-            
-            
-                <changefreq>weekly</changefreq>
-            
-            
-                <priority>0.5</priority>
-            
-            
-        </url>
-    
-        <url>
-            <loc>https://securingthe.net/categories/news/</loc>
-            
-                <lastmod>2020-02-01T16:19:02-07:00</lastmod>
-            
-            
-                <changefreq>weekly</changefreq>
-            
-            
-                <priority>0.5</priority>
-            
-            
-        </url>
-    
-        <url>
             <loc>https://securingthe.net/2019/03/pwk-week-1/</loc>
             
                 <lastmod>2020-02-01T16:19:02-07:00</lastmod>
@@ -239,7 +253,7 @@
         </url>
     
         <url>
-            <loc>https://securingthe.net/tags/opinion/</loc>
+            <loc>https://securingthe.net/categories/opinion/</loc>
             
                 <lastmod>2020-02-01T16:19:02-07:00</lastmod>
             
@@ -253,7 +267,7 @@
         </url>
     
         <url>
-            <loc>https://securingthe.net/categories/opinion/</loc>
+            <loc>https://securingthe.net/tags/opinion/</loc>
             
                 <lastmod>2020-02-01T16:19:02-07:00</lastmod>
             
@@ -365,7 +379,7 @@
         </url>
     
         <url>
-            <loc>https://securingthe.net/tags/linux/</loc>
+            <loc>https://securingthe.net/categories/linux/</loc>
             
                 <lastmod>2020-02-01T16:19:02-07:00</lastmod>
             
@@ -379,7 +393,7 @@
         </url>
     
         <url>
-            <loc>https://securingthe.net/categories/linux/</loc>
+            <loc>https://securingthe.net/tags/linux/</loc>
             
                 <lastmod>2020-02-01T16:19:02-07:00</lastmod>
             

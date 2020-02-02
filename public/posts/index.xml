@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Mon, 24 Jun 2019 02:54:19 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 01 Feb 2020 23:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://securingthe.net/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Blog changes and other updates</title>
+      <link>https://securingthe.net/2020/02/blog-changes-and-other-updates/</link>
+      <pubDate>Sat, 01 Feb 2020 23:00:00 +0000</pubDate>
+      
+      <guid>https://securingthe.net/2020/02/blog-changes-and-other-updates/</guid>
+      <description>I haven&amp;rsquo;t posted in a while, so I thought I&amp;rsquo;d clear the cobwebs by posting about some recent changes to my site and an update on what I&amp;rsquo;m working on now.
+Blog changes When I first started publishing to this domain a little over a year ago, I was running Ghost on a Digital Ocean droplet. This would typically cost me between $5 and $15 per month, depending on the amount of traffic the site received.</description>
+    </item>
     
     <item>
       <title>My OSCP experience</title>
