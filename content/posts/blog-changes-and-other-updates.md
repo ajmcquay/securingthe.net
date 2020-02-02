@@ -12,7 +12,7 @@ title = "Blog changes and other updates"
 
 I haven't posted in a while, so I thought I'd clear the cobwebs by posting about some recent changes to my site and an update on what I'm working on now.
 
-## Blog changes
+# Blog changes
 
 When I first started publishing to this domain a little over a year ago, I was running Ghost on a Digital Ocean droplet. This would typically cost me between $5 and $15 per month, depending on the amount of traffic the site received. I looked into various static site options and decided to migrate to Hugo on AWS S3.
 
@@ -20,7 +20,7 @@ I ran this setup for a few months and saw a drastic decrease in cost. I was basi
 
 It took me about 20 minutes to completely shift from Amazon to Netlify, and I can pretty much do all updates from the command line. I haven't quite got "netlify deploy -p" working, but I assume it's just user error. My montly cost has completely reached zero, however.
 
-## Other updates
+# Other updates
 
 After completing the OSCP last summer I hit a bit of a "hangover". That cert had been a goal of mine for the past 2-3 years, and it took a pretty significant amount of focus and energy to work through the material and sit for the exam. Once it was done I wasn't really sure what to do next.
 
