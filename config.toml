@@ -57,7 +57,7 @@ unsafe = true
   [[menu.main]]
     identifier = "about"
     name = "About"
-    url = "/posts/about/"
+    url = "/about"
     weight = 4
 
   [[menu.main]]
